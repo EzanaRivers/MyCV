@@ -1,0 +1,566 @@
+---
+title: "Assignment 1: Estimating CDF and PDF"
+author: "Ezana Rivers "
+date: " Due: 02/03/2026 (Real)"
+output:
+  html_document: 
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    number_sections: no
+    toc_collapsed: yes
+    code_folding: hide
+    code_download: yes
+    smooth_scroll: yes
+    theme: lumen
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    number_sections: yes
+    fig_width: 3
+    fig_height: 3
+  word_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    keep_md: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{css, echo = FALSE}
+#TOC::before {
+  content: "Table of Contents";
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+  color: navy;
+  margin-bottom: 10px;
+}
+
+
+div#TOC li {     /* table of content  */
+    list-style:upper-roman;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+
+h1.title {    /* level 1 header of title  */
+  font-size: 22px;
+  font-weight: bold;
+  color: DarkRed;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+}
+
+h4.author { /* Header 4 - and the author and data headers use this too  */
+  font-size: 15px;
+  font-weight: bold;
+  font-family: system-ui;
+  color: navy;
+  text-align: center;
+}
+
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Gill Sans", sans-serif;
+  color: DarkBlue;
+  text-align: center;
+}
+
+h1 { /* Header 1 - and the author and data headers use this too  */
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: center;
+}
+
+h2 { /* Header 2 - and the author and data headers use this too  */
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h3 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h4 { /* Header 4 - and the author and data headers use this too  */
+    font-size: 14px;
+  font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: left;
+}
+
+/* Add dots after numbered headers */
+.header-section-number::after {
+  content: ".";
+
+body { background-color:white; }
+
+.highlightme { background-color:yellow; }
+
+p { background-color:white; }
+
+}
+```
+
+```{r setup, include=FALSE}
+# code chunk specifies whether the R code, warnings, and output 
+# will be included in the output files.
+if (!require("knitr")) {
+   install.packages("knitr")
+   library(knitr)
+}
+if (!require("pander")) {
+   install.packages("pander")
+   library(pander)
+}
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+if (!require("tidyverse")) {
+  install.packages("tidyverse")
+  library(tidyverse)
+}
+
+if (!require("plotly")) {
+  install.packages("plotly")
+  library(plotly)
+}
+####
+knitr::opts_chunk$set(echo = TRUE,       # include code chunk in the output file
+                      warning = FALSE,   # sometimes, you code may produce warning messages,
+                                         # you can choose to include the warning messages in
+                                         # the output file. 
+                      results = TRUE,    # you can also decide whether to include the output
+                                         # in the output file.
+                      message = FALSE,
+                      comment = NA
+                      )  
+```
+ 
+ \
+ 
+## **Assignment Objectives** 
+
+* Develop a clear technical understanding of nonparametric cumulative distribution function (CDF) estimation and various kernel density estimators.
+
+* Translate mathematical formulas into R functions and apply them to solve related problems.
+
+* Create effective visualizations to demonstrate your understanding of key concepts in the following questions.
+
+
+
+\
+
+## **Question 1: Cumulative Distribution Function (CDF) Estimation**
+
+The following failure times (in hours) were observed for 8 electronic components:
+
+<center> 23, 45, 67, 89, 112, 156, 189, 245  </center>
+
+a) Write an R function implementing the ECDF $\hat{F}_n(t)$ according to its mathematical definition. Validate your implementation using R's ecdf() function on the given data, with comparison based on their step functions.
+
+
+
+
+The formula for an empirical distribution function
+
+$$
+F_n(x) =\frac{1}{n}\sum_{i=1}^n I(X_i \le x) = \frac{[\ \text{Number of  } X_i \le x]}{n}
+$$
+
+```{r q1a1}
+
+#Precomparsion with a histogram of fail_elec
+
+#hist(fail_elec)
+
+#ele_ecdf=ecdf(fail_elec)
+
+
+
+
+hours = c(23, 45, 67, 89, 112, 156, 189, 245)
+
+uniq.hours= sort(unique(hours))  #sorting the hours data as unique values
+
+
+hour.ECDF = function(indat, outx) #create the ECDF as a function
+{
+#Building the ecdf function in R
+  freq.table = table(indat)    
+   uniq=as.numeric(names(freq.table))
+   rep.hours = as.vector(freq.table)
+   cum.rel.feq = cumsum(rep.hours)/sum(rep.hours)
+ cum.prob <- NULL
+  for (i in 1:length(outx)){
+    intvl.id <- which(uniq <= outx[i]) # identify the index meeting the condition
+    cum.prob[i] <- cum.rel.feq[max(intvl.id)] # extract the cumulative prob according to CDF 
+  }
+  cum.prob             
+}
+
+#Overall above creates a unique sorted dataset that can be counted as character to assess the frequency of each number type, captures those frequencies and identifies/collects them to be assessed into a distrubtuion
+
+
+#Plotting ECDF
+Hoursp=plot(uniq.hours, hour.ECDF(indat = hours, outx = uniq.hours), type = "s",
+     
+     main = "ECDF Electronic Failure Times",
+     xlab= "Failure Times",
+     ylab = "Cummulative Probability"
+     )
+
+
+hist(hours, prob=TRUE)
+#lines(x=density(hours), col= "blue")
+
+#Validate using R's ecdf function
+
+
+  #Recdf=ecdf(hours)
+
+  #hist(Recdf, prob=TRUE)
+#ggplotly(Hoursp)
+
+```
+b) A colleague claims that the probability of failure before 100 hours is 0.5 based on these data. Do you agree? Explain your reasoning using the empirical cumulative distribution function (ECDF).
+
+Yes, I agree with the colleague. The probability of failure before 100 hours is 0.5 based on the ECDF, ``hour.ECDF(indat = hours, outx = 100)`` . 
+Currently about 50% of the sample fails before 100 hours. The values 23, 45, 67, and 89 fails prior to 100 hours, making 4 out of the 8 total sample size giving a probability of 0.5 from ${Number of T_i}/{n}$ = 4/8.
+
+$$
+
+      P(T \le t) = \hat{F}_{n}(100) = .5
+
+$$
+
+```{r q1b}
+
+#Failure before 100 hours is 0.5.
+
+hour.ECDF(indat = hours, outx = 100)
+
+hours[hours<100] 
+length(hours[hours<100]) #4 values less than 100
+
+Fn=(length(hours[hours<100])) / (length(hours)) #equal to 0.5 #The number of values less than the 100 failure time / sample size --> Gives probability of 0.5
+
+str(hours)
+
+
+#output is [0.5]
+
+
+
+```
+
+\
+
+## **Question 2: Density Function Estimation**
+
+Consider the following failure times from a mechanical system:
+
+<center> 12.3, 14.7, 15.2, 16.8, 18.1, 19.4, 20.6, 22.3, 23.9, 25.4 </center>
+
+a) Create a histogram of the data using 3 equally spaced bins.
+
+
+* What is the estimated density in each bin?
+
+  The density of the 10-15 failure times bin is about .04.
+  The density of the 15-20 failure time is about .08.
+  The density of the 20-25 failure times bin is about .06.
+  The density of the 25-30 failure times bin is about .02.
+
+
+* Describe the shape of the histogram's distribution.
+
+  The histogram shape appears normally distributed. 
+
+```{r Q2}
+mech.sys=c(12.3, 14.7, 15.2, 16.8, 18.1, 19.4, 20.6, 22.3, 23.9, 25.4)
+length(mech.sys) #n=10
+
+hist(mech.sys, prob=TRUE, breaks= 3, xlab= "Failure times of mechanical system")
+
+
+
+```
+
+
+
+b) Write an R function that computes kernel density estimates using a Gaussian kernel with $h=2$. Validate your implementation against R's built-in density() function.
+
+$$
+\hat{f}_h(t) = \frac{1}{nh}\sum_{i=1}^n K\left( \frac{t-t_i}{h}\right), \ \ \text{ where } \ \ K(u) = \frac{1}{\sqrt{2\pi}} e^{-u^2/2}.
+$$
+ 
+```{r kern2}
+
+#making the function for gaussian distrubtion
+my.kerf= function(in.data, h, out.x)
+{
+        n = length(in.data)
+        den = numeric(length(out.x))
+      for(i in seq_along(out.x))
+      {
+        
+        den[i] = sum(dnorm(out.x[i], mean = in.data, sd = h)) /n #uses Gaussian kernel as a normal distribution (specific to gaussan kernel)
+        
+      }
+
+  den
+  }
+
+
+xx = seq(min(mech.sys), max(mech.sys), length=200) ## allows density to be connected and smoothed to the eye
+
+
+#Building a KDE with h =2
+my.den = my.kerf(in.data = mech.sys, h=2, out.x=xx) #aaplies the summation to the formula
+
+ 
+kde = density(mech.sys, kernel = "gaussian", bw= 2 ) #defines kernel type and bandwidth
+kde.y = approx(kde$x, kde$y, xout = xx)$y #estimates the density values for the points generated in xx aka the points made for density smoothing
+
+#Plot comparison
+
+# Plot comparison
+plot(xx, my.den, type = "l",
+     main = "Comparing Kernel Density Estimators",
+     xlab = "Mechanical System Failure Times",
+     ylab = "Kernel Density",
+     lwd = 2,
+     col = "navy")
+
+lines(xx, kde.y, lwd = 2, col = "orange")
+
+legend("topright",
+       legend = c("my.kerf()", "density()"), lty =c(1,2), lwd = rep(2,2),
+       col = c("navy", "orange"), cex = 0.8, bty = "n")
+```
+
+The  built and suggested gaussian kernel have the same bandwidth and relationship, as they overlap each other in the Kernel density graph.
+
+
+/
+
+
+
+c) Write a custom R function that computes kernel density estimates using the Epanechnikov kernel with $h=2$. Validate your implementation by comparing results with R's built-in density() function for Gaussian kernel estimation.
+
+$$
+\hat{f}_h(t) = \frac{1}{nh}\sum_{i=1}^n K\left( \frac{t-t_i}{h}\right), \ \ \text{ where } \ \ K(u) = \frac{3}{4}(1 - u^2) \ \ \text{ for } \ \ |u| \le 1.
+$$
+
+
+```{r q2Pc}
+
+#Building Epanechikov Kernel
+  #bw = 2.34 *sd *n^(-1/5)
+
+epan.kerf= function(in.data, h=2, out.x)
+{
+        n = length(in.data)
+        den = numeric(length(out.x))
+      for(i in seq_along(out.x))
+      {
+        
+        u = (out.x[i] - in.data)/ h #1. calculate the weighted distance for u for all points      #        
+         #(u is the standardized distance btwn point you   are              looking at and specific data point)
+        
+        epan_kern= ifelse(abs(u) <= 1, 0.75 * (1 - u^2), 0) #the kerenl epanechikov formula
+        
+        den[i] =sum(epan_kern)/ (n*h)
+        
+        
+       # den[i] = sum(abs(out.x) <= 1, 0.75 * (1 - out.x^2), 0)  #wrong approach
+        
+      }
+
+  den
+}
+
+
+epanden=density(mech.sys, kernel ="epanechnikov") #defulat density function
+
+
+
+#epanechnikov.kernel <- ifelse(abs(out.x) <= 1, 0.75 * (1 - out.x^2), 0)
+
+xx = seq(min(mech.sys), max(mech.sys), length = 200) #smoothing by connecting points together for smoothing
+e.den= epan.kerf(in.data = mech.sys, h=2, out.x=xx)  #using the generated function  --> applies parabola Epanechnikov kernel weight to each piece of data 
+
+gaussian_den = density(mech.sys, kernel ="gaussian") #comparison kernel 
+kde_y_gaussian= approx(gaussian_den$x, gaussian_den$y, xout= xx)$y #estimates the points made during the xx smoothing steps
+
+
+# Plot comparison
+plot(xx, e.den, type = "l",
+     main = "Comparing Kernel Density Estimators",
+     xlab = "Mechanical System Failure Times",
+     ylab = "Kernel Density",
+     lwd = 2,
+     col = "navy")
+
+lines(xx, kde_y_gaussian, lwd = 2, col = "orange")
+
+legend("topright",
+       legend = c("Epanechnikov", "Gaussian"), lty =c(1,2), lwd = rep(2,2),
+       col = c("navy", "orange"), cex = 0.8, bty = "n")
+
+
+
+
+
+
+
+```
+<p> For part C we have a Epanechniov kernel at 2 compared to a gaussian kernel at default. Here we see the kernels take similar generalized direction, although the epanechnikov kernel may be more sensitive to aggregates in the data set.
+
+d) How does the choice of kernel (Gaussian vs. Epanechnikov) affect the density estimate? For both kernel estimators applied to this dataset, what happens when we select $h=1.5$ versus $h=2.5$?
+
+
+
+Applying the h=1.5 to Epanechnikov and Gaussian is default
+```{r Q2d1.5}
+
+
+xx = seq(min(mech.sys), max(mech.sys), length = 200)
+e.den= epan.kerf(in.data = mech.sys, h=1.5, out.x=xx)
+
+gaussian_den = density(mech.sys, kernel ="gaussian") #comparison kernel
+kde_y_gaussian= approx(gaussian_den$x, gaussian_den$y, xout= xx)$y
+
+
+# Plot comparison
+plot(xx, e.den, type = "l",
+     main = "Comparing Kernel Density Estimators",
+     xlab = "Mechanical System Failure Times",
+     ylab = "Kernel Density",
+     lwd = 2,
+     col = "navy")
+
+lines(xx, kde_y_gaussian, lwd = 2, col = "orange")
+
+legend("topright",
+       legend = c("Epanechnikov", "Gaussian"), lty =c(1,2), lwd = rep(2,2),
+       col = c("navy", "orange"), cex = 0.8, bty = "n")
+
+
+```
+
+
+
+
+When comparing kernel density for a Epanechnikov kernel at 1.5 and a Gaussian set to default, we see similarities in the general curvature in both kernels. The epanenikov may prioritize local weighting while the Gaussian prioritizes smoothness.
+
+The smaller h at 1.5 in comparison to the previous h at 2.0, presents a more in-focus view with a finer detail for individual changes.
+
+Applying the h=2.5 to Epanechnikov and Gaussian is default
+```{r Q2d2.5}
+
+
+xx = seq(min(mech.sys), max(mech.sys), length = 200)
+e.den= epan.kerf(in.data = mech.sys, h=2.5, out.x=xx)
+
+gaussian_den = density(mech.sys, kernel ="gaussian") #comparison kernel
+kde_y_gaussian= approx(gaussian_den$x, gaussian_den$y, xout= xx)$y
+
+
+# Plot comparison
+plot(xx, e.den, type = "l",
+     main = "Comparing Kernel Density Estimators",
+     xlab = "Mechanical System Failure Times",
+     ylab = "Kernel Density",
+     lwd = 2,
+     col = "navy")
+
+lines(xx, kde_y_gaussian, lwd = 2, col = "orange")
+
+legend("topright",
+       legend = c("Epanechnikov", "Gaussian"), lty =c(1,2), lwd = rep(2,2),
+       col = c("navy", "orange"), cex = 0.8, bty = "n")
+
+
+```
+
+
+Applying the h=1.5 to Epanechnikov and Gaussian is h=1.5
+```{r Q2dboth1.5}
+
+
+xx = seq(min(mech.sys), max(mech.sys), length = 200)
+e.den= epan.kerf(in.data = mech.sys, h=1.5, out.x=xx)
+
+gaussian_den = density(mech.sys, kernel ="gaussian", bw=1.5) #comparison kernel
+kde_y_gaussian= approx(gaussian_den$x, gaussian_den$y, xout= xx)$y
+
+
+# Plot comparison
+plot(xx, e.den, type = "l",
+     main = "Comparing Kernel Density Estimators",
+     xlab = "Mechanical System Failure Times",
+     ylab = "Kernel Density",
+     lwd = 2,
+     col = "navy")
+
+lines(xx, kde_y_gaussian, lwd = 2, col = "orange")
+
+legend("topright",
+       legend = c("Epanechnikov", "Gaussian"), lty =c(1,2), lwd = rep(2,2),
+       col = c("navy", "orange"), cex = 0.8, bty = "n")
+
+
+```
+
+
+<p> With Gaussian and Epanechnikov both at h =1.5, they share general overarching curature with the gaussian looking far smoother than the epanechnikov. The gaussian at 1.5 in comparison to default tor h=2 shows more curvature detail.
+
+
+Applying the h=2.5 to Epanechnikov and Gaussian is h=2.5
+```{r Q2dboth2.5}
+
+
+xx = seq(min(mech.sys), max(mech.sys), length = 200)
+e.den= epan.kerf(in.data = mech.sys, h=2.5, out.x=xx)
+
+gaussian_den = density(mech.sys, kernel ="gaussian", bw=2.5) #comparison kernel
+kde_y_gaussian= approx(gaussian_den$x, gaussian_den$y, xout= xx)$y
+
+
+# Plot comparison
+plot(xx, e.den, type = "l",
+     main = "Comparing Kernel Density Estimators",
+     xlab = "Mechanical System Failure Times",
+     ylab = "Kernel Density",
+     lwd = 2,
+     col = "navy")
+
+lines(xx, kde_y_gaussian, lwd = 2, col = "orange")
+
+legend("topright",
+       legend = c("Epanechnikov", "Gaussian"), lty =c(1,2), lwd = rep(2,2),
+       col = c("navy", "orange"), cex = 0.8, bty = "n")
+
+
+```
+
+<center>
+
+With both Gaussian and Epanechikov at h = 2.5 there is a wide view approach to the density estimator, presenting less noise and overfitting. The gaussian kernel is less curved in comparison to the h=1.5 and h=2 bandwidth kernels. <center>
