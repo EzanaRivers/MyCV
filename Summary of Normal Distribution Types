@@ -1,0 +1,623 @@
+---
+title: "Homework 2"
+author: "Ezana Rivers"
+date: "02-10-2026"
+output:
+  html_document: 
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    number_sections: yes
+    toc_collapsed: yes
+    code_folding: hide
+    code_download: yes
+    smooth_scroll: yes
+    theme: lumen
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    number_sections: yes
+    fig_width: 3
+    fig_height: 3
+  word_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    keep_md: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{css, echo = FALSE}
+#TOC::before {
+  content: "Table of Contents";
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+  color: navy;
+  margin-bottom: 10px;
+}
+
+
+div#TOC li {     /* table of content  */
+    list-style:upper-roman;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+
+h1.title {    /* level 1 header of title  */
+  font-size: 22px;
+  font-weight: bold;
+  color: DarkRed;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+}
+
+h4.author { /* Header 4 - and the author and data headers use this too  */
+  font-size: 15px;
+  font-weight: bold;
+  font-family: system-ui;
+  color: navy;
+  text-align: center;
+}
+
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Gill Sans", sans-serif;
+  color: DarkBlue;
+  text-align: center;
+}
+
+h1 { /* Header 1 - and the author and data headers use this too  */
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: center;
+}
+
+h2 { /* Header 2 - and the author and data headers use this too  */
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h3 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h4 { /* Header 4 - and the author and data headers use this too  */
+    font-size: 14px;
+  font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: left;
+}
+
+/* Add dots after numbered headers */
+.header-section-number::after {
+  content: ".";
+
+body { background-color:white; }
+
+.highlightme { background-color:yellow; }
+
+p { background-color:white; }
+
+}
+```
+
+```{r setup, include=FALSE}
+# code chunk specifies whether the R code, warnings, and output 
+# will be included in the output files.
+if (!require("knitr")) {
+   install.packages("knitr")
+   library(knitr)
+}
+if (!require("pander")) {
+   install.packages("pander")
+   library(pander)
+}
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+if (!require("tidyverse")) {
+  install.packages("tidyverse")
+  library(tidyverse)
+}
+
+if (!require("plotly")) {
+  install.packages("plotly")
+  library(plotly)
+}
+if (!require("mixtools")) {
+  install.packages("mixtools")
+  library(mixtools)
+}
+
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+
+
+if (!require("gganimate")) {
+  install.packages("gganimate")
+  library(gganimate)
+}
+
+if (!require("gifski")) {
+  install.packages("gifski")
+  library(gifski)
+}
+
+
+## library(mixtools)
+knitr::opts_chunk$set(echo = TRUE,       # include code chunk in the output file
+                      warning = FALSE,   # sometimes, you code may produce warning messages,
+                                         # you can choose to include the warning messages in
+                                         # the output file. 
+                      results = TRUE,    # you can also decide whether to include the output
+                                         # in the output file.
+                      message = FALSE,
+                      comment = NA
+                      )  
+
+# You will need these packages installed:
+# install.packages("ggplot2")
+# install.packages("gganimate")
+
+
+
+```
+
+\
+
+
+# Introduction
+
+This note covers the definitions and inter-relationships of normal, t, chi-square, and F distributions, and their assumptions.
+
+
+# Normal Distrubtions
+
+A normal distribution is a parametric distribution. A parametric distribution assumes the shape of the distribution. In other words, a parametric model assumes how the data is organized to make analyses from.
+
+A normal distribution assumes about:
+\
+  * 68% of data is 1 standard deviation of the mean 
+\
+  * 95% of the data is 2 standard deviations of the mean 
+\
+  * 99.7% of the data is 3 standard deviations of the mean 
+\
+(Wackery, Mendenhall, Scheaffer, 1945, p.10).
+
+  
+```{r Image, echo=FALSE, fig.cap=" Normal Distrubtion", out.width='70%', fig.align='center'}
+  
+knitr::include_graphics("C:/Users/75ER969287/OneDrive - West Chester University of PA/STA 506 - Mathematical Statistics II/Weekly Modules/Week 3/Homework/Image 1 normal distrubtion for assignement 2.png")
+
+#center this image
+
+```
+The assumed normal distribution takes on a bell curve. Demonstrated by the formula:
+
+$$
+f(y) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(y-\mu)^2}{2\sigma^2}}
+$$
+
+Note: What is a standard deviation? 
+  - A standard deviation measures how much variation (or how dispersed) a set of values is from the mean. A lower standard deviation (ig. 1 standard deviation from the mean) is a value closer to the mean. A value closer the the mean as well as lower variance may suggest a stronger value or model. As lower variance may suggest points are clustered tightly around the the mean while higher variance suggests the data is spread out, potentially containing outliers.
+  
+
+
+## Assumptions for Normal Distrubutions
+  1. Data is continuous
+  2. Symmetric with one peak
+  3. Bell Shaped
+  4. Mean, median and mode all assumed to be equal  
+
+
+
+# Using Normal Distrubutions for Estimation
+
+
+As the majority of random samples take on a normal distribution as using a parametric normal distribution as a sole estimator for a true Cumulative density function (CDF) should come with causation because assuming the shape of sample may add noise or bias into the estimator and or analysis, as adding a parameter test may not best hit the sample and or population.
+
+-Note in most cases the population parameters and or distribution is unknown.
+  
+
+Although the majority of random samples take on a normal distribution inherently taking on a parametric distribution as a estimator for a true Cumulative density function (CDF), always assuming a normal distribution should come with caution. Assuming the shape of sample, when the sample distribution shape may be unknown may add noise or bias into the estimator and or analysis. The a parameter test may not best fit the sample and or population. If we force a bell-curve onto data that is actually skewed (leaning to one side instead of symmetric and non-naturally bell-shaped) our conclusions will hold bias. 
+
+Note in many cases the true population's parameters or distributions are unknown so assuming shape may increase chance of error.
+
+
+```{r imageskew, out.width='70%', fig.align='center'}
+
+# https://www.biologyforlife.com/skew.html
+
+knitr::include_graphics("C:/Users/75ER969287/OneDrive - West Chester University of PA/STA 506 - Mathematical Statistics II/Weekly Modules/Week 3/Homework/skewness image image 2.png")
+
+```
+  
+
+
+## Normal Distrubution Advantages 
+
+Despite a normal distribution being a parametric distribution that assumes shape, there are many advantages to using a normal distribution. 
+Uses for a normal distribution 
+
+- A normal distribution has act as a comparison and validity checker 
+    *   A normal distribution  
+        Often the case for linear regression, t-test and ANOVA residual tests
+/
+    * We will later discuss an normal distribution assumption to assess the quality of two models by their variance ratio, also known as an F distribution 
+/
+    * Overall we often use normal distribution as the bases to make conclusions or approximations about our distributions because often samples or population often approach normal distributions and we can standardize our distributions relatively easily to match a universal scale for standard deviations. Regardless of the data's original units, we can standardize within our data to digest how rare or common a data point is in respect to the other values.
+    
+
+- Estimation for the Cumulative Distribution Function
+  A normal distribution can act as an estimator for the cumulative distribution function.  if an empirical CDF is used, the theoretical normal distribution function can be a base comparison to see if these two are statistically different. 
+
+In this case the empirical CDF is model based on the data observed. We can compare how well an empirical model compares to a theoretical normal distribution model to help us understand any nuance in our observed data. 
+
+```{r}
+
+set.seed(45)
+# Generate sample data
+sample_data <- rnorm(100, mean = 0, sd = 1)
+
+# Create empirical CDF
+empirical_cdf <- ecdf(sample_data)
+
+# Plot empirical vs theoretical CDF
+plot_df <- data.frame(
+  x = seq(-5, 5, length.out = 2500),
+  Empirical = empirical_cdf(seq(-15, 15, length.out = 2500)),
+  Theoretical = pnorm(seq(-15, 15, length.out = 2500))
+)
+
+plot_df_long <- plot_df %>%
+  pivot_longer(cols = c(Empirical, Theoretical), 
+               names_to = "Type", values_to = "CDF")
+
+Fn.plt <- ggplot(plot_df_long, aes(x = x, y = CDF, color = Type)) +
+  geom_line(linewidth = 1) +
+  scale_color_manual(values = c("Empirical" = "green", "Theoretical" = "purple")) +
+  labs(title = "Empirical vs Theoretical CDF",
+       subtitle = "Sample size n = 100 from Standard Normal",
+       x = "x", y = "CDF") +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.margin = margin(t = 35, r = 20, b = 30, l = 30, unit = "pt"))
+ggplotly(Fn.plt)
+
+
+```
+
+
+
+
+While the Normal distribution is the foundation of parametric inference, it can be applied to describe a sampling distribution in two distinct capacities:
+  
+  
+1. **Exact Distribution**: our population distribution is known to be normally distributed with random variables that are identically and independently distributed within a small sample size or
+
+Because we know our population distribution is normal we can standardize our distribution  sample to be under one. 
+
+$$
+Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \rightarrow^d N(0,1)
+$$
+
+
+
+
+2. **Asymptotic Distribution** our population distribution is unknown but our sample size is large
+
+
+## Extract Distrubtion 
+  A exact distribution assumes a normally distributed population with random variables that are identically and independently distributed within a small sample size. Our random variables are collected and treated independently, as the probability of the one value does not effect the probability of the next value.
+
+## Asymptotic Distribution Relation in Normal Distrubution
+As mentioned earlier, there are some advantages to using the normal distribution despite its shape assumption.
+
+As we take a random sample from the population in which we are not sure of its distribution, we use the normal distribution as an approximation for the true distribution. 
+
+Due to the large sample size, we can use the Central Limit Theorem to assume our sample statistic (often our sample mean) approaches and reaches a normal distribution. Even if in smaller quantities the distribution may not appear normal, with a large sample size our distribution my converge to a normal distribution. If an original population contains skew in its distribution, with a large enough sample the distribution can place into a bell curve.
+
+```{r }
+# Set a seed so the random results are the same every time you 'knit'
+set.seed(12)
+
+# Define number of simulations and different sample sizes to test
+n_simulations <- 10000
+sample_sizes <- c(2, 5, 20, 50)
+
+# Set up a 2x2 grid for the graphs
+par(mfrow = c(2, 2))
+
+for (n in sample_sizes) {
+  # 1. Take 10,000 random samples of size 'n' from a skewed population
+  # 2. Calculate the mean for each of those 10,000 samples
+  sample_means <- replicate(n_simulations, mean(rexp(n, rate = 1)))
+  
+  # 3. Create the histogram
+  hist(sample_means, 
+       breaks = 40, 
+       freq = FALSE, 
+       main = paste("Sample Size n =", n),
+       xlab = "Value of Sample Mean", 
+       col = "skyblue", 
+       border = "white")
+  
+  # 4. Add a theoretical Normal Curve (Red line) to see the fit
+  # The mean of our population is 1, and SD is 1.
+  curve(dnorm(x, mean = 1, sd = 1/sqrt(n)), 
+        add = TRUE, col = "red", lwd = 2)
+}
+
+
+```
+
+In these images we see as the sample size (n) increases,the distribution to moves to be less skewed into a more normal distribution. 
+
+
+As the observed distribution, may not follow a normal distribution directly we standardize our values into a normal distribution, using the following formula. Note this formula is an approximation. An approximation acts as best estimate considering we do not know the true distribution, unlike the exact distribution.
+
+
+$$
+Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \rightarrow^{aprox} N(0,1)
+$$
+
+By standardizing our values into Z scores, we can approximate our probability distribution sample statistics, which are values like the mean, proportion, or regression coefficient.
+
+
+
+
+
+# t-distubution 
+
+We used a normal distribution when our population standard deviation $\sigma^2$ was known. When we do not know our population's standard deviation we use a **t distribution**. 
+
+When we do not know our population's standard deviation we estimate using the sample variance $S^2$ .  
+$$
+  T = \frac{\bar{X} - \mu}{\ S/ \sqrt{n}}  \rightarrow t_{n-1}
+$$
+Our formula for out sample variance $S^2$ is :
+
+$$
+S^2 = \frac {1}{n-1} \sum_{i=1}^{n} ({x_i -\bar{X}})^2
+$$
+In our T distribution since we do not know our population standard deviation and divide by the sample standard deviation, we must consider the variation within the sample, which is why we divide $S$ by the square root of the sample size. 
+
+As the shape of a t-distribution and normal distribution by the naked eye follow highly similar shapes the formulaic difference of the  $S /\sqrt{n}$ ,in the t distribution denominator, causes more uncertainty in the distribution leading to wider "fatter" tails in the t- distribution rather than the normal distribution. Unlike in the normal distribution where we know the variance, or spread of data, with the goal of finding the sample mean, in a t-distribution we neither know the variance nor the sample mean, leading to a greater chance of uncertainty. Greater uncertainty  ultimately leads us to have fatter tails showing higher variance, although as n increases this uncertainty is reduced, giving a smaller standard deviation $S^2$ ultimately decreasing the spread in the distribution. 
+
+
+
+Note as our sample size grows, the tails of the t-distribution get less fat, often converging closer the a normal distribution. Similar to our Central Limit Theron where the larger our sample size, the more our model converges to the normal distribution. The formula component of $\sqrt{n}$ assists in changing the distribution shape, as the level of n contributes to the degrees of freedom, the only parameter in the t-distribution formula. 
+
+
+Below we compare a t-distribution with a normal distribution. Note the t-distribution has 'fatter' tails.
+
+```{r}
+
+set.seed(359)
+n <- 15
+mu <- 5
+sigma <- 2
+
+# Generate t-statistics
+n.samples <- 10000
+t.stats <- numeric(n.samples)  # This defines a 10000 dimensional zero vector
+                               # t.test <- NULL uses more computing resource
+for(i in 1:n.samples) {
+  sample.data <- rnorm(n, mu, sigma)
+  x.bar <- mean(sample.data)
+  s <- sd(sample.data)
+  t.stats[i] <- (x.bar - mu) / (s/sqrt(n))
+}
+
+# Compare with theoretical t-distribution
+x.vals <- seq(-4, 4, length.out = 200)
+theoretical.t <- dt(x.vals, df = n-1)    # calling t-density function
+theoretical.normal <- dnorm(x.vals)      # standard normal distribution
+
+comparison.df <- data.frame(
+  x = rep(x.vals, 2),
+  density = c(theoretical.t, theoretical.normal),
+  distribution = rep(c("t(9)", "N(0,1)"), each = length(x.vals))
+)
+
+t.plt <- ggplot(comparison.df, aes(x = x, y = density, color = distribution)) +
+  geom_line(size = 1) +
+  labs(title = "t-Distribution vs Normal Distribution",
+       x = "Value", y = "Density") +
+    theme(plot.title = element_text(hjust = 0.5),
+        plot.margin = margin(t = 35, r = 20, b = 30, l = 30, unit = "pt")) +
+   scale_color_manual(values = c("blue", "orange"))
+ggplotly(t.plt)
+
+```
+
+
+Why our t-distribution connects with the normal distribution? 
+
+Our t-distribution in function behaves similarly to the normal distribution. Our normal standardized formula and normal distribution formula  share a numerator accounting for the distance between the mean and the observed value ( shared numerator: $\bar{X} - \mu$). Even in shape both the t and normal distributions share a bell curve centered at 0. When the sample size is large enough a t distribution can become a normal distribution. Our t-distribution converging to the normal distribution is valuable because with a large enough sample size, our sample variance because accurate enough to account as the true population variance, allowing our statistics to be more accurate as they are closer to the true population.
+
+
+Our assumptions of the t-distribution include independent random observations, random sampling, and that our population is normally distributed.  
+
+As t distributions tend to converge into normal distributions upon large sample size, often t distributions prior to converging have smaller sample sizes.
+
+The t-distribution considers estimations for the sample mean, we use a chi-squared distribution to assess the variance, also known as spread, of the distribution.
+
+# Chi-Squared Distrubution
+
+A chi-squared distribution is also a distribution type that can converge into normal distribution. A chi- squared distribution is a special case of a gamma distribution, in which both distributions have skewness. 
+
+Below is an example of a chi-square distribution:
+
+```{r chiexample1}
+
+set.seed(6)
+n <- 5
+sigma <- 2
+
+# Generate chi-square statistics
+n.samples <- 10000
+chisq.stats <- numeric(n.samples)
+
+for(i in 1:n.samples) {
+  sample.data <- rnorm(n, 0, sigma)
+  chisq.stats[i] <- sum((sample.data/sigma)^2)
+}
+
+# Compare with theoretical chi-square
+x.vals <- seq(0, 30, length.out = 200)
+theoretical.chisq <- dchisq(x.vals, df = n)
+theory.df <- data.frame(x = x.vals, density = theoretical.chisq)
+
+chi.plt <- ggplot(data.frame(x = chisq.stats), aes(x = x)) +
+  geom_histogram(aes(y = ..density..), bins = 50, alpha = 0.7, fill = "green") +
+  geom_line(data = theory.df, aes(x = x, y = density), 
+            color = "blue", linewidth = 1.5) +
+  #stat_function(fun = dchisq, args = list(df = n), color = "red", size = 1) +
+  labs(title = "Chi-Squared Distribution (n=5) ",
+       subtitle = "Sum of squared standard normals",
+       x = "Value", y = "Density") +
+   theme(plot.title = element_text(hjust = 0.5),
+        plot.margin = margin(t = 35, r = 20, b = 30, l = 30, unit = "pt"))
+ggplotly(chi.plt)
+
+
+```
+
+An increase in sample size can lead to a normal distribution, as increase in sample size reduces the skewness.
+```{r chiexample3}
+
+set.seed(6)
+n <- 500
+sigma <- 2
+
+# Generate chi-square statistics
+n.samples <- 10000
+chisq.stats <- numeric(n.samples)
+
+for(i in 1:n.samples) {
+  sample.data <- rnorm(n, 0, sigma)
+  chisq.stats[i] <- sum((sample.data/sigma)^2)
+}
+
+# Compare with theoretical chi-square
+x.vals <- seq(0, 1100, length.out = 200)
+theoretical.chisq <- dchisq(x.vals, df = n)
+theory.df <- data.frame(x = x.vals, density = theoretical.chisq)
+
+chi.plt <- ggplot(data.frame(x = chisq.stats), aes(x = x)) +
+  geom_histogram(aes(y = ..density..), bins = 50, alpha = 0.7, fill = "green") +
+  geom_line(data = theory.df, aes(x = x, y = density), 
+            color = "blue", linewidth =1.5) +
+  #stat_function(fun = dchisq, args = list(df = n), color = "red", size = 1) +
+  labs(title = "Chi-Squared Distribution (n=500) ",
+       subtitle = "Sum of squared standard normals",
+       x = "Value", y = "Density") +
+   theme(plot.title = element_text(hjust = 0.5),
+        plot.margin = margin(t = 35, r = 20, b = 30, l = 30, unit = "pt"))
+ggplotly(chi.plt)
+
+
+```
+
+A chi-square distribution can derive from an exact normal distribution. It can essentially act as a squared standard normal with one degree of freedom or a sum of squares with more than 1 degree of freedom, adding skewness to a normal distribution. As the chi-square is a squared normal, the distribution can never be negative, exaggerating any right skewness. In other words, a chi-squared distribution can be described as a normal distribution, whose center has moved and now possesses skewness.
+
+In contribution that the variance is a squared parameter, the sampling distribution of the sample variance can be described as a chi-square distribution upon scaling. When our sample size increases,the degree of freedom parameter $(n-1)$ in our numerator increases. The Central Limit Theorem helps our chi-squared distribution take on a normal distribution, smoothing the skewness into a bell-shape, as the sample size increase. 
+
+Our chi-square distribution relationship with a normal distribution:
+
+$$
+  \frac{(n-1)S^2}{\sigma^2} \rightarrow \chi^2_{n-1}
+$$
+
+Like a t-distribution, our assumptions about a chi-square distribution is that we sample from a normally distributed population as well as individually and independently distributed.
+The chi-squared and t-distribution have degrees of freedom in their parameters, dictating the shapes of their distributions.
+
+
+# F distrubution
+
+With our chi-squared distribution we see the variance of our distribution. Often we have multiple distributions and we need to relate the variances to each other to see quality of the two distributions. Hence we build a F distribution as a ratio of two chi-squared variables of independent sample variances. Like the individual chi-squared, both assume normal distribution. These chi-squared distributions source from independent populations. 
+
+$$
+{X_1, X_2, ...X_n} ~ ^{i.i.d} N(\mu_2, \sigma^2_1) \\ and \\{Y_1, Y_2, ...Y_n} ~ ^{i.i.d} N(\mu_2, \sigma^2_2) 
+$$
+$$
+S^2_1 = \frac {1}{n_1-1} \sum_{i=1}^{n} ({X_i -\bar{X}})^2    \\and\\ 
+S^2_2 = \frac {1}{n_2-1} \sum_{i=1}^{n} ({Y_i -\bar{Y}})^2
+$$
+Define
+$$
+F= \frac {S^2_1/ \sigma^2} {S^2_2/\sigma^2_2} \rightarrow^d F_{n-1, n_2-1}
+$$ 
+
+
+The 1 degree of freedom each chi-squares hold in the F-distribution give us 2 degrees of freedom (one in the denominator, and one in the numerator) that both contribute to the distribution's shape.
+
+In the greater the F distribution ratio, the more variance in the numerator's distribution. The smaller the variance the variance is larger in the denominator distribution. If the F distribution ratio is 1, the two variances in the numerator and denominator are equal.
+
+
+
+```{r}
+
+set.seed(45)
+df1 <- 20
+df2 <- 25
+
+# Generate F statistics
+n.samples <- 10000
+f.stats <- numeric(n.samples)
+
+for(i in 1:n.samples) {
+  u1 <- rchisq(1, df1)
+  u2 <- rchisq(1, df2)
+  f.stats[i] <- (u1/df1) / (u2/df2)
+}
+
+# Compare with theoretical F-distribution
+x.vals <- seq(0, 5, length.out = 200)
+theoretical.f <- df(x.vals, df1, df2)
+theory.df <- data.frame(x = x.vals, density = theoretical.f)
+
+
+
+
+f.plt <- ggplot(data.frame(x = f.stats), aes(x = x)) +
+  geom_histogram(aes(y = ..density..), bins = 50, alpha = 0.7, fill = "blue") +
+  geom_line(data = theory.df, aes(x = x, y = density), 
+            color = "red", linewidth = 1) +
+  coord_cartesian(xlim = c(0, 5)) +
+  labs(title = paste("F-Distribution \n F(", df1, ",", df2, ")", sep = ""),
+       x = "Value", y = "Density") +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.margin = margin(t = 35, r = 20, b = 30, l = 30, unit = "pt"))
+ggplotly(f.plt)
+
+
+
+```
+
+
+
+
+# Conclusion
+Assuming a normal distribution allows us to connect a t distribution to a normal distribution. A normal distribution can be used towards a chi- squared distribution to assess model variance and two chi-square tests can be used in an F distribution ratio to assess the overall quality of two distributions. 
+
+The normal distribution builds into advanced analyse that allow us to consider the quality of our distribution. Without a standardized distribution shape that the normal distribution gives us, making these comparisons would be challenging, especially through various unit types. Our normal distribution allows us to organize our distribution for analysis, and test the quality of an observed data set either through approximation or theoretical comparison.
