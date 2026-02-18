@@ -1,0 +1,558 @@
+---
+title: "Assignment 3: ECDF and Bootstrap Sampling and Applications"
+author: "Ezana Rivers "
+date: " 2-17-2026"
+output:
+  html_document: 
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    number_sections: no
+    toc_collapsed: yes
+    code_folding: hide
+    code_download: yes
+    smooth_scroll: yes
+    theme: lumen
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    number_sections: yes
+    fig_width: 3
+    fig_height: 3
+  word_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    keep_md: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{css, echo = FALSE}
+#TOC::before {
+  content: "Table of Contents";
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+  color: navy;
+  margin-bottom: 10px;
+}
+
+
+div#TOC li {     /* table of content  */
+    list-style:upper-roman;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+
+h1.title {    /* level 1 header of title  */
+  font-size: 22px;
+  font-weight: bold;
+  color: DarkRed;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+}
+
+h4.author { /* Header 4 - and the author and data headers use this too  */
+  font-size: 15px;
+  font-weight: bold;
+  font-family: system-ui;
+  color: navy;
+  text-align: center;
+}
+
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Gill Sans", sans-serif;
+  color: DarkBlue;
+  text-align: center;
+}
+
+h1 { /* Header 1 - and the author and data headers use this too  */
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: center;
+}
+
+h2 { /* Header 2 - and the author and data headers use this too  */
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h3 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h4 { /* Header 4 - and the author and data headers use this too  */
+    font-size: 14px;
+  font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: left;
+}
+
+/* Add dots after numbered headers */
+.header-section-number::after {
+  content: ".";
+
+body { background-color:white; }
+
+.highlightme { background-color:yellow; }
+
+p { background-color:white; }
+
+}
+```
+
+```{r setup, include=FALSE}
+# code chunk specifies whether the R code, warnings, and output 
+# will be included in the output files.
+if (!require("knitr")) {
+   install.packages("knitr")
+   library(knitr)
+}
+if (!require("pander")) {
+   install.packages("pander")
+   library(pander)
+}
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+if (!require("tidyverse")) {
+  install.packages("tidyverse")
+  library(tidyverse)
+}
+
+if (!require("plotly")) {
+  install.packages("plotly")
+  library(plotly)
+}
+####
+knitr::opts_chunk$set(echo = TRUE,       # include code chunk in the output file
+                      warning = FALSE,   # sometimes, you code may produce warning messages,
+                                         # you can choose to include the warning messages in
+                                         # the output file. 
+                      results = TRUE,    # you can also decide whether to include the output
+                                         # in the output file.
+                      message = FALSE,
+                      comment = NA
+                      )  
+```
+ 
+ \
+ 
+## **Assignment Objectives** 
+
+* Understand the theoretical basis of Bootstrap sampling methods for approximating sampling distributions.
+
+* Assess the performance of Bootstrap sampling distributions against exact and asymptotic sampling distributions.
+
+* Implement Bootstrap sampling algorithm and construct sampling distributions using R.
+
+\
+
+**Use of AI Tools**
+
+**Policy on AI Tool Use**: Students must adhere to the AI tool policy specified in the course syllabus. The direct copying of AI-generated content is strictly prohibited. All submitted work must reflect your own understanding; where external tools are consulted, content must be thoroughly rephrased and synthesized in your own words.
+
+**Code Inclusion Requirement**: Any code included in your essay must be properly commented to explain the purpose and/or expected output of key code lines. Submitting AI-generated code without meaningful, student-added comments will not be accepted.
+
+\
+
+**Asymptotic Distribution of Sample Variance**
+
+Assume that $\{ x_1, x_2, \cdots, x_n \} \to F(x)$ with $\mu = E[X]$ and $\sigma^2 = \text{var}(X)$. Denote 
+
+$$
+s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \mu)^2
+$$
+
+If $n$ is large, 
+
+$$
+s^2 \to N\left(\sigma^2,  \frac{\mu_4-\sigma^4}{n} \right)
+$$
+
+where $\mu_4 = E[(X_i - \mu)^4]$ is tje 4th central moment which can be estimated by
+
+$$
+\hat{\mu}_4 = \frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^4.
+$$
+
+**Note**: This describes the asymptotic convergence of the sample variance, following from the central limit theorem (CLT). The sample size required for this approximation to hold is situation-dependent.
+
+
+\
+
+## **Question 1: Asymptotic vs Bootstrap Sampling Distributions**
+
+Write an essay summarizing the concepts of Asymptotic and Bootstrap Sampling Distributions, along with their key applications. Your discussion should be grounded in your personal understanding of the material. Any external sources including AI tools consulted must be clearly cited. 
+
+
+**Essay Prompt**: Discuss the concepts of the bootstrap sampling plan, the bootstrap sampling distribution, and the asymptotic sampling distribution in the context of statistics (e.g., sample mean and variance) computed from an independent and identically distributed (i.i.d.) sample. Your discussion should:
+
+* Clearly outline the key assumptions required for each method.
+
+* Explain the practical application of each distribution.
+
+* Provide guidance on when and why one should be preferred over the other in statistical inference.
+
+
+
+\
+
+## Asymptotic Sampling Distrubutions
+
+
+We use **sampling distributions** when we want to make statistical inferences about the population. Often running statistics on the true population is extremely expensive, or impossible. Often the true population is unknown, so running statistics on the true population soley, is impractical. To compensate, often we take a random sample from our population of interest to make a statistical inference to the population. We assume our sample can provide us with information about the population.
+
+An **Asymptotic Sampling Distribution** is an example of a type of sampling distribution we use to make statistical inferences about the population. When we use an asymptotic sampling distribution we assume a large sample size with an independently and identically distributed sample. We can use an underlining non-parametric or unknown population shape and standardize the normal distribution to approximate the distribution and parameters of interest for the samples collected. 
+
+We model raw collected datasets or samples with a **Empirical Cumulative Distribution Function (ECDF)**. This is a distribution directly from observed sample data, with no inherently assumed shape about the sample or population distribution.  
+
+The asymptotic distribution converges to a normal distribution as the sample size increases, although we standardize each observation in the distribution to approximate a normal distribution to make inferences about the distribution using our normal distribution as a guide to do so using the following formulas:
+
+
+When our standard deviation is known for the population, we standardize a Asymptotic Distribution  using the formula
+$$
+
+Z= \frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \to_{\text{approx}} N(0, 1)
+
+
+$$
+
+
+When our standard deviation is not known for the population, we assume the standard deviation is approximately normally distributed (with a large sample size), we standardize a Asymptotic Distribution using the formula which happens to be a T-distrubution: 
+
+$$
+T = \frac{\bar{X}-\mu}{S/\sqrt{n}} \overset{d}{\to}  t_{n-1}
+$$
+We estimate the sample variance to apply to the T distribution which the $\sqrt(S^2)$ can be placed in the T distribution formula. 
+
+$$
+S^2 \stackrel{d}{\to} N\left(\sigma^2, \frac{\mu_4 - \sigma^4}{n}\right) \quad \text{as } n \to \infty,
+$$
+When our distribution is subset with a proportion (Bernoulli Random Variable), we a Asymptotic Distribution standardize using the formula
+$$
+Z_n = \frac{\hat{p}_n - p}{\sqrt{\frac{p(1-p)}{n}}} \stackrel{d}{\to} N(0,1) \quad \text{as } n \to \infty
+$$
+
+The Asymptotic Distribution is very valuable for approximating sample statistics for example, the sample statistic, mean can be approximated using the following formula where $\mu_4 = E[(X_i - \mu)^4]$ is tje 4th central moment which can be estimated as:
+
+$$
+\hat{\mu}_4 = \frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^4.
+
+$$
+While our asymptotic distribution can make approximations on sample statistics, when distributions become more complex, for example paired observations, unbounded populations, and unknowns about the true population, direct computation of the asymptotic distributions can become incredibly complex and non-time efficient. Instead of direct computations and approximations for the distribution we can run simulations within the datasets we have to simulate and summary the statistics after repeated resamples to estimate a sample statistic (for example mean or variance) through the behavior seen through repeated measurements instead through direct computation. One way we demonstrate this simulated resampling is through **Bootstrap Sampling Distributions**. 
+
+
+
+## Bootstrap Sampling Distrubutions 
+A bootstrap sampling distribution is a simulated approach into analyzing sample statistics (ig. mean, variance, etc.). Instead of organizing a distribution directly to derive one mean or other sample statistic, we repeatably sample (with replacement) from the originally collected sample to derived a variety of the sample statistic of interest values to compile and compute into a even more robust value for the sample statistic of interest.  
+
+We select a random sample from the true population.  We use the collected random sample as a representative population to draw samples from. With this originally captured sample we take 
+
+
+We choose to randomly select random samples from the original random sample to compute a bootstrap samples statistic. We will ultimately use all the simulated bootstrap statistics to compute the statistic of interest onto the simulated bootstrap statistics. 
+
+
+Below is the simulation of a bootstrap statistic from an original dataset, to find a bootstrap distribution we can calculate a statistic from
+
+```{r}
+
+#creating a simulated bootstrap
+
+url = "https://pengdsci.github.io/STA506/w04/w02-wcuheights.txt"
+
+
+height = read.table(url, header = TRUE) #the Population of the heights at west chester university 
+
+original.sample = sample(height$Height, 81, replace = FALSE) #Take a random sample of the original population to act as the population proxy for our bootstrap
+
+#our sample size is 81
+# we do not need to replace our samples from the true population. We would like consistent values to repeatedly sample from for our bootstrap sampling
+
+bt.sample.mean = NULL #create an empty vector to hold our sample into when we compute the bootstrap mean during our for loop
+
+for(i in 1:1000)
+{
+  
+  ith.bt.sample = x=sample(x=original.sample, size = 81, replace= TRUE) #take repeated samples from our original sample aka the sample acting as a proxy for our original population
+  
+  #our sample size is 81, the same size of the original population
+  #we want to take values from this sample repeated so we do replace our samples 
+  
+  bt.sample.mean[i] = mean(ith.bt.sample)
+  
+  
+}
+
+
+hist(bt.sample.mean,
+     breaks = 12,
+     probability = TRUE,
+     xlab = "Bootstrap sample means", #x axis lable
+   main="Bootstrap Sampling Distribution \n of Sample Means Example",
+          cex.main = 0.9,
+       col.main = "darkgreen")   
+lines(density(bt.sample.mean), col = "skyblue", lwd = 2)
+
+```
+
+
+
+The Bootstrap Sampling Distribution has value because it allows us to make inferences about a population based on a large independent identically distrubtued random sample in which we are unsure about the true population and most likely have complexity in the organization of our distribution. We may find value in using a bootstrap when 
+
+When we do not have complex attributes in our distribution a Asymptotic Distribution may be better fitted. A simulation may cause higher likelihood f type I error, due to the need to run more simulation tests
+
+
+Assess the performance of Bootstrap sampling distributions against exact and asymptotic sampling distributions.
+
+An exact distribution has similar qualities to an asymptotic distribution, although an exact distribution is specific to a small sample size, with a normally distributed sample that is an identically and interdependent samples distribution. In comparison to both exact and asymptotic distributions, a boot strap sampling distribution is valuable because we can simulate a distribution to reach a statistic for a distributions that would otherwise be too complex to model through parametric approximation. Although an exact test is small and a parametric test, at times an exact test may be more applicable if there are no complex distributions, a small sample size that does not meet the large sample size assumption of the Bootstrap Assumptions and there also be little need to approximate the distribution as the distribution already known. A Bootstrap sampling distribution may be more appropriate for complex asymptotic distributions with large sample sizes.
+
+
+
+## **Question 2: Daily Coffee Sales (in mL) at Two Different Cafe Locations**
+
+This data set represents the volume of regular brewed coffee sold per day (in milliliters) at two different cafe locations over a period of 50 days. 
+
+```
+2850, 3200, 2900, 3100, 2950, 7800, 8100, 7900, 3300, 3050, 4000, 4200, 3150, 3400, 7700, 8200, 
+3250, 4400, 3100, 4200, 4500, 4800, 4300, 8500, 8200, 8900, 8700, 3250, 3000, 4600, 4100, 8400, 
+8800, 3350, 4700, 3100, 8100, 3050, 8300, 4100, 3100, 8300, 8900, 8200, 4400, 4500, 3250, 4600, 
+8400, 3300, 4200, 4500, 4800, 4300, 8500
+```
+We are interested in finding the sampling distribution of sample means that will be used for various inferences about the underlying population mean.
+
+a) Based on the given data, can the Central Limit Theorem be used to derive the asymptotic sampling distribution of the sample mean? Justify your answer.
+
+The asymptotic sampling distribution allows a non-parametric approximation that uses the assumption that the larger the sample size the, greater the likelihood the sample mean will be normally distrusted. The Central Limit Theorem is a tool the asymptotic sampling distribution uses a as an approximation for the sampling distribution. In many cases both an asymptotic sampling distribution or bootstrap distribution can be used, although which is most accessible depends on the complexity of the distribution and parameter of interest. As this sampling distribution, does not look complex in regards to paired observation for example, the central limit theorem can be used because the sample we are assuming is our population is not normally distributed; the asymptotic sampling distribution does not assume shape of population, unlike the exact normal distribution. 
+
+
+This is the use of the central limit theory for the asymptotic distribution 
+
+```{r}
+
+coffees = c(2850, 3200, 2900, 3100, 2950, 7800, 8100, 7900, 3300, 3050, 4000, 4200, 3150, 3400, 7700, 8200, 3250, 4400, 3100, 4200, 4500, 4800, 4300, 8500, 8200, 8900, 8700, 3250, 3000, 4600, 4100, 8400, 8800, 3350, 4700, 3100, 8100, 3050, 8300, 4100, 3100, 8300, 8900, 8200, 4400, 4500, 3250, 4600, 8400, 3300, 4200, 4500, 4800, 4300, 8500)
+
+
+
+s.coffee=sort(coffees) #sorting the dataset in increasing ordering
+
+hist(s.coffee, main = "Histogram of Coffee Volume" )#bimodal distribution
+
+
+
+#Building Z distribution to Approximate for Asymptotic sampling 
+n_coffee=length(s.coffee) #sample size is 55
+sd_coffee = sd(s.coffee) #standard deviation of sorted coffee
+
+var_coffee = var(s.coffee) #calculating sample variance of coffee
+
+se_coffee <- sd_coffee / sqrt(n_coffee) #standard error of coffee
+
+mean.coffee=mean(s.coffee) #coffee mean is 5250
+
+ecdf(s.coffee)
+
+freq_coff=table(coffees)
+
+
+
+my.ECDF <- function(indat, outx){
+  # outx - a vector of given values
+  freq.table <- table(indat)                          # frequency table
+  uniq <- as.numeric(names(freq.table))          # unique data values
+  rep.time <- as.vector(freq.table)                   # frequencies of the unique data values
+  cum.rel.feq <- cumsum(rep.time)/sum(rep.time)       # cumulative relative frequencies: CDF
+  cum.prob <- NULL
+  for (i in 1:length(outx)){
+    intvl.id <- which(uniq <= outx[i])      # identify the index meeting the condition
+    cum.prob[i] <- cum.rel.feq[max(intvl.id)] # extract the cumulative prob according to CDF 
+  }
+  cum.prob             
+}
+
+plot(s.coffee, my.ECDF(indat = coffees, outx = s.coffee), type = "s",
+     main = "ECDF of Coffee Volume",
+     xlab = "Coffee Volume",
+     ylab = "Cumulative Probability")
+
+
+
+```
+
+In the histogram of coffee volume the distribution is not normally distributed but, bimodal, meaning having two peaks. There is most likely a separation in our dataset that causes the volumes to sit in two different 'subsets'.
+
+
+Our coffee volume sample mean using the CLT approximation distribution is 5250 mL.
+ 
+
+
+
+b) Apply the bootstrap method to estimate the sampling distribution (often called the bootstrap sampling distribution) of the sample mean. Generate a kernel density estimate from the bootstrap sample means and plot it. Then, use this bootstrap distribution to validate your conclusion from part (a). Make sure your visuals are effective in enhancing the presentation of these results.
+
+```{r}
+#Apply the bootstrap method to the sample mean
+#Generate a kernel density estimate from the bootstrap and sample plot
+
+#call the sample from the population
+set.seed(142)
+
+s.coffee
+#create an  empty vector to calculate the bootstrap distribution mean in the for loop
+
+s.coffee.vec.mean = NULL
+
+#sample from the population
+
+for(i in 1:1000)
+{
+ 
+ith.coffee.sample=sample(s.coffee, 55, replace= TRUE) #randomly select from original sample
+#Our sample size is 55
+#replace our sample each loop because we do not have a large sample
+
+s.coffee.vec.mean[i] = mean(ith.coffee.sample) #calculated mean: 5207.273
+  
+}
+
+kde = density(s.coffee.vec.mean, bw = sd_coffee)
+
+#generate a kernel density estimate from the bootstrap from the sample means and plot it
+
+hist(s.coffee.vec.mean, #datapoint aka statistic we just generated, we want to see its simulated distrubution
+        probability = TRUE,  #identify the relative frequency (always say true)
+        breaks = 14,
+        xlab = "sample means of repeated samples", #label the x axis
+        main= "Approximated Sampling Distrubution \n of Sample Means - Bootstrap Resampling",
+     cex.main = 0.9,
+     col.main = "darkgreen"
+     )
+lines(density(s.coffee.vec.mean, kernel = "gaussian"), col= "skyblue", lwd=2) #what the bootstrap distribution looks like 
+
+
+
+
+
+# KDE based on built-in function density(): bandwidth = 0.4
+
+########### plot what the bootstrap distribution looks like what kernel ####
+  
+
+
+```
+
+The simulated bootstrap resampling mean for the coffee volume is 5207.273 mL.
+
+
+We see our bootstrap distribution gave is a approximately normal distribution of the means, our parameter statistic of interest. 
+
+Our calculated mean of coffee volume using the bootstrap distribution is 5217.273 mL.
+
+
+```{r}
+
+boot_df <- data.frame(boot_means = s.coffee.vec.mean) #Create a comparison dataframe to compare the CLT Asymptotic Distribution and the Bootstrap Disrtubution
+
+
+mean.coffee <- mean(s.coffee)    # Center (5250) #Call the CLT asymptotic   parameters for comparison
+se_coffee <- sd(s.coffee) / sqrt(length(s.coffee))  
+
+ 
+ggplot(boot_df, aes(x = boot_means)) + #create plot using coffee mean aka  boots_mean
+  #creating a histogram based on the bootstrap distribution 
+  geom_histogram(aes(y = after_stat(density)), bins = 30, 
+                 fill = "darkgray", alpha = 0.4, color = "black") +
+  
+  # B: The KDE (Gaussian Kernel - Smoothing the Bootstrap results)
+  # R defaults to a Gaussian kernel here
+  geom_density(color = "blue", linewidth = 1.2) + #add a layer for a Gaussian line with a 
+  
+  # C: The CLT Normal Curve (Validation from Part A)
+  #based on the mean of coffee and standard error for a Asymptotic distribution
+  stat_function(fun = dnorm, args = list(mean = mean.coffee, sd = se_coffee), 
+                color = "red", linetype = "dashed", linewidth = 1) +
+  
+  # Labels and Theme
+  labs(title = "Approximated Sampling Distribution of Sample Means",
+       subtitle = "Gray: Bootstrap Hist | Blue: Gaussian KDE | Red: CLT Normal",
+       x = "Sample Mean Volume (mL)", 
+       y = "Density") +
+  theme_minimal()
+```
+
+
+As mentioned prior, both the bootstrap and the CLT Asymptotic Sampling Distribution can be used on this non-complex distribution type, thus the distributions for taken both for the bootstrap and asymptotic present similar results. A
+
+
+
+
+c) Repeat the analysis in parts (a) and (b) for the sample variance.
+
+
+```{r}
+options(scipen = 0)
+
+#Part a for Variance
+var_coffee = var(s.coffee) #calculating sample variance of coffee = 5030833
+
+##Part B for Variance  
+
+#call the sample from the population
+set.seed(142)
+
+s.coffee
+#create an  empty vector to calculate the bootstrap distribution mean in the for loop
+
+s.coffee.vec.var = NULL
+
+#sample from the population
+
+for(i in 1:1000)
+{
+ 
+ith.coffee.sample.v=sample(s.coffee, 55, replace= TRUE) #randomly select from original sample
+#Our sample size is 55
+#replace our sample each loop because we do not have a large sample
+
+s.coffee.vec.var[i] = var(ith.coffee.sample.v) #calculated variance: 4844761
+  
+}
+
+kdeV = density(s.coffee.vec.var)
+
+#generate a kernel density estimate from the bootstrap from the sample means and plot it
+
+hist(s.coffee.vec.var, #datapoint aka statistic we just generated, we want to see its simulated distrubution
+        probability = TRUE,  #identify the relative frequency (always say true)
+        breaks = 14,
+        xlab = "sample varience of repeated samples", #label the x axis
+        main= "Approximated Sampling Distrubution \n of Sample Varience - Bootstrap Resampling",
+     cex.main = 0.9,
+     col.main = "darkgreen"
+     )
+lines(density(s.coffee.vec.var, kernel = "gaussian"), col= "skyblue", lwd=2) #what the bootstrap distribution looks like 
+
+
+
+```
+
+
+The asymptotic sampling distribution is a distribution better represented for non-complex values. As the variance is a squared parameter that adds complexity a asymptotic sampling distribution is not a strong distribution type for identifying a variance parameter. A bootstrap resampling distribution is a better suited distribution type for identifying a variance's added complexity. 
+
+
+
