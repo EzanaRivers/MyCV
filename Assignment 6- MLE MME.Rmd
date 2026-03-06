@@ -1,0 +1,577 @@
+---
+title: "Assignment 4: Maximum Likelihood Estimation"
+author: "Ezana Rivers"
+date: " Due: 03-03-2026"
+output:
+  html_document: 
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    number_sections: no
+    toc_collapsed: yes
+    code_folding: hide
+    code_download: yes
+    smooth_scroll: yes
+    theme: lumen
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    number_sections: yes
+    fig_width: 3
+    fig_height: 3
+  word_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    keep_md: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{css, echo = FALSE}
+#TOC::before {
+  content: "Table of Contents";
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+  color: navy;
+  margin-bottom: 10px;
+}
+
+
+div#TOC li {     /* table of content  */
+    list-style:upper-roman;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+
+h1.title {    /* level 1 header of title  */
+  font-size: 22px;
+  font-weight: bold;
+  color: DarkRed;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+}
+
+h4.author { /* Header 4 - and the author and data headers use this too  */
+  font-size: 15px;
+  font-weight: bold;
+  font-family: system-ui;
+  color: navy;
+  text-align: center;
+}
+
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Gill Sans", sans-serif;
+  color: DarkBlue;
+  text-align: center;
+}
+
+h1 { /* Header 1 - and the author and data headers use this too  */
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: center;
+}
+
+h2 { /* Header 2 - and the author and data headers use this too  */
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h3 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h4 { /* Header 4 - and the author and data headers use this too  */
+    font-size: 14px;
+  font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: left;
+}
+
+/* Add dots after numbered headers */
+.header-section-number::after {
+  content: ".";
+
+body { background-color:white; }
+
+.highlightme { background-color:yellow; }
+
+p { background-color:white; }
+
+}
+```
+
+```{r setup, include=FALSE}
+# code chunk specifies whether the R code, warnings, and output 
+# will be included in the output files.
+if (!require("knitr")) {
+   install.packages("knitr")
+   library(knitr)
+}
+if (!require("pander")) {
+   install.packages("pander")
+   library(pander)
+}
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+if (!require("tidyverse")) {
+  install.packages("tidyverse")
+  library(tidyverse)
+}
+
+if (!require("plotly")) {
+  install.packages("plotly")
+  library(plotly)
+}
+####
+knitr::opts_chunk$set(echo = TRUE,       # include code chunk in the output file
+                      warning = FALSE,   # sometimes, you code may produce warning messages,
+                                         # you can choose to include the warning messages in
+                                         # the output file. 
+                      results = TRUE,    # you can also decide whether to include the output
+                                         # in the output file.
+                      message = FALSE,
+                      comment = NA
+                      )  
+```
+ 
+\
+ 
+## **Assignment Objectives** 
+
+* Comprehend the likelihood function and its properties.
+
+* Master the maximum likelihood estimation framework and required components.
+
+* Understand the plug-in principle underlying MLE.
+
+* Implement maximum likelihood estimation procedures in R.
+
+\
+
+## **Policies of Using AI Tools**
+
+**Policy on AI Tool Use**: Students must adhere to the AI tool policy specified in the course syllabus. The direct copying of AI-generated content is strictly prohibited. All submitted work must reflect your own understanding; where external tools are consulted, content must be thoroughly rephrased and synthesized in your own words.
+
+**Code Inclusion Requirement**: Any code included in your essay must be properly commented to explain the purpose and/or expected output of key code lines. Submitting AI-generated code without meaningful, student-added comments will not be accepted.
+
+\
+
+**Gamma Distribution Revisited**
+
+Let $X$ be the two parameter Gamma random variable with density function
+
+$$
+f(x \mid \alpha, \beta) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha-1} e^{-x/\beta}  \ \ \text{for} \ \  x > 0,
+$$
+
+where with $\alpha > 0$ (shape), $\beta>0$ (scale), and
+
+$$
+\Gamma(\alpha) = \int_{0}^{\infty} t^{\alpha-1} e^{-t} \, dt, \quad \alpha > 0.
+$$
+
+$\Gamma(x)$ can be computed in R using the `gamma()` function. The derivative of $\Gamma(x)$ are given respectively by
+
+$$
+\Gamma^\prime(z) = \Gamma (z)\psi_0(z)
+$$
+
+where $\psi_0(z) = \frac{d}{dz} \ln \Gamma{z}$. In R, the digamma function $\psi_0(z)$ is evaluated by `digamma()`.
+
+
+
+\
+
+<font color = "blue">This assignment focuses on finding maximum likelihood estimate of parameters $\alpha$ and $\beta$ based on a real-world application data set.</font>
+
+
+\
+
+## **Question 1: Derive gradient (first order partial derivative) of likelihood function**
+
+Assume that $\{x_1, x_2, \cdots, x_n \} \to \text{ gamma }(\alpha, \beta)$ with density function given by
+
+$$
+f(x \mid \alpha, \beta) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha-1} e^{-x/\beta}  \ \ \text{for} \ \  x > 0,
+$$
+
+Derive the gradient of the **log-likelihood function** with respect to the gamma distribution parameters $\alpha$ and $\beta$. To this end,
+
+
+a). Write out the full **log-likelihood function** based on the given data and the density function provided above.
+```{r}
+
+true.alpha <- 2.5
+true.beta <- 1.8
+
+
+sample.data= rgamma(1000, shape = true.alpha, scale = true.beta )
+
+
+# Log-Likelihood Function (to simplify computation)
+gammas.loglik = function(params, data) 
+  {
+  alpha_shape = params[1] #shape parameter
+  beta_scale = params[2] # scale parameter
+  n = length(data)
+  
+  # giving a log to the gamma distribution function and simplifying the equation
+  #replacing log(alpha)or log(gamma(alpha)) with lgamma()
+  loglik_gamma = -n * lgamma(alpha_shape) - 
+                 n * alpha_shape * log(beta_scale) + 
+                 (alpha_shape - 1) * sum(log(data)) - 
+                 (1/beta_scale) * sum(data)
+  
+  return(loglik_gamma) 
+}
+
+```
+
+
+
+Expanding the log and crafting the summation
+$$ 
+ \ell(\alpha, \beta)= \sum [ln(1)-ln\Gamma(\alpha)-ln(\beta^\alpha) + ln(x_i^{\alpha-1})+ln(e^{-x_i/\beta})]
+$$
+
+
+The log likelihood function of the gamma distribution function:
+$$
+\ell(x \mid \alpha, \beta)= -n \ln \Gamma(\alpha) - n \alpha \ln(\beta) + (\alpha - 1) \sum_{i=1}^{n} \ln(x_i) - \frac{1}{\beta} \sum_{i=1}^{n} x_i
+$$
+
+
+b). Derive the score functions (the gradient of the log-likelihood) from the full **log-likelihood function** in part (a).
+
+
+```{r}
+
+
+# Corrected Score Function
+gamma.score = function(params, data) 
+  {
+  alpha_shape = params[1]
+  beta_scale = params[2]
+  n = length(data)
+
+  # Getting the gradient parameters, replacing with digamma 
+  gradient_alpha = -n * digamma(alpha_shape) - n * log(beta_scale) + sum(log(data)) #Partial derivative to alpha #The first derivative of log gamma function which you need for the partial derivatives mentioned
+  gradient_beta = -(n * alpha_shape) / beta_scale + sum(data) / (beta_scale^2) 
+#Partial derivative with respect to Beta
+
+  return(c(gradient_alpha, gradient_beta))
+}
+
+
+```
+
+
+Performing the log likelihood partial derivatives for the Gamma distribution. 
+
+Taking the partial derivative in respect to the parameter $\alpha$. 
+
+$$
+\frac{\partial \ell}{\partial \alpha} = \frac{\partial}{\partial \alpha} \left[ -n \ln \Gamma(\alpha) - n \alpha \ln(\beta) + (\alpha - 1) \sum_{i=1}^{n} \ln(x_i) - \frac{1}{\beta} \sum_{i=1}^{n} x_i \right]
+$$
+
+
+$$
+\frac{\partial}{\partial \alpha} [-n \ln \Gamma(\alpha)] = -n \psi_0(\alpha)
+$$
+
+
+
+$$
+\frac{\partial}{\partial \alpha} [-n \alpha \ln(\beta)] = -n \ln(\beta)
+$$
+
+
+$$
+\frac{\partial}{\partial \alpha} [(\alpha - 1) \sum \ln(x_i)] = \sum \ln(x_i)
+$$
+
+
+$$
+\frac{\partial}{\partial \alpha} [-\frac{1}{\beta} \sum x_i] = 0
+$$
+
+$$
+U_\alpha = -n \psi_0(\alpha) - n \ln(\beta) + \sum_{i=1}^{n} \ln(x_i)
+$$
+
+
+## Beta 
+
+Taking the partial derivative in respect to the parameter $\beta$.
+
+$$
+
+\frac{\partial}{\partial \beta} [-n \ln \Gamma(\alpha)] = 0
+
+$$
+
+
+The Partial derivative of the Beta parameter is:
+
+$$
+\frac{\partial}{\partial \beta} [-n\alpha \ln(\beta)] = -\frac{n \alpha}{\beta}
+$$
+
+
+3. Differentiate and set the beta section to 0:
+
+$$
+\frac{\partial}{\partial \beta} [(\alpha - 1) \sum \ln(x_i)] = 0
+$$
+Remove line below:
+$$
+\frac{\partial\ell}{\partial \beta}=\frac{\partial}{\partial \beta} [-n\alpha \ln(\beta) +(\alpha-1) \sum^n_{i=1}(x_i) - \frac{1}{\beta} \sum^n_{i=1}x_i
+$$
+
+
+$$
+\frac{\partial}{\partial \beta} [-\frac{1}{\beta} \sum x_i] = \frac{\sum x_i}{\beta^2}
+$$
+
+
+The score function for the scale $\beta$ parameter is:
+
+$$
+U_\beta = -\frac{n \alpha}{\beta} + \frac{\sum_{i=1}^{n} x_i}{\beta^2}
+$$
+
+The gradient vector with Alpha (Shape) and Beta (Scale) Parameters:
+
+
+$$
+U_\alpha = -n \psi_0(\alpha) - n \ln(\beta) + \sum_{i=1}^{n} \ln(x_i) .........(A)
+$$
+
+$$
+U_\beta = -\frac{n \alpha}{\beta} + \frac{\sum_{i=1}^{n} x_i}{\beta^2} .......... (B)
+$$
+
+
+\
+
+
+
+## **Question 2: Birth data set**
+
+The following R code reads in a data set containing, for each of 7 days, the lengths of time in hours spent by
+women in the delivery suite while giving birth (without a ceasarian section) at John Radcliffe Hospital in
+Oxford, England. The data are taken from Davison (Statistical Models. Cambridge University Press, 2003).
+
+```
+2.1, 3.4, 4.25, 5.6, 6.4, 7.3, 8.5, 8.75, 8.9, 9.5, 9.75, 10, 10.4, 10.4, 16, 19,
+4, 4.1, 5, 5.5, 5.7, 6.5, 7.25, 7.3, 7.5, 8.2, 8.5, 9.75, 11, 11.2, 15, 16.5, 2.6, 
+3.6, 3.6, 6.4, 6.8, 7.5, 7.5, 8.25, 8.5, 10.4, 10.75, 14.25, 14.5, 1.5, 4.7, 4.7, 
+7.2, 7.25, 8.1, 8.5, 9.2, 9.5, 10.7, 11.5, 2.5, 2.5, 3.4, 4.2, 5.9, 6.25, 7.3, 7.5, 
+7.8, 8.3, 8.3, 10.25, 12.9, 14.3, 4, 4, 5.25, 6.1, 6.5, 6.9, 7, 8.45, 9.25, 10.1, 
+10.2, 12.75, 14.6, 2, 2.7, 2.75, 3.4, 4.2, 4.3, 4.9, 6.25, 7, 9, 9.25, 10.7
+```
+
+Assume the data are generated from a gamma distribution. The objective is to use these data and the designated algorithm to find the maximum likelihood estimates (MLEs) of the parameters $\alpha$ and $\beta$.
+
+
+a). Find the MLEs of $\alpha$ and $\beta$, denoted by $\hat{\alpha}$ and $\hat{\beta}$,  using gradient-based optimization via the R function `optim()` with the gradient vector derived in Question 1.
+
+
+```{r}
+
+databirth= sort(c(2.1, 3.4, 4.25, 5.6, 6.4, 7.3, 8.5, 8.75, 8.9, 9.5, 9.75, 10, 10.4, 10.4, 16, 19,
+4, 4.1, 5, 5.5, 5.7, 6.5, 7.25, 7.3, 7.5, 8.2, 8.5, 9.75, 11, 11.2, 15, 16.5, 2.6, 
+3.6, 3.6, 6.4, 6.8, 7.5, 7.5, 8.25, 8.5, 10.4, 10.75, 14.25, 14.5, 1.5, 4.7, 4.7, 
+7.2, 7.25, 8.1, 8.5, 9.2, 9.5, 10.7, 11.5, 2.5, 2.5, 3.4, 4.2, 5.9, 6.25, 7.3, 7.5, 
+7.8, 8.3, 8.3, 10.25, 12.9, 14.3, 4, 4, 5.25, 6.1, 6.5, 6.9, 7, 8.45, 9.25, 10.1, 
+10.2, 12.75, 14.6, 2, 2.7, 2.75, 3.4, 4.2, 4.3, 4.9, 6.25, 7, 9, 9.25, 10.7))
+
+#gammas.loglik(params = params, data = databirth)
+
+
+# Score Function to reach the gradient function of alpha and beta
+gamma.score = function(params, data) 
+  {
+  alpha_shape = params[1]
+  beta_scale = params[2]
+  n = length(data)
+
+  # Math Fix: Combined into one expression
+  gradient_alpha = -n * digamma(alpha_shape) - n * log(beta_scale) + sum(log(data))
+  gradient_beta = -(n * alpha_shape) / beta_scale + sum(data) / (beta_scale^2)
+
+  return(c(gradient_alpha, gradient_beta))
+}
+
+initial.params = c(alpha_shape = 5 , beta_scale= 2 ) #change later
+
+#Using optim() to reach gradient, gamma is a nonlinear, nonclosed function. We use optim() to get more accurate parameters
+mle.result <- optim(
+  par = initial.params,
+  fn = gammas.loglik, # fn, maps the territory of the function to follow/find the height of the function(here it is the gamma function)
+  gr = gamma.score,     # scored gamma  function --> needed for gradient
+  data = databirth,           
+  method = "L-BFGS-B",  # Best for gradients + bounds
+  hessian = TRUE,  # A matrix second order partial derivatives. If the Gradient is the first derivative (slope), the hessian is the second derivative (curvature)
+  control = list(trace = FALSE,
+                 fnscale = -1, # We want to MAXIMIZE the log-likelihood, so choose -1
+                 maxit = 500,
+                 abstol = 1e-8)
+)
+
+
+mle.result
+
+```
+
+
+The predicted shape parameter in the birth times is $\hat\alpha $ =  `r mle.result$par[1]`. The predicted scale parameter $\hat\beta$ = `r mle.result$par[2]`.
+
+
+b). Apply the method of moments to obtain estimators for $\alpha$ and $\beta$. Denote these moment estimators as $\tilde{\alpha}$ and $\tilde{\beta}$.
+
+
+```{r t2b2}
+
+
+#MME: Method of Moments (Scale Parameter)
+m1 <- mean(databirth) 
+s2 <- var(databirth)  # Sample Variance (s^2)
+
+# Scale parameter MoM formulas:
+mom_beta  <- s2 / m1          # This is the Scale Beta
+mom_alpha <- m1^2 / s2        # This is the Shape Alpha
+
+#mom_beta
+#mom_alpha
+
+initial.params = c(alpha_shape = mom_alpha, beta_scale= mom_beta ) #change later
+
+#Using optim like above 2a to optimze() the nonlinear and nonclosed function of the method of moment estimators mme
+mle.result <- optim(
+  par = initial.params,
+  fn = gammas.loglik,   # gamma function
+  gr = gamma.score,     # scored gamma  function
+  data = databirth,           
+  method = "L-BFGS-B",  # Best for gradients + bounds
+  hessian = TRUE,
+  control = list(trace = FALSE,
+                 fnscale = -1, # We want to MAXIMIZE the log-likelihood, so choose -1
+                 maxit = 500,
+                 abstol = 1e-8)
+)
+
+
+mle.result
+```
+
+
+
+The method of moments estimators for $\tilde{\alpha}$ is `r mom_alpha` and $\tilde{\beta}$ is `r mom_beta`.
+
+
+
+c). Conduct a brief literature review comparing the method of moments estimation (MME) and maximum likelihood estimation (MLE). Synthesize the key advantages and limitations of each, concluding with a practical recommendation.
+
+Method of moments estimation (MME) and Maximum likelihood estimation (MLE) are both methods to connect distributions with estimated parameters using a random sample. The method of moment estimation (MME) is a simpler test than the Maximum likelihood estimation (MLE).
+
+# Methods of Moments Estimation
+
+Method of moments estimation is a simpler estimator, using the population moments (information from the population) and setting it equal to the known sample  moments (known sample information) to solve for what the population parameters would be. Parameters are numerical population descriptions that summarize characteristics about our population, for example, mean or variance. The goal of the likelihood estimation is to measure how well parameter values explains the observed data.
+
+
+The major advantage to the Moment of methods estimation is its simplicity. MME does not require much computational power, allowing for fast computations that can be used as general estimators. 
+The downside of thee Method of moment's simplicity, is its lack of specify may yield estimators with wider variance and less accuracy- also known as efficiency. 
+
+When we set up two equations together and solve for the unknown population parameter of interest, sometimes, depending on the complexity of the distribution, we may not have a nonlinear equation. In other words, solving for the unknown parameter, cannot be done using simple algebraic expressions and require more computational rigor often requiring a background application in calculus or linear algebra. When an expression is non-linear we can no longer get defined values for the parameters of interest, but approximations. Connecting the higher variance of MME calculations with a possible added noise or bias with a non-linear approximation, the parameters calculated using MME have a greater chance to being less accurate in comparison to other tests, such as the Maximum Likelihood Estimation (MLE). 
+
+The higher chance of bias places importance of pairing the MME with a Fisher Information test. The Fisher Information test measures how well the sample carries information about the population parameter. With its simpler calculations, the MME is best suited to provide general starting point information about the parameter from the sample, in fact it is often used as a starting point prior to MLE analysis.
+
+
+## Maximum Likelihood Estimation
+
+Maximum likelihood estimation is an estimator process that assumes the collected data is fixed. It performs a series of tests to find  at for the greatest point in the distribution to calculate the parameter that is most likely that summarizes the sample.  
+
+In retrospect, the likelihood estimation function calculates the likelihood of a parameter across the entire distribution while each point in the distribution has its own unique parameter value. The maximum likelihood estimator finds the region in the distribution with the greatest likelihood to provide a reasonable estimate for the parameter that maximizes the likelihood for the observed data giving a statistically probable estimate for the parameters. 
+
+Unlike the MME, the Maximum Likelihood Estimation is a more computationally involved process.
+
+Additionally the MME cannot be checked with quality metrics that require data outside of the collected sample, such as hypothesized data such as a p-value test. 
+
+
+# Comparison of Method of Moments Estimation and Maximum Likelihood Estimation
+
+The MLE is more accurate than the MME, instead of approximating the highest points of frequency in the distribution we directly calculate the highest maximia via partial derivative calculus . The MLE has lower variance than the MLE leading to lower bias.
+
+Both the MLE and MME have the chance to have non-linear, non-closed form equations. As the MLE is already often a more complex test, this only slows the computational time, and often results in computational approximations, rather than defined parameter answers. 
+
+
+Due to accuracy, if time is alloted the Maximum Likelihood Estimation is the best test to use. Ultimately the MLE shares some methodology from the MME, making it a more refined test of the MLE. Often the MLE and MME can be used together. The MME can act as a less computationally intensive starting point for the MLE as the MLE becomes more complex. 
+
+## Comparison MLE and MME with Birthing Time Data
+In observing the difference in the Maximum Likelihood Estimation and Methods of Moments Estimation directly on the birthing time dataset, we see the gamma alpha parameter calculated using the MME is $\tilde{\alpha}_{MME}$ = `r mom_alpha` and the beta parameter is $\tilde{\beta}_{MME}$ = `r mom_beta`. The MLE gamma alpha parameter is $\hat{\alpha}_{MLE}$ = `r mle.result$par[1]` and the beta parameter is $\hat{\beta}_{MLE}$ = `r mle.result$par[2]`. Although the calculated parameter values are similar, it is understood that the MME parameters have more variance than their MLE counterparts.
+
+
+```{r}
+
+# Defining the range for the x-axis based on birth data
+x_range <- seq(0, max(databirth) + 5, length.out = 200)
+
+# Calculate the Density curves
+# Using  MME values
+mom_dens <- dgamma(x_range, shape = mom_alpha, scale = mom_beta)
+
+# Using your MLE values from optim
+mle_dens <- dgamma(x_range, shape = mle.result$par[1], scale = mle.result$par[2])
+
+# Create the data frame for ggplot
+plot_data <- data.frame(
+  x = rep(x_range, 2),
+  density = c(mom_dens, mle_dens),
+  Method = rep(c("Method of Moment Estimator", "Maximum Likelihood Estimator"), each = length(x_range))
+)
+
+# Building plot
+gamma_plt <- ggplot() +
+  # Add the actual data as a histogram or density area
+  #gray is the birthdata distribution
+  geom_density(data = data.frame(x = databirth), aes(x = x), 
+               fill = "gray90", color = "gray60", alpha = 0.5) +
+  # Add the two theoretical lines
+  geom_line(data = plot_data, aes(x = x, y = density, color = Method, linetype = Method), size = 1) +
+  labs(title = "Method of Moment Estimators Compared to 
+       Maximum Likelihood Estimators for Birth Times",
+       subtitle = "Comparing estimator densities against observed data in a gamma distribution",
+       x = "Hours in Delivery Suite", 
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("Method of Moment Estimator" = "blue", 
+                                "Maximum Likelihood Estimator" = "red")) + #The estimator's distribution for the MME and the MLE in different colors
+
+#The distribution is drawn we need both the parameters alpha and beta the draw the distribution, so they are both represented
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5))
+
+# Make it interactive
+ggplotly(gamma_plt)
+
+```
+Using the delivery suite birthing times data, we see that both the Method of Moment Estimator (blue) and the Maximum Likelihood Estimator (red) capture the distribution similarly, although the MLE capture the distribution closer to the true distribution (gray). These sample estimations would then be used to best parameterize the population.
