@@ -1,0 +1,708 @@
+---
+title: "Assignment 8: Bootstrap Methods and Applications"
+author: " Ezana Rivers "
+date: " 03-31-26: "
+output:
+  html_document: 
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    number_sections: no
+    toc_collapsed: yes
+    code_folding: hide
+    code_download: yes
+    smooth_scroll: yes
+    highlight: monochrome
+    theme: spacelab
+  word_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    keep_md: yes
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+    fig_caption: yes
+    number_sections: yes
+    fig_width: 3
+    fig_height: 3
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{css, echo = FALSE}
+#TOC::before {
+  content: "Table of Contents";
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+  color: navy;
+  margin-bottom: 10px;
+}
+
+
+div#TOC li {     /* table of content  */
+    list-style:upper-roman;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+
+h1.title {    /* level 1 header of title  */
+  font-size: 22px;
+  font-weight: bold;
+  color: DarkRed;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+}
+
+h4.author { /* Header 4 - and the author and data headers use this too  */
+  font-size: 15px;
+  font-weight: bold;
+  font-family: system-ui;
+  color: navy;
+  text-align: center;
+}
+
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Gill Sans", sans-serif;
+  color: DarkBlue;
+  text-align: center;
+}
+
+h1 { /* Header 1 - and the author and data headers use this too  */
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: center;
+}
+
+h2 { /* Header 2 - and the author and data headers use this too  */
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h3 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h4 { /* Header 4 - and the author and data headers use this too  */
+    font-size: 14px;
+  font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: left;
+}
+
+/* Add dots after numbered headers */
+.header-section-number::after {
+  content: ".";
+
+body {background-color: #ffffff;
+      color: #000000;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      }
+
+.highlightme { background-color:yellow; }
+
+p { background-color:white; }
+
+}
+```
+
+```{r setup, include=FALSE}
+# code chunk specifies whether the R code, warnings, and output 
+# will be included in the output files.
+if (!require("knitr")) {
+   install.packages("knitr")
+   library(knitr)
+}
+if (!require("pander")) {
+   install.packages("pander")
+   library(pander)
+}
+if (!require("ggplot2")) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+if (!require("tidyverse")) {
+  install.packages("tidyverse")
+  library(tidyverse)
+}
+
+if (!require("plotly")) {
+  install.packages("plotly")
+  library(plotly)
+}
+
+if (!require("VGAM")) {
+  install.packages("VGAM")
+  library(VGAM)
+}
+
+if (!require("boot")) {
+  install.packages("boot")
+  library(boot)
+}
+#### VGAM
+knitr::opts_chunk$set(echo = TRUE,       # include code chunk in the output file
+                      warning = FALSE,   # sometimes, you code may produce warning messages,
+                                         # you can choose to include the warning messages in
+                                         # the output file. 
+                      results = TRUE,    # you can also decide whether to include the output
+                                         # in the output file.
+                      message = FALSE,
+                      comment = NA
+                      )  
+```
+ 
+ \
+ 
+## **Assignment Objectives** 
+
+<p>
+* Reinforce the understanding of Bootstrap sampling .
+
+* Understand the bootstrap estimation: confidence interval and sampling distribution.
+</p>
+
+
+## **Policies of Using AI Tools**
+
+<p>
+**Policy on AI Tool Use**: Please adhere to the AI tool policy specified in the course syllabus. The direct copying of AI-generated content is strictly prohibited. All submitted work must reflect your own understanding; where external tools are consulted, content must be thoroughly rephrased and synthesized in your own words.
+</p>
+
+<p>
+**Code Inclusion Requirement**: Any code included in your essay must be properly commented to explain the purpose and/or expected output of key code lines. Submitting AI-generated code without meaningful, student-added comments will not be accepted.
+</p>
+
+
+<p>**Log-normal Distribution Revisited**</p>
+
+<p>
+If $Y = \ln(X) \sim N(\mu, \sigma^2)$, then $X$ follows a lognormal distribution $X \sim \text{Lognormal}(\mu, \sigma^2)$. The probability density is given by
+
+$$
+f(x|\mu,\sigma) = \frac{1}{x\sigma\sqrt{2\pi}} \exp\left(-\frac{(\ln x - \mu)^2}{2\sigma^2}\right), \quad x > 0
+$$
+
+After some algebra, we can express the mean and variance of the above lognormal distribution in the following
+
+
+\begin{align}
+\mathbb{E}[X] &= \exp\left(\mu + \frac{\sigma^2}{2}\right) \\
+\text{Var}(X) &= [\exp(\sigma^2) - 1] \exp(2\mu + \sigma^2)
+\end{align}
+
+
+Using the relationship between normal and log-normal distribution and a sample $\{x_1, x_2, \dots, x_n\}$, the MLE estimators of $\mu$ and $\sigma^2$ are given by
+
+
+\begin{align}
+\hat{\mu} &= \frac{1}{n}\sum_{i=1}^n \ln(x_i) \\
+\hat{\sigma}^2 &= \frac{1}{n}\sum_{i=1}^n (\ln(x_i) - \hat{\mu})^2
+\end{align}
+
+
+Using the plug-in principle of MLE, we have the MLE of $\mathbb{E}[X]$ and $\text{Var}(X)$ in the following
+
+$$
+\boxed{\widehat{\mathbb{E}[X]} = \exp\left(\hat{\mu} + \frac{\hat{\sigma}^2}{2}\right)}
+$$
+
+</P>
+
+
+
+<p><font color = "blue">**This assignment focuses on constructing various bootstrap confidence intervals of the lognormal population mean $\mathbb{E}[X]$**</font></p>
+
+
+\
+
+## **Question: Trace Metal Concentrations in Soil**
+
+<p>
+Soil lead (Pb) concentrations (mg/kg) from 55 urban garden sites. Trace metals in environmental media typically follow lognormal distributions due to:
+
+* Multiplicative processes controlling accumulation
+
+* Positive constraints (concentrations cannot be negative)
+
+* Right-skewed nature of contamination patterns
+</p>
+
+
+
+<p>
+```
+0.85, 1.23, 0.92, 3.45, 2.11, 1.56, 4.89, 2.34, 1.78, 6.72, 0.95, 1.34, 8.91, 
+2.67, 1.89, 5.43, 1.12, 3.78, 2.45, 7.65, 1.05, 1.45, 12.34, 2.89, 2.01, 4.56, 
+1.23, 4.32, 2.67, 9.87, 0.99, 1.56, 15.23, 3.12, 2.34, 3.89, 1.34, 5.67, 2.89, 
+11.45, 1.12, 1.67, 18.90, 3.45, 2.56, 3.45, 1.45, 6.78, 3.12, 14.56, 1.23, 1.78, 
+22.34, 3.78, 2.78
+```
+</p>
+
+<p>
+
+$$\boxed{\text{Instructions:}}$$
+
+Assume the data follow a log-normal distribution. For each question in parts (b)–(d), begin by clearly explaining the reasoning behind your analytical approach. Then, develop your own R functions to implement **three types of confidence intervals:**
+  * the asymptotic interval, 
+  * the percentile bootstrap interval, and 
+  * the bias-corrected and accelerated (BCa) bootstrap interval. 
+  
+Use these functions to construct the required confidence intervals, and **verify your results using the appropriate functions from the** `boot` package.
+
+You are encouraged to design a wrapper function that integrates all confidence interval methods, allowing users to select the desired method through an input argument.
+</P>
+
+<p>
+
+$$\boxed{\text{Individual Questions:}}$$
+
+a). Perform 5000 bootstrap samples to estimate the bootstrap sampling distribution of $\boxed{\widehat{\mathbb{E}[X]}}$. Display the distribution using either a histogram or a kernel density plot. Comment on the **shape**, **variability**, and any **notable patterns observed** in the bootstrap sampling distribution.
+
+```{r}
+
+
+#ANSWERS PROMPT A 
+set.seed(123)
+#soil is a log function
+soilraw = sort(c(0.85, 1.23, 0.92, 3.45, 2.11, 1.56, 4.89, 2.34, 1.78, 6.72, 0.95, 1.34, 8.91, 2.67, 1.89, 5.43, 1.12, 3.78, 2.45, 7.65, 1.05, 1.45, 12.34, 2.89, 2.01, 4.56, 1.23, 4.32, 2.67, 9.87, 0.99, 1.56, 15.23, 3.12, 2.34, 3.89, 1.34, 5.67, 2.89, 11.45, 1.12, 1.67, 18.90, 3.45, 2.56, 3.45, 1.45, 6.78, 3.12, 14.56, 1.23, 1.78, 22.34, 3.78, 2.78))
+
+n =length(soilraw)
+
+#Estimate boot strap sampling distribution (MLE)
+
+B =5000
+boot_means <- numeric(B) #empty vector
+
+for(b in 1:B){
+  boot_sample = sample(soilraw, n, replace=TRUE) # bootstraps from original sample
+  
+  #Log transform for MLEs for log transformed resample
+  
+  
+  log_sample=log(boot_sample)
+  log_mean_perc = mean(log_sample)
+  log_var_perc = sum((log_sample-log_mean_perc)^2)/n #calculate variance 
+
+  
+  boot_means[b] = exp(log_mean_perc + (log_var_perc/2)) #calculate all bootstrapped mean  Question A
+  
+  
+  
+}
+
+#Calculate the MLE mean of the bootstrap distribution
+boot_mle_per_means= mean(boot_means)
+
+
+cat("Question A: ", "The average bootstrap sampling distribution mean of the soil metal concentration is ", boot_mle_per_means)  
+  
+#histogram
+hist(boot_means,
+     main = "Bootstrap Distribution of MLE Mean ",
+     prob = TRUE)
+
+```
+
+
+** Viewing Characteristics of MLE Mean Bootstrap Distribution**
+The distribution of the bootstrapped MLE mean appears to have some skew although the skew does not appear extreme. This is expected as the distribution is a log of a normal distribution, most likely adding some right skew a previously normal distribution to better suit the model. There is moderate low  variance through the histogram. Overall this is a unimodal model, with the greatest density between 3.5 and 4.5. The histogram suggests the variance of MLE bootstrapped mean values tend to be in similar ranges. 
+
+
+For each question in parts (b)–(d), begin by clearly explaining the reasoning behind your analytical approach.
+
+b). Construct a 95% bootstrap percentile confidence interval for $\mu_{LN} = \mathbb{E}[X]$.
+
+**Performing a Bootstrap Percentile 95%CI **
+
+Performing a bootstrap confidence interval for a percentile interval ranging all values in the distribution into quantiles between 0 and 1 while relying on the empirical distribution. The percentile bootstrap CI are constructed by quantiles around the parameter based on the alpha value, for example values between 2.5% and 97.5% from the distribution of bootstrap estimates. A percentile bootstrap works best when the bootstrap distribution is **roughly symmetric** and an **estimator that has little bias**. In this example the distribution and values is the normal log of the original  distribution. The transformation still maintains the same 95% area even after being back transformed to calculate the more accurate confidence intervals to the distribution.
+
+
+** Pseudo-Algorithm**
+```
+function percentile_ci(data, statistic, B=5000, alpha=0.05)
+
+theta_hat, boot_dis = bootstrap(data, statistic B)
+sort_boot = sort(log(boot_dist))
+lower_idx = floor(B* alpha/2)
+upper_idx = ceiling(B* (1-alpha/2))
+lower = sorted_boot[lower_idx]
+upper = sorted_boot[upper_idx]
+return(lower, upper)
+```
+
+```{r PERC}
+
+
+##Bootstrapping confidence intervals by hnad
+
+
+#boot_result_per = boot(soil, boot_mle_per_means, R=5000)
+
+
+
+for(b in 1:B){
+  boot_sample = sample(soilraw, n, replace=TRUE) # bootstraps from original sample
+  
+  #Log transform for MLEs for log transformed resample
+  
+  
+  log_sample=log(boot_sample)
+  log_mean_perc = mean(log_sample)
+  log_var_perc = sum((log_sample-log_mean_perc)^2)/n #calculate variance 
+
+  
+  boot_means[b] = exp(log_mean_perc + (log_var_perc/2)) #calculate all bootstrapped mean  Question A
+  
+  
+  
+}
+
+#Calculate the MLE mean of the bootstrap distribution
+boot_mle_per_means= mean(boot_means)
+
+
+
+
+# Calculating the quanitles for Percentile CI
+alpha = 0.05
+
+ci_perc <- quantile(boot_means, probs=c(alpha/2, 1-alpha/2))
+cat(" The bootstrapped confidence intervals for percentiles are: [ ", ci_perc, "] ", "\n")
+
+
+
+
+#Define statistic function
+l_mean_stat <- function(data, indices) {
+  sample_data <- data[indices]
+  l_samp = log(sample_data)
+  mean_sam = mean(l_samp)
+  v = sum((l_samp - mean_sam)^2) / length(l_samp)
+  
+   return(exp(mean_sam + v/2))
+}
+#Verify with boot() and boot.ci() command
+
+#perform bootstrap
+  boot_result = boot(data = soilraw, statistic = l_mean_stat, R = 5000)
+perc_boot_comm=  boot.ci(boot_result, type = "perc")
+
+cat("Question B: The percentile bootstrap derived from the boot library command is: " )
+perc_boot_comm
+
+cat("The bootstrapped MLE Parameter is: ", boot_mle_per_means )
+
+```
+The hand calculated bootstrapped Percentile 95%CI at `r ci_perc` is comparable to the boot() library bootstrap percentile 95% CI at ( 3.124,  5.624 ). The manual calculation of the percentile 95%CI has slightly smaller interval, which can suggest more accuracy, although both have highly similar widths. Further testing would be needed to determine if these differences are statistically significant.
+
+
+c). Construct a 95% bootstrap BCa confidence interval for $\mu_{LN} = \mathbb{E}[X]$.
+
+
+We use the **Bias Correlated and Accelerated** (BCa) Confidence interval to avoid skewness and bias from the sampling distribution to being implemented into the confidence interval:
+    * We perform this using a Jackknife 
+    * The Jackknife based *BCa* is the default method for bootstrapped CI
+
+- We correct **bias correction** by measuring the **parameter bias** by comparing the bootstrap estimate to the original estimate
+- Acceleration (a): measures **how** the **standard error changes** with the **parameter value** (estimate via jackknife)
+
+It generally provides more accurate coverage than the simple percentile method, especially for skewed distributions or biased estimators, and resampling. The BCa is generally the most robust CI type due to its accounts for bias.
+
+**Algorithm**
+```
+Create For-loop from rawsoil (dataset) with replacement for the bootstrap sample
+Calculate mean and variance or parameter of interest to assist CI calculations 
+Apply log normal to boostraps to apply log normal distribution 
+Calculate bootstrapped mean and variance
+Administer Bias-Correction with determined alpha levels
+Jackknife the bootstrapped sample
+Define alpha leves for the BCa CI's adjusted limits at the 95% Confidence level
+Compare with boot and boot.ci() commands
+```
+
+```{r BCa}
+
+
+##Bootstrapping confidence intervals by hnad
+
+
+#boot_result_per = boot(soil, boot_mle_per_means, R=5000)
+
+
+
+for(b in 1:B){
+  boot_sample = sample(soilraw, n, replace=TRUE) # bootstraps from original sample
+  
+  #Log transform for MLEs for log transformed resample
+  
+  
+  log_sample=log(boot_sample)
+  log_mean_perc = mean(log_sample)
+  log_var_perc = sum((log_sample-log_mean_perc)^2)/n #calculate variance 
+
+  
+  boot_means[b] = exp(log_mean_perc + (log_var_perc/2)) #calculate all bootstrapped mean  Question A
+  
+  
+  
+}
+
+#Calculate the MLE mean of the bootstrap distribution
+boot_mle_per_means= mean(boot_means)
+
+
+##Emplicating the Jackknife Apporach (non boot.ci())
+
+#Bias Correction
+orig_log = log(soilraw)
+theta_hat = exp(mean(orig_log) + (sum((orig_log - mean(orig_log))^2)/n)/2)
+prop_less =sum(boot_means < theta_hat)/B
+z0 = qnorm(prop_less)
+
+# Acceleration (jackknife)
+n = length(soilraw)
+
+jack_mles = numeric(n)
+    for( i in 1:n ){
+        jack_sample = soilraw[-i] #all obs minus 1 
+      l_j <- log(jack_sample) #log the collected sameple to meet normallog distubution
+  # Calculate MLE for this jackknife set
+  jack_mles[i] <- exp(mean(l_j) + (sum((l_j - mean(l_j))^2)/length(l_j))/2)
+}
+
+#adjustment
+mean_jack = mean(jack_mles) #Jackknife Parameter
+a_hat =sum((mean_jack - jack_mles)^3) / (6 * (sum((mean_jack - jack_mles)^2))^1.5)
+
+#calculate percentiles of interest
+alpha =0.05
+
+z_alpha = qnorm(alpha/2) #defining alphas used for ci calculation
+z_1alpha = qnorm(1 - alpha/2) #defining upper end of alpha used for ci calulation
+
+#BCa CI with adjusted limits
+alpha1 = pnorm(z0 + (z0 + z_alpha)/(1 - a_hat*(z0 + z_alpha)))
+    alpha2 = pnorm(z0 + (z0 + z_1alpha)/(1 - a_hat*(z0 + z_1alpha)))
+
+
+
+bca_manual <- quantile(boot_means, probs = c(alpha1, alpha2))
+
+cat("Manual BCa Confidence Interval: [", bca_manual[1], ",", bca_manual[2], "]\n")
+cat("The jackknife parameter is ", mean_jack)
+
+#Define statistic function
+l_mean_stat <- function(data, indices) {
+  sample_data <- data[indices]
+  l_samp = log(sample_data)
+  mean_sam = mean(l_samp)
+  v = sum((l_samp - mean_sam)^2) / length(l_samp)
+  
+   return(exp(mean_sam + v/2))
+}
+#Verify with boot() and boot.ci() command
+
+set.seed(123)
+#perform bootstrap
+  boot_result = boot(data = soilraw, statistic = l_mean_stat, R = 5000)
+
+
+cat("Question B: The Bias- Correction and Acceleration (BCa)  bootstrap derived from the boot library command is: \n" )
+boot.ci(boot_result, type = "bca")
+
+cat("The bootstrapped MLE Parameter is: ", boot_mle_per_means,  "\n")
+
+```
+The hand calculated BCa 95%CI at (`r bca_manual`) is comparable and highly similar to the boot() library bootstrap BCa 95% CI at ( 3.212,  5.807 ). 
+
+
+
+
+d). Use the Central Limit Theorem to construct a 95% asymptotic confidence interval for $\mu_{LN} = \mathbb{E}[X]$.
+
+**Approaching an Asymptotic Confidence Interval**
+  The asymptotic confidence interval is a non-bootstrap confidence interval approach. It uses a  pivotal quantities to 
+Pivotal quantities based confidence intervals do not depend on the parameter for its construction. We use exact distributions whose normal, t and $\chi^2$ distributions are independent of unknown parameters $\mu$ and $\sigma$ in the distribution.
+
+```
+Identify and calculate componets of the pivotal quanity
+Calculate the standard error, variance and mean parameters.
+Identify the alpha level for 95% confidence (0.05)
+Calculate the critical value (z- critical)
+Use z critical values to compute the intervals based on the mean parameter
+Calculate confidence intervals
+```
+
+
+```{r}
+# Asymptotic Confidence Intervals (CLT-Based) ---
+
+#Asymptotic Confidence intervals
+soilraw = sort(c(0.85, 1.23, 0.92, 3.45, 2.11, 1.56, 4.89, 2.34, 1.78, 6.72, 0.95, 1.34, 8.91, 
+2.67, 1.89, 5.43, 1.12, 3.78, 2.45, 7.65, 1.05, 1.45, 12.34, 2.89, 2.01, 4.56, 
+1.23, 4.32, 2.67, 9.87, 0.99, 1.56, 15.23, 3.12, 2.34, 3.89, 1.34, 5.67, 2.89, 
+11.45, 1.12, 1.67, 18.90, 3.45, 2.56, 3.45, 1.45, 6.78, 3.12, 14.56, 1.23, 1.78, 
+22.34, 3.78, 2.78))
+
+soil = log(soilraw)
+
+n =length(soil)
+###########DO I MAKE THIS A BOOTSTRAP??????????##################
+
+
+##Finding mu hat and parameters for asymptotic 
+mu_asym_hat = mean(soil)
+sig_sq_hat_asym = sum((soil - mean(soil))^2)/n # Maximum Likelihood Estimate (MLE) for variance
+
+#Point estimate (Lognormal mean)
+theta_hat = exp(mu_asym_hat + (sig_sq_hat_asym/2))
+
+# standard error
+# We find the SE for the log-mean, to account for uncertainty in both mu and sigma squared
+# to measure the accuracy of a sample mean and to calculate CIs
+wobble_mu = sig_sq_hat_asym / n
+wobble_sig2 = (sig_sq_hat_asym^2) / (2 * n)
+
+se_asym = sqrt(wobble_mu + wobble_sig2)
+
+# the asymptotic parameter - mean
+x_bar_asym = mu_asym_hat + (sig_sq_hat_asym / 2)
+
+#Get the critical value (z score)
+
+z_crit_asym= qnorm(0.975)
+
+# Calculate the upper and lower asym ci (Still in LOG-SCALE)
+asy_ci.low = x_bar_asym - (z_crit_asym * se_asym)
+asy_ci.up  = x_bar_asym + (z_crit_asym * se_asym)
+asy_ci = c(asy_ci.low, asy_ci.up)
+
+
+# Transformation the log to the original non-log units
+final_asy_ci <- exp(asy_ci)
+
+cat("Point Estimate (MLE Mean):", theta_hat, "\n")
+cat("95% Asymptotic CI (Original Scale): [", final_asy_ci[1], ",", final_asy_ci[2], "]\n")
+
+
+
+
+
+```
+```{r TRY}
+
+##Should this be a boorstrap???
+
+
+
+for(b in 1:B){
+
+
+mu_asym_hat = mean(soil)
+sig_sq_hat_asym = sum((soil - mean(soil))^2)/n # Maximum Likelihood Estimate (MLE) for variance
+
+#Point estimate (Lognormal mean)
+theta_hat = exp(mu_asym_hat + (sig_sq_hat_asym/2))
+
+# standard error
+# We find the SE for the log-mean, to account for uncertainty in both mu and sigma squared
+# to measure the accuracy of a sample mean and to calculate CIs
+wobble_mu = sig_sq_hat_asym / n
+wobble_sig2 = (sig_sq_hat_asym^2) / (2 * n)
+
+se_asym = sqrt(wobble_mu + wobble_sig2)
+
+# the asymptotic parameter - mean
+x_bar_asym = mu_asym_hat + (sig_sq_hat_asym / 2)
+}
+
+
+```
+
+
+
+f). Assuming the confidence intervals constructed in the previous parts are valid, evaluate their performance by comparing their widths, symmetry, stability, and sensitivity to distributional skewness. Then, provide a well‑reasoned recommendation regarding which method is most suitable for this analysis.
+</p>
+
+```{r}
+boot.ci(boot_result, type=c("perc", "bca"))
+#Comparing the asymptotic distribution
+cat("95% Asymptotic CI: ",
+    "[", final_asy_ci[1], ",", final_asy_ci[2], "]\n \n")
+##FIXA asymptotic CI
+cat("The bootstrapped MLE Parameter is: ", boot_mle_per_means, "\n" )
+cat("The jackknife parameter is ", mean_jack)
+
+
+#Testing width of the intervals
+per= 5.587 - 3.106
+per
+Bc = 5.807 - 3.212
+Bc
+Asy = 5.452982 - 3.262868
+Asy
+per > Bc
+
+Asy > Bc
+
+Asy > per
+
+#Test symmetry from parameter
+
+
+#how far BCa intervals from mean
+
+5.831848 - boot_mle_per_means #1.593687
+
+boot_mle_per_means- 3.243310 #0.9948512
+
+#how far perc intervals from mean
+boot_mle_per_means -  3.124 #1.114161
+5.624 - boot_mle_per_means # 1.385839
+
+#How far asym intervals are from mean
+
+x_bar_asym
+asy_ci
+x_bar_asym - asy_ci
+
+# 0.2567781 -0.2567781
+
+```
+
+Considering the intervals of the percentile bootstrap 95% CI, BCa bootstrap 95% CI and the asymptotic 95%CI, we consider the width of the confidence interval, and the test's ability to overcome bias to reach the greatest level of accuracy. 
+
+
+We know this is a skewed distribution, the percentile bootstrap CI has some strength in a skewed distribution, but is best suited for roughly symmetric distribution. The skew in this lognormal distribution does not have extreme skew, which is also shown in the percentile CI's (`r per`) similar performance as all 3 confidence interval tests, especially to the width of the BCa CI (`r Bc`). 
+
+
+The percentile's very slight inability to best follow a skewed distribution confidence interval with bias ends from the mean parameters may slightly artificially closer some of the true variation among the parameter captured during a bootstrap.
+The percentile interval's distances from their mean are ` r boot_mle_per_means -  3.124` and `r 5.624 - boot_mle_per_means`.
+
+
+As we  know the BCa can capture skewness in its confidence intervals, any increases in width, most likely capture the true skewness in the distribution rather than any artificial closeness or widening unlike the percentile ci.  
+
+Although smaller confidence intervals, like the one observed in the percentile  are typically more precises, variation that allows for possible omition and re-introduction of outliers during the repetitive jackknife test, can overall help lead to more true representations of the distribution as including bias is a strong contender when assessing the realistic use of a dataset. The BCa is the strongest CI test assessed in the model that can handel both skewness and bias, making it the more preferred test despite its larger CI at (3.212, 5.807) and distance from its mean at `r Bc ``.
+
+
+*Assessing Asymptotic CI Performance*
+
+An asymptotic CI uses exact distributions, that assume a shape, in this case a normal distribution. The soil mineral dataset does not follow a normal distribution. The asymptotic inability to follow a skewed distribution leaves force lack of symmetry in capturing the confidence interval ends from the mean parameters. The percentile interval's distances look as symmetrically although due to the skew of the distribution this is an artificial narrowing of the distance between the mean parameter and confidence interval ends. The distances from the mean parameter for the asymptotic distribution are roughly equal when considered in the distance at the absolute value ` r x_bar_asym - asy_ci`. The skewness of the true distribution is not reflected in the asymptotic distribution, making it the least useful CI test measured in this assessment. Not only is the distance from the mean parameter artificially narrow, so is the width of the confidence interval at `r Asy` with a confidence interval of `r asy_ci`.
