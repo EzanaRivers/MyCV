@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Ezana Rivers" />
+
+
+<title>STA 506 Final Examination Spring</title>
+
+<script src="libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<script src="libs/navigation-1.1/sourceembed.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { font-weight: bold; } /* Alert */
+code span.an { font-style: italic; } /* Annotation */
+code span.cf { font-weight: bold; } /* ControlFlow */
+code span.co { font-style: italic; } /* Comment */
+code span.cv { font-style: italic; } /* CommentVar */
+code span.do { font-style: italic; } /* Documentation */
+code span.dt { text-decoration: underline; } /* DataType */
+code span.er { font-weight: bold; } /* Error */
+code span.in { font-style: italic; } /* Information */
+code span.kw { font-weight: bold; } /* Keyword */
+code span.pp { font-weight: bold; } /* Preprocessor */
+code span.wa { font-style: italic; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">STA 506 Final Examination Spring</h1>
+<h4 class="author">Ezana Rivers</h4>
+<h4 class="date">Due: May 5</h4>
+
+</div>
+
+
+<style type="text/css">
+#TOC::before {
+  content: "Table of Contents";
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+  color: navy;
+  margin-bottom: 10px;
+}
+
+
+div#TOC li {     /* table of content  */
+    list-style:upper-roman;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+
+h1.title {    /* level 1 header of title  */
+  font-size: 22px;
+  font-weight: bold;
+  color: DarkRed;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+}
+
+h4.author { /* Header 4 - and the author and data headers use this too  */
+  font-size: 15px;
+  font-weight: bold;
+  font-family: system-ui;
+  color: navy;
+  text-align: center;
+}
+
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Gill Sans", sans-serif;
+  color: DarkBlue;
+  text-align: center;
+}
+
+h1 { /* Header 1 - and the author and data headers use this too  */
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: center;
+}
+
+h2 { /* Header 2 - and the author and data headers use this too  */
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h3 { /* Header 3 - and the author and data headers use this too  */
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: navy;
+    text-align: left;
+}
+
+h4 { /* Header 4 - and the author and data headers use this too  */
+    font-size: 14px;
+  font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    color: darkred;
+    text-align: left;
+}
+
+/* Add dots after numbered headers */
+.header-section-number::after {
+  content: ".";
+
+body { background-color:white; }
+
+.highlightme { background-color:yellow; }
+
+p { background-color:white; }
+
+}
+</style>
+<p><br />
+</p>
+<div id="final-exam-guidelines" class="section level2">
+<h2><strong>Final Exam Guidelines</strong></h2>
+<ul>
+<li><p><strong>Coverage</strong>: The major concepts and inference
+procedures—such as sampling distributions, confidence intervals, and
+hypothesis testing—are covered and implemented using both classical
+parametric likelihood-based methods and modern non-parametric
+approaches, including the bootstrap and kernel density
+estimation.</p></li>
+<li><p><strong>Part A</strong> requires derivation of selected
+likelihood-based functions for performing various types of inference,
+with sufficient detail to enable translation of these derivations into
+code for numerical analysis.</p></li>
+<li><p>Your code for the problems in <strong>Part B</strong> must align
+with your derivations in <strong>Part A</strong> and be well commented
+where necessary.</p></li>
+<li><p>In <strong>Part B</strong>, all numerical results must be
+interpreted from a practical perspective.</p></li>
+</ul>
+<p><br />
+</p>
+</div>
+<div id="policies-of-using-ai-tools" class="section level2">
+<h2><strong>Policies of Using AI Tools</strong></h2>
+<ul>
+<li><p><strong>Policy on AI Tool Use</strong>: Students must adhere to
+the AI tool policy specified in the course syllabus. The direct copying
+of AI-generated content is strictly prohibited. All submitted work must
+reflect your own understanding; where external tools are consulted,
+content must be thoroughly rephrased and synthesized in your own
+words.</p></li>
+<li><p><strong>Code Inclusion Requirement</strong>: Any code included in
+your essay must be properly commented to explain the purpose and/or
+expected output of key code lines. Submitting AI-generated code without
+meaningful, student-added comments will not be accepted.</p></li>
+</ul>
+<p><br />
+</p>
+</div>
+<div id="working-model-for-the-final-exam" class="section level2">
+<h2><strong>Working Model for the Final Exam</strong></h2>
+<p><font color = "orange"><strong>Caution</strong>: <em>Please follow
+the suggested expressions and guided steps to complete the exam. Other
+approaches such as transformation for trivialize the problems that will
+not meet the exam objectives.</em></font></p>
+<p>The <strong>Kumaraswamy distribution</strong> is a two-parameter
+continuous probability distribution defined on the interval (0, 1). It
+is often used as an alternative to the Beta distribution due to its
+simple closed-form expressions for the cumulative distribution function
+(CDF) and quantile function. It is commonly used in</p>
+<ul>
+<li><p><strong>Hydrology</strong>: Modeling rainfall, streamflow, or
+other bounded natural phenomena</p></li>
+<li><p><strong>Economics</strong>: Income shares, proportions, or
+bounded indices</p></li>
+<li><p><strong>Monte Carlo simulation</strong>: Efficient random variate
+generation (via inverse transform)</p></li>
+<li><p><strong>Machine learning</strong>: Output layer for bounded
+targets, prior distributions in Bayesian models</p></li>
+<li><p><strong>Reliability engineering</strong>: Modeling failure rates
+of systems with bounded lifetimes</p></li>
+</ul>
+<p><br />
+</p>
+<p>Let <span class="math inline">\(X\)</span> be the Kumaraswamy random
+variable with Cumulative Distribution Function (CDF)</p>
+<p><span class="math display">\[
+F(x; a, b) = 1 - (1 - x^a)^b
+\]</span></p>
+<p>where <span class="math inline">\(a &gt; 0\)</span> and <span
+class="math inline">\(b &gt; 0\)</span> unknown parameters and <span
+class="math inline">\(0 &lt; x &lt; 1\)</span>.</p>
+<p>The following are two special case of the Kumaraswamy
+distribution:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Uniform Distribution</strong>: When <span
+class="math inline">\(a = 1\)</span> and <span class="math inline">\(b =
+1\)</span>, the Kumaraswamy distribution becomes a uniform distribution
+over <span class="math inline">\([0, 1]\)</span> with CDF <span
+class="math inline">\(F(x) = x\)</span>.</p></li>
+<li><p><strong>Power Distribution</strong>: when <span
+class="math inline">\(b = 1\)</span> and <span class="math inline">\(a
+&gt; 0\)</span>, the Kumaraswamy distribution becomes a power
+distribution over <span class="math inline">\([0, 1]\)</span> with CDF
+<span class="math inline">\(F(x) = x^a\)</span>.</p></li>
+</ol>
+<p>This final exam focuses on inferences of Kumaraswamy distribution and
+related data analysis.</p>
+</div>
+<div id="part-a-methodological-derivations" class="section level2">
+<h2>Part A: Methodological Derivations</h2>
+<p><br />
+</p>
+<div id="problem-a1" class="section level3">
+<h3><strong>Problem A1</strong>:</h3>
+<p>Show that the density function of the Kumaraswamy distribution is</p>
+<p><span class="math display">\[
+f(x; a, b) = ab \, x^{a-1} (1 - x^a)^{b-1}.
+\]</span></p>
+<div class="figure" style="text-align: center">
+<img src="https://i.postimg.cc/4xr9y9bc/Problem-A1.jpg" alt=" Problem A1" width="50%" />
+<p class="caption">
+Problem A1
+</p>
+</div>
+<p><br />
+</p>
+</div>
+<div id="problem-a2" class="section level3">
+<h3><strong>Problem A2</strong>:</h3>
+<p>Let <span class="math inline">\(\{x_1, x_2, \cdots, x_n \}\)</span>
+be an i.i.d. random sample taken from a population that follows the
+above 2-parameter Kumaraswamy distribution. Write out the loglikelihood
+function of <span class="math inline">\(a\)</span> and <span
+class="math inline">\(b\)</span>, denoted by <span
+class="math inline">\(\ell(a,b)\)</span>, based on the above random
+sample and <strong>derive</strong> the gradient vector <span
+class="math inline">\([\ell_a^\prime(a,b), \ell_b^\prime(a,b)]\)</span>,
+the first order partial derivative of the log-likelihood with respect to
+parameters <span class="math inline">\(a\)</span> and <span
+class="math inline">\(b\)</span>.</p>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A2%20pt1.jpg" alt=" Problem A2" width="50%" />
+<p class="caption">
+Problem A2
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A2%20pt2.jpg" alt=" Problem A2" width="50%" />
+<p class="caption">
+Problem A2
+</p>
+</div>
+<p><br />
+</p>
+</div>
+<div id="problem-a3" class="section level3">
+<h3><strong>Problem A3</strong>:</h3>
+<p>Based on the gradients functions obtained in the above problem A2,
+<strong>derive</strong> the observed Fisher Information matrix (i.e, the
+negative Hessian Matrix).</p>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A3%20pt1.jpg" alt=" Problem A3" width="50%" />
+<p class="caption">
+Problem A3
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A3%20pt2.jpg" alt=" Problem A3" width="50%" />
+<p class="caption">
+Problem A3
+</p>
+</div>
+<p><br />
+</p>
+</div>
+<div id="problem-a4" class="section level3">
+<h3><strong>Problem A4</strong>:</h3>
+<p>Consider power distribution <span class="math inline">\(F(x) = x^a,
+(a &gt;0 \quad \text{ and }\quad x \in (0,1))\)</span>, a special case
+of the Kumaraswamy distribution with <span class="math inline">\(b =
+1\)</span>, and a random sample from this distribution <span
+class="math inline">\(\{ x_1, x_2, \cdots, x_n\}\)</span>.
+<strong>Derive</strong> the MLE and MME of <span
+class="math inline">\(a\)</span> respectively. [<em>Hint: To find the
+MME, you need to compute the moment of the power distribution; that is,
+<span class="math inline">\(E[X^k] = \int_0^1 x^k F&#39;(x) dx\)</span>.
+Note that both the MLE and the MME have closed-form
+expressions.</em>]</p>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A4%20pt1.jpg" alt=" Problem A4" width="50%" />
+<p class="caption">
+Problem A4
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A4%20pt2.jpg" alt=" Problem A4" width="50%" />
+<p class="caption">
+Problem A4
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A4%20pt3.jpg" alt=" Problem A4" width="50%" />
+<p class="caption">
+Problem A4
+</p>
+</div>
+<p><br />
+</p>
+</div>
+<div id="problem-a5" class="section level3">
+<h3><strong>Problem A5</strong>:</h3>
+<p>Using the same setting as in <strong>Problem A4</strong>, find the
+asymptotic (Wald) confidence interval for <span
+class="math inline">\(a\)</span>. [<em>Hint: Compute the Fisher
+information for <span class="math inline">\(a\)</span>, then take its
+reciprocal to obtain the variance</em>.]</p>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A5.jpg" alt=" Problem A5" width="50%" />
+<p class="caption">
+Problem A5
+</p>
+</div>
+<p><br />
+</p>
+</div>
+<div id="problem-a6" class="section level3">
+<h3><strong>Problem A6</strong>:</h3>
+<p>Using the same setting as in <strong>Problem A4</strong>, perform a
+likelihood ratio test for the hypothesis <span class="math inline">\(H_0
+:a=1\)</span> (i.e., the power distribution reduces to a uniform
+distribution). [<em>Hint: Evaluate the log-likelihood function at the
+maximum likelihood estimate <span class="math inline">\(\hat{a}\)</span>
+and at <span class="math inline">\(a=1\)</span>, then use these values
+to construct the LRT test statistic.</em>]</p>
+<div class="figure" style="text-align: center">
+<img src="Question%20A/Problem%20A6.jpg" alt=" Problem A6" width="50%" />
+<p class="caption">
+Problem A6
+</p>
+</div>
+<p><br />
+</p>
+</div>
+</div>
+<div id="part-b-numerical-analysis" class="section level2">
+<h2>Part B: Numerical Analysis</h2>
+<p><strong>All code must be well commented and adhere to best coding
+practices</strong></p>
+<p><strong>Working Dataset</strong>: A small reservoir supplies water to
+a town. During the dry season (50 days), engineers record the fraction
+of usable storage filled each morning. Values near 0 mean the reservoir
+is nearly empty; values near 1 mean it’s full. The distribution tends to
+be right‑skewed (mostly low levels due to drought) but with occasional
+replenishment.</p>
+<p>The following 50 data points (ordered for clarity) represent the
+daily proportion of usable storage:</p>
+<pre><code>0.12, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20, 0.21, 0.22,
+0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.30, 0.31, 0.32,
+0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.40, 0.41, 0.42,
+0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.50, 0.51, 0.52,
+0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.60, 0.61, 0.78</code></pre>
+<p><br />
+</p>
+<div id="problem-b1" class="section level3">
+<h3><strong>Problem B1</strong>:</h3>
+<p>Fit the Kumaraswamy distribution to the above data. Use the
+derivations in <strong>Problem A2</strong> to find the MLE of <span
+class="math inline">\(a\)</span> and <span
+class="math inline">\(b\)</span>. <strong>Please copy the key formulas
+before coding.</strong></p>
+<p>Formulas:</p>
+<p>Gradient Vector for Kumaraswamy distribution log likelihoods.</p>
+<p>Gradient Vector <span
+class="math inline">\(\ell&#39;_b(a,b)\)</span></p>
+<p><span class="math display">\[
+\ell&#39;_b{a,b) = \frac{n}{b} + \sum^n_{i=1} ln(1-X^a_i)
+\]</span> $$ ’<em>a(a,b) = +^n</em>{i=1} ln(X_i) +(b-1)^n_{i=1}</p>
+<p>$$</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>storage<span class="ot">=</span> <span class="fu">sort</span>(<span class="fu">c</span>(<span class="fl">0.12</span>, <span class="fl">0.14</span>, <span class="fl">0.15</span>, <span class="fl">0.16</span>, <span class="fl">0.17</span>, <span class="fl">0.18</span>, <span class="fl">0.19</span>, <span class="fl">0.20</span>, <span class="fl">0.21</span>, <span class="fl">0.22</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fl">0.23</span>, <span class="fl">0.24</span>, <span class="fl">0.25</span>, <span class="fl">0.26</span>, <span class="fl">0.27</span>, <span class="fl">0.28</span>, <span class="fl">0.29</span>, <span class="fl">0.30</span>, <span class="fl">0.31</span>, <span class="fl">0.32</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fl">0.33</span>, <span class="fl">0.34</span>, <span class="fl">0.35</span>, <span class="fl">0.36</span>, <span class="fl">0.37</span>, <span class="fl">0.38</span>, <span class="fl">0.39</span>, <span class="fl">0.40</span>, <span class="fl">0.41</span>, <span class="fl">0.42</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fl">0.43</span>, <span class="fl">0.44</span>, <span class="fl">0.45</span>, <span class="fl">0.46</span>, <span class="fl">0.47</span>, <span class="fl">0.48</span>, <span class="fl">0.49</span>, <span class="fl">0.50</span>, <span class="fl">0.51</span>, <span class="fl">0.52</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fl">0.53</span>, <span class="fl">0.54</span>, <span class="fl">0.55</span>, <span class="fl">0.56</span>, <span class="fl">0.57</span>, <span class="fl">0.58</span>, <span class="fl">0.59</span>, <span class="fl">0.60</span>, <span class="fl">0.61</span>, <span class="fl">0.78</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">hist</span>(storage) <span class="co">#histogram of dataset</span></span></code></pre></div>
+<p><img
+src="14-FinalExam_files/figure-html/unnamed-chunk-12-1.png" /><!-- --></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#Find MLE of a and b</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#Gradient for log_b(a,b)</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#n= length(storage)</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#function to find values of a and b based on the dataset alone</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#finding the gradient of b</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>grad_bfunc <span class="ot">=</span><span class="cf">function</span>(params, data) {</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>  a <span class="ot">&lt;-</span> params[<span class="dv">1</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>  b <span class="ot">&lt;-</span> params[<span class="dv">2</span>]</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>  </span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(data)</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>  </span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#n/b + sum(log(1-x^a))</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  sum_term<span class="ot">=</span>  <span class="fu">sum</span>(<span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span> data<span class="sc">^</span>a)) <span class="co">#n/b + sum(data)</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>  gradient_b <span class="ot">=</span> <span class="sc">-</span>((n<span class="sc">/</span>b) <span class="sc">+</span> sum_term)</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>  </span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  <span class="fu">return</span>(gradient_b)</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>}</span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>grad_afunc <span class="ot">=</span> <span class="cf">function</span>(params, data) <span class="co">#building log likelihood for gradient vector</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>{</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>  </span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>  a <span class="ot">&lt;-</span> params[<span class="dv">1</span>]</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>  b <span class="ot">&lt;-</span> params[<span class="dv">2</span>]</span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(data)</span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>  </span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>  first <span class="ot">=</span>(n<span class="sc">/</span>a) <span class="co">#first term of gradient equation for a</span></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>  logdata<span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">log</span>(data)) <span class="co">#loging all summed data in the dataset</span></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>  b1<span class="ot">=</span> (b<span class="dv">-1</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>      num_a <span class="ot">=</span> ((data<span class="sc">^</span>a)<span class="sc">*</span> <span class="fu">log</span>(data)) <span class="co">#numerator of last term</span></span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>      dom_a <span class="ot">=</span> (<span class="dv">1</span><span class="sc">-</span> (data<span class="sc">^</span>a)) <span class="co">#denominator of last term</span></span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>  last_term_ga<span class="ot">=</span> <span class="fu">sum</span>(num_a<span class="sc">/</span>dom_a) <span class="co">#finalized fracttion for last term to be put into gradient equation</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>  </span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>  grad_a <span class="ot">=</span> <span class="sc">-</span>(first <span class="sc">+</span> logdata <span class="sc">+</span> b1 <span class="sc">*</span> last_term_ga) <span class="co">#gradient term for a using all data (no bootstraps, etc. just loop)</span></span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a> </span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a><span class="fu">return</span>(grad_a)</span>
+<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a>   </span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>}</span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="co">#placing a and b fradients in the same function to later compare in optim() and possible matrix building</span></span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>combined_kum_gradient<span class="ot">=</span> <span class="cf">function</span>(params, data){</span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>  a <span class="ot">&lt;-</span> params[<span class="dv">1</span>]</span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>  b <span class="ot">&lt;-</span> params[<span class="dv">2</span>]</span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(data)</span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a><span class="do">##################if you choose to block or change everything in between  </span></span>
+<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a> <span class="co"># grad_a</span></span>
+<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a><span class="co">#  gradient_b</span></span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>  </span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a><span class="co">#  return(c(grad_a, gradient_b))</span></span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a><span class="do">########################################    </span></span>
+<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>  </span>
+<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>  ga <span class="ot">&lt;-</span> <span class="fu">grad_afunc</span>(params, data)</span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>  gb <span class="ot">&lt;-</span> <span class="fu">grad_bfunc</span>(params, data)</span>
+<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a>  <span class="co"># Return them together as a vector for the optimizer</span></span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(ga, gb))</span>
+<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>  </span>
+<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a>}</span>
+<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a><span class="co"># Negative Log-Likelihood (Target for Optimization)</span></span>
+<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a>kumar_loglik <span class="ot">=</span> <span class="cf">function</span>(params, data) {</span>
+<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a>  a <span class="ot">&lt;-</span> params[<span class="dv">1</span>]</span>
+<span id="cb3-70"><a href="#cb3-70" tabindex="-1"></a>  b <span class="ot">&lt;-</span> params[<span class="dv">2</span>]</span>
+<span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(data)</span>
+<span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a>  </span>
+<span id="cb3-73"><a href="#cb3-73" tabindex="-1"></a>  <span class="co"># Based on your derivation in A2</span></span>
+<span id="cb3-74"><a href="#cb3-74" tabindex="-1"></a>  logl <span class="ot">=</span> n<span class="sc">*</span><span class="fu">log</span>(a) <span class="sc">+</span> n<span class="sc">*</span><span class="fu">log</span>(b) <span class="sc">+</span> (a<span class="dv">-1</span>)<span class="sc">*</span><span class="fu">sum</span>(<span class="fu">log</span>(data)) <span class="sc">+</span>   (b<span class="dv">-1</span>)<span class="sc">*</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> data<span class="sc">^</span>a))</span>
+<span id="cb3-75"><a href="#cb3-75" tabindex="-1"></a>  </span>
+<span id="cb3-76"><a href="#cb3-76" tabindex="-1"></a>  <span class="fu">return</span>(<span class="sc">-</span>logl) <span class="co"># We return negative because optim() minimizes by default</span></span>
+<span id="cb3-77"><a href="#cb3-77" tabindex="-1"></a>}</span>
+<span id="cb3-78"><a href="#cb3-78" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" tabindex="-1"></a>test_params<span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb3-80"><a href="#cb3-80" tabindex="-1"></a></span>
+<span id="cb3-81"><a href="#cb3-81" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="#cb3-82" tabindex="-1"></a>mle.result<span class="ot">=</span> <span class="fu">optim</span>(</span>
+<span id="cb3-83"><a href="#cb3-83" tabindex="-1"></a>  <span class="at">par =</span> test_params,    <span class="co">#intial guess (starting value for vector intial guess) . This must be a vector intial guesses for a and b</span></span>
+<span id="cb3-84"><a href="#cb3-84" tabindex="-1"></a>  <span class="at">fn =</span> kumar_loglik, <span class="co"># checks height of likelihood surface</span></span>
+<span id="cb3-85"><a href="#cb3-85" tabindex="-1"></a>  <span class="at">gr =</span> combined_kum_gradient, <span class="co"># gradient uphill should be the combined gradient</span></span>
+<span id="cb3-86"><a href="#cb3-86" tabindex="-1"></a>  <span class="at">data =</span> storage,</span>
+<span id="cb3-87"><a href="#cb3-87" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;L-BFGS-B&quot;</span>, <span class="co">#constraints the box</span></span>
+<span id="cb3-88"><a href="#cb3-88" tabindex="-1"></a>  <span class="at">hessian =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-89"><a href="#cb3-89" tabindex="-1"></a>  <span class="at">lower =</span> <span class="fu">c</span>(<span class="fl">1e-5</span>, <span class="fl">1e-5</span>), <span class="co"># keeps the parameters positive #would remove control if this was in the code</span></span>
+<span id="cb3-90"><a href="#cb3-90" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">trace =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-91"><a href="#cb3-91" tabindex="-1"></a>                 <span class="at">fnscale =</span> <span class="dv">1</span>, <span class="co">#minimized the negative log likelihood function --&gt; fnscale = -1 maximizes the function</span></span>
+<span id="cb3-92"><a href="#cb3-92" tabindex="-1"></a>                 <span class="at">maxit =</span> <span class="dv">500</span>,</span>
+<span id="cb3-93"><a href="#cb3-93" tabindex="-1"></a>                 <span class="at">abstol =</span> <span class="fl">1e-8</span>)</span>
+<span id="cb3-94"><a href="#cb3-94" tabindex="-1"></a>)</span>
+<span id="cb3-95"><a href="#cb3-95" tabindex="-1"></a>  </span>
+<span id="cb3-96"><a href="#cb3-96" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" tabindex="-1"></a><span class="co"># Extract MLEs a and b</span></span>
+<span id="cb3-98"><a href="#cb3-98" tabindex="-1"></a>mle_a <span class="ot">&lt;-</span> mle.result<span class="sc">$</span>par[<span class="dv">1</span>]</span>
+<span id="cb3-99"><a href="#cb3-99" tabindex="-1"></a>mle_b <span class="ot">&lt;-</span> mle.result<span class="sc">$</span>par[<span class="dv">2</span>]</span>
+<span id="cb3-100"><a href="#cb3-100" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MLE for a:&quot;</span>, mle_a, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">MLE for b:&quot;</span>, mle_b)</span></code></pre></div>
+<pre><code>MLE for a: 0.9593218 
+MLE for b: 1.999172</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Testing your combined function with a guess of a=1, b=1</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">combined_kum_gradient</span>(<span class="at">params =</span> test_params, <span class="at">data =</span> storage)</span></code></pre></div>
+<pre><code>[1]   3.23001 -24.56262</code></pre>
+<p>The MLE predicted <span class="math inline">\(\hat{a}\)</span> is
+0.959 0.9593218 and the MLE predicted <span
+class="math inline">\(\hat{b}\)</span> is 1.99 1.9991723. The histogram
+of storage appears to have some right tail and unimodal distribution
+characteristics.</p>
+<p><br />
+</p>
+</div>
+<div id="problem-b2" class="section level3">
+<h3><strong>Problem B2</strong>:</h3>
+<p>Fit the <strong>power distribution</strong> to the above data using
+the derived of <span class="math inline">\(a\)</span> obtained in
+<strong>Problem A4</strong> to test the following hypothesis using
+likelihood ratio procedure at significance level <span
+class="math inline">\(\alpha = 0.05\)</span>:</p>
+<p><span class="math display">\[
+H_0: b = 1 \quad \text{ versus } \quad H_a: b \ne 1.
+\]</span> $$</p>
+<p> = -</p>
+<p>$$ When we use log likelihood ratio tests we compared if the complex
+nested equation is better at explaining the model than the simple nested
+equation. Here we compare the power distribution (b=1) MLE to the full
+Kumaraswamy model.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#Likelihood ratio procedure on the data at alpha =0.05</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#using power distribution of MLE where b =1 </span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>storage</span></code></pre></div>
+<pre><code> [1] 0.12 0.14 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27
+[16] 0.28 0.29 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42
+[31] 0.43 0.44 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57
+[46] 0.58 0.59 0.60 0.61 0.78</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(storage)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># - n/ (sum(data)*log(data))</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>mle_a_power<span class="ot">=</span> <span class="sc">-</span>n<span class="sc">/</span> (<span class="fu">sum</span>(<span class="fu">log</span>(storage))) <span class="co">#MLE for a calculation</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MLE for a in the special case power distrubution:&quot;</span>, mle_a_power)</span></code></pre></div>
+<pre><code>MLE for a in the special case power distrubution: 0.9393197</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co">#When we use loglikelihood ratio tests we compared if the complex nested equation is better at explaining the model than the simple nested equation. Here we compare the power distribution (b=1) MLE to the full kumaraswamy model</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># The loglikelihood model for kumaraswamy a</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>loglike_kumar <span class="ot">=</span> <span class="sc">-</span><span class="fu">kumar_loglik</span>(<span class="fu">c</span>(mle_a, mle_b), storage) <span class="co"># full unrestriced model </span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>loglike_power <span class="ot">=</span> <span class="sc">-</span><span class="fu">kumar_loglik</span>(<span class="fu">c</span>(mle_a_power, <span class="dv">1</span>), storage) <span class="co">#restricted model log likelihood power distribution</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>LRT_statistic <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span> (loglike_kumar <span class="sc">-</span> loglike_power) <span class="co">#likelihood ratio statistic for the log kumaraswamy and likelihood for power distrubution</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>p_val <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span> <span class="fu">pchisq</span>(LRT_statistic, <span class="at">df=</span><span class="dv">1</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;The likelihood ratio test statistic is&quot;</span>, LRT_statistic, <span class="st">&quot;p=&quot;</span>, p_val, <span class="st">&quot;.&quot;</span>)</span></code></pre></div>
+<pre><code>The likelihood ratio test statistic is 16.00457 p= 6.318993e-05 .</code></pre>
+<p>State the statistical decision clearly. What is the practical
+implication of the testing result?</p>
+<p>As the p value is less than <span
+class="math inline">\(\alpha=0.005\)</span>, 6.3189934^{-5}, we reject
+the null hypothesis ($H_o: b=1 $) that the less complex power
+distribution log likelihood model better suits the distribution. The
+Kumaraswamy distribution should be used to model the daily storage water
+data.</p>
+<p><br />
+</p>
+</div>
+<div id="problem-b3" class="section level3">
+<h3><strong>Problem B3</strong>:</h3>
+<p>Use the procedure and code from <strong>Problem B1</strong> to
+estimate the MLEs of <span class="math inline">\(a\)</span> and <span
+class="math inline">\(b\)</span>, and then complete the following
+analyses:</p>
+<p>(1). Obtain the bootstrap sampling distributions of <span
+class="math inline">\(\hat{a}\)</span> and <span
+class="math inline">\(\hat{b}\)</span> and plot each distribution using
+<strong>Gaussian kernel density curves</strong>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#Bootstrap MLE for a and b</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>B<span class="ot">=</span><span class="dv">9999</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>boot_a <span class="ot">=</span> <span class="fu">numeric</span>(B) <span class="co">#allows number of bootstraps for a</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>boot_b <span class="ot">=</span> <span class="fu">numeric</span>(B) <span class="co">#allows number of bootstraps for b</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(storage)</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) <span class="co">#begin bootstrap to find mle a and b</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>{</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>  </span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>boot_sample<span class="ot">=</span> <span class="fu">sample</span>(storage, <span class="at">size=</span>n, <span class="at">replace=</span> <span class="cn">TRUE</span> )  <span class="co">#resample with replacement</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>  </span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">#Estimate MLEs for bootstrap sample </span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>  <span class="co">#using optim </span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>boot_mle<span class="ot">=</span> <span class="fu">optim</span>(</span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a>    <span class="at">par =</span> <span class="fu">c</span>(mle_a <span class="sc">*</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="fl">0.9</span>, <span class="fl">1.1</span>), mle_b <span class="sc">*</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="fl">0.9</span>, <span class="fl">1.1</span>)), <span class="co"># Jitter starting values #par = c(mle_a, mle_b), # Start at the original MLEs for speed</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a>    <span class="at">fn =</span> kumar_loglik,  <span class="co"># checks height of likelihood surface</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a>    <span class="at">gr =</span> combined_kum_gradient,  <span class="co"># gradient uphill should be the combined gradient</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>    <span class="at">data =</span> boot_sample,</span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;L-BFGS-B&quot;</span>, <span class="co">#contraints box</span></span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">c</span>(<span class="fl">1e-5</span>, <span class="fl">1e-5</span>) <span class="co"># keeps the parameters positive #would remove control if this was in the code</span></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a>  </span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a>)</span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a>boot_a[i] <span class="ot">&lt;-</span> boot_mle<span class="sc">$</span>par[<span class="dv">1</span>] <span class="co">#output a MLE parameter</span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a>boot_b[i] <span class="ot">&lt;-</span> boot_mle<span class="sc">$</span>par[<span class="dv">2</span>] <span class="co">#output b MLE parameter</span></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a>}</span>
+<span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co">#gaussian kernel building for a hat</span></span>
+<span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a>dboot_aplot<span class="ot">=</span> <span class="fu">plot</span>(<span class="fu">density</span>(boot_a, <span class="at">kernel=</span> <span class="st">&quot;gaussian&quot;</span>), <span class="at">main =</span> <span class="st">&quot;Bootstrap Distrubution of a hat&quot;</span>,</span>
+<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;a hat&quot;</span>, <span class="at">col=</span> <span class="st">&quot;skyblue&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span> mle_a, <span class="at">col=</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty=</span><span class="dv">2</span>)<span class="co">#reference for original MLE</span></span></code></pre></div>
+<p><img
+src="14-FinalExam_files/figure-html/unnamed-chunk-14-1.png" /><!-- --></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co">#gaussian kernel density for b hat</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>dboot_bplot<span class="ot">=</span> <span class="fu">plot</span>(<span class="fu">density</span>(boot_b, <span class="at">kernel =</span> <span class="st">&quot;gaussian&quot;</span>), <span class="at">main=</span><span class="st">&quot;Bootstrap Distrubution of b hat&quot;</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>     <span class="at">xlab=</span> <span class="st">&quot;b hat&quot;</span>, <span class="at">col=</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> mle_b, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img
+src="14-FinalExam_files/figure-html/unnamed-chunk-14-2.png" /><!-- --></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">ggplotly</span>(dboot_bplot)</span></code></pre></div>
+<div></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">ggplotly</span>(dboot_aplot)</span></code></pre></div>
+<div></div>
+<p>The bootstrapped sampling distribution of a is 1.0214885. The
+bootstrapped sampling distribution of b is 1.9411152.</p>
+<p>(2). Construct both the <span class="math inline">\(95\%\)</span>
+<strong>bootstrap confidence interval</strong> and the <strong>Wald
+confidence interval</strong> for <span class="math inline">\(b\)</span>.
+Do these intervals agree with the results obtained in <strong>Problem
+B2</strong>? [<em>Compute the standard error of <span
+class="math inline">\(\hat{b}\)</span> using the observed Fisher
+information matrix, i.e., the inverse of the negative Hessian obtained
+from optim()</em>]</p>
+<p>Wald Equation <span class="math display">\[
+\hat{b} + z_{\alpha/2} * \sqrt([I_n(\hat{b}]_{2,2}))
+\]</span></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="do">## Bootstrapped Confidence Intervals</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co">#boot_ci_a= quantile(boot_a, probs= c(0.025, 0.975))</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co">#boot_ci_b = quantile(boot_b, probs= c(0.025, 0.975))</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co">#cat(&quot;The bootstrapped confidence interval&quot;)</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co">#Bootstrapped Normal Confidence Interval</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>z_critical <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>dis_crit_cal<span class="ot">=</span>boot_a <span class="sc">+</span> z_critical <span class="sc">*</span> (boot_a<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co"># Calculate Bootstrap Standard Error (se_boot)</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>se_boot_a <span class="ot">=</span> <span class="fu">sd</span>(boot_a)</span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>se_boot_b <span class="ot">=</span> <span class="fu">sd</span>(boot_b)</span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a><span class="co"># Z critical value for 95%</span></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a>z<span class="ot">=</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a><span class="co">#Confidence level for parameter a</span></span>
+<span id="cb17-23"><a href="#cb17-23" tabindex="-1"></a>ci_boot_a <span class="ot">=</span> <span class="fu">c</span>(<span class="at">LCI=</span> mle_a <span class="sc">-</span> z<span class="sc">*</span>se_boot_a,  <span class="co">#lower confidence level</span></span>
+<span id="cb17-24"><a href="#cb17-24" tabindex="-1"></a>              <span class="co">#estimate= mle_a, #the value the CI is centered around</span></span>
+<span id="cb17-25"><a href="#cb17-25" tabindex="-1"></a>              <span class="at">UCL=</span> mle_a <span class="sc">+</span> z<span class="sc">*</span>se_boot_a <span class="co">#upper confidence level</span></span>
+<span id="cb17-26"><a href="#cb17-26" tabindex="-1"></a>              )</span>
+<span id="cb17-27"><a href="#cb17-27" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;The bootstraped normal confidence interval for parameter a=&quot;</span>, mle_a, <span class="st">&quot;is, [&quot;</span>, ci_boot_a, <span class="st">&quot;].&quot;</span>)</span></code></pre></div>
+<pre><code>The bootstraped normal confidence interval for parameter a= 0.9593218 is, [ 0.8521865 1.066457 ].</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>ci_boot_b <span class="ot">=</span> <span class="fu">c</span>(<span class="at">LCI=</span> mle_b <span class="sc">-</span> z<span class="sc">*</span>se_boot_b,  <span class="co">#lower confidence level</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>              <span class="co">#estimate= mle_b, #the value the CI is centered around</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>              <span class="at">UCL=</span> mle_b <span class="sc">+</span> z<span class="sc">*</span>se_boot_b <span class="co">#upper confidence level</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>              )</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st"> The bootstraped normal confidence interval for parameter b=&quot;</span>, mle_b, <span class="st">&quot;is, [&quot;</span>, ci_boot_b, <span class="st">&quot;].&quot;</span>)</span></code></pre></div>
+<pre><code>
+ The bootstraped normal confidence interval for parameter b= 1.999172 is, [ 1.776119 2.222225 ].</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co">#Percentile CI Boootstraps</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>boot_percentile_a <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">quantile</span>(boot_a, <span class="at">probs=</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>boot_percentile_b <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">quantile</span>(boot_b, <span class="at">probs=</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st"> The bootstrapped percentile 95% confidence interval for parameter a= is, [&quot;</span>, boot_percentile_a, <span class="st">&quot;].&quot;</span>)</span></code></pre></div>
+<pre><code>
+ The bootstrapped percentile 95% confidence interval for parameter a= is, [ 0.8681103 1.04955 ].</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st"> The bootstraped percentile 95% confidence interval for parameter b is, [&quot;</span>, boot_percentile_b, <span class="st">&quot;].&quot;</span>)</span></code></pre></div>
+<pre><code>
+ The bootstraped percentile 95% confidence interval for parameter b is, [ 1.810586 2.188767 ].</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="do">###########Wald CI </span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co">#Compute the Wald CI using observed Fisher information</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>fisher_info<span class="ot">=</span> <span class="fu">solve</span>(mle.result<span class="sc">$</span>hessian) <span class="co">#take the inverse of the mle.result matrix</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co">#have values before this matrix in the equatinn as well as we describe some of the formula below</span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>  <span class="co">#variance(Theta1)    #covariance(Theta1, Theta2)</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a>  <span class="co">#cov(Theta1, Theta2) # variance(theta2)</span></span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#inside the hessian matrix for wald which is the inverse of the fisher matrix  * the matrix of hat\theta1 - inverse theta10 (on top of) hat\theta2 - theta20</span></span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co">#the inverse of</span></span>
+<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a>  <span class="co">#variance(hat\a)    #covariance(\hat\a, \hat\b) </span></span>
+<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a>  <span class="co">#cov(\hat\a, \hat\b) # variance(\hat\a)</span></span>
+<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="co">#we are only the b parameter</span></span>
+<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a><span class="co">#calculate the standard error specific to wald b</span></span>
+<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a>se_wald_b <span class="ot">=</span> <span class="fu">sqrt</span>(fisher_info[<span class="dv">2</span>,<span class="dv">2</span>]) <span class="co">#standard error wald</span></span>
+<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a>z<span class="ot">=</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a>wald_ci_b <span class="ot">=</span> <span class="fu">c</span>(<span class="at">LCI=</span> mle_b<span class="sc">-</span> z<span class="sc">*</span>se_wald_b, <span class="at">UCL=</span> mle_b <span class="sc">+</span> z<span class="sc">*</span>se_wald_b)</span>
+<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st"> The Wald Confidence Interval for b is [&quot;</span>, wald_ci_b, <span class="st">&quot;].&quot;</span>)</span></code></pre></div>
+<pre><code>
+ The Wald Confidence Interval for b is [ 1.44504 2.553304 ].</code></pre>
+<p>We are comparing the Wald Confidence interval to a bootstrap sampling
+confidence interval. To better capture the skewness of this Kumaraswamy
+distribution we compare the bootstrapped Percentile Confidence Interval
+to the Wald Confidence Interval. The Percentile 95%CI for parameter b is
+1.8105856, 2.188767 (width = 0.378181) . The Wald Confidence interval is
+1.4450403, 2.5533043 (width= 1.108264). The bootstrapped percentile CI
+has a far smaller interval than the Wald Confidence interval suggesting
+the Wald test is not the best test to use on the distribution as it
+assumes a normal sampling distribution, which is best suited here. The
+Wald 95%CI is underperforming the bootstrapped Normal 95%CI as well
+1.7761192, 2.2222254. Our desire is to have a small confidence interval
+as long as the distribution is well represented by the interval
+used.</p>
+<p>In Problem B2 we rejected the null hypothesis that the simpler model
+suits the distribution, concluding the Kumaraswamy distribution better
+models the daily storage water data. Considering this more complex
+model, most likely has more complex distribution shape that is not well
+represented by a normal distribution even when overcoming for some
+robustness, the better suited bootstrapped percentile ci agrees with the
+complexity of the dataset.</p>
+<p>(3). Based on the bootstrap sampling distributions from part (1) of
+this problem, assess whether the validity of the Wald confidence
+interval is supported.</p>
+<p>While the bootstrapped confidence intervals do not include 0, we can
+assume our parameters a and b has significance. The bootstrap kernel
+figure for <span class="math inline">\(\hat{a}\)</span> range about from
+0.83-1.10 with a MLE value of <code>r boot_a[i]</code>. The bootstrap
+kernel figure for <span class="math inline">\(\hat{b}\)</span> ranges
+from about 1.8 to 2.2 with an MLE value of 1.9411152. As the Wald
+confidence interval 1.4450403, 2.5533043 is between kernel’s ranges for
+the entire encompassing dataset therefore capturing an interval within a
+plausible range although it is way less valid than its bootstrapped
+percentile Confidence Interval.A percentile confidence interval is
+preferred for the storage distribution. The Wald CI assumption for
+normality and symmetry cannot well capture the true shape of the
+distribution. As the distribution appears to have some unimodal shape
+and slight tail, rather than a strong symmetrical shape centered around
+its MLE. The wider Wald confidence interval highlights its uncertiany to
+measure deviations from normal shape well.</p>
+<p><br />
+</p>
+</div>
+<div id="problem-b4" class="section level3">
+<h3><strong>Problem B4</strong>:</h3>
+<p>In the introduction to the working model for this exam, the
+Kumaraswamy distribution reduces to the uniform distribution on (0,1).
+In this problem, we perform a <strong>likelihood ratio test</strong> for
+the following hypothesis to assess whether the data come from the
+uniform distribution on (0,1):</p>
+<p><span class="math display">\[
+H_0: a = 1\quad \&amp; \quad b = 1\quad \text{ versus } \quad H_a: a \ne
+1 \quad \text{or} \quad b \ne 1 \quad \text{or}\quad (a \ne 1 \quad
+\&amp; \quad b \ne 1).
+\]</span></p>
+<p>Provide a practical interpretation of the above test result.
+[<em>Hint: <span class="math inline">\(H_a\)</span> basically says that
+there is no constraints for <span class="math inline">\(a\)</span> and
+<span class="math inline">\(b\)</span>. Please review the lecture note
+for module 11 on the likelihood ratio test before coding.</em>]</p>
+<p><br />
+</p>
+<p>Here we compare the Kumaraswamy distribution to another special case
+uniform distribution model where the distribution ranges between 0 and
+1.</p>
+<p><span class="math display">\[
+LRT_{uni(1,1)}= 2[\ell(\hat{a}, \hat{b})-\ell(1,1)]
+\]</span></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>n<span class="ot">=</span> <span class="fu">length</span>(storage)</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co">#unrestricted original log likelihood from kumaraswamy distribution</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>logL_unrestricted <span class="ot">=</span> <span class="sc">-</span><span class="fu">kumar_loglik</span>(<span class="fu">c</span>(mle_a, mle_b), storage) <span class="co">#presents joint probability of entire dataset give a and b parameters</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co">#log likelihood for Uniform (a=1, b=1)</span></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>logL_restricted<span class="ot">=</span> <span class="sc">-</span><span class="fu">kumar_loglik</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), storage) <span class="co">#the parameters for 1 and 1 for both  a and b</span></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a><span class="co">#log ratio test statistic</span></span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a>LRT_stat_unicomparison <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> (logL_unrestricted <span class="sc">-</span> logL_restricted) </span>
+<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a>pval_unicompLRT<span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span> <span class="fu">pchisq</span>(LRT_stat_unicomparison, <span class="at">df=</span><span class="dv">2</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;The logliklihood ratio considering the special case kumaswamy uniform distrubutio (a=1, b=1) is&quot;</span>, LRT_stat_unicomparison, <span class="st">&quot;(p=&quot;</span>, pval_unicompLRT, <span class="st">&quot;).&quot;</span>)</span></code></pre></div>
+<pre><code>The logliklihood ratio considering the special case kumaswamy uniform distrubutio (a=1, b=1) is 16.20465 (p= 0.0003028339 ).</code></pre>
+<p>When assessing the stronger model using the Likelihood Ratio Test,
+the more complex Kumaraswamy distribution does a better job at modelling
+the water storage distribution than the uniform model. If comparing
+whether to use the restricted uniform distribution or the unrestricted
+Kumaraswamy distribution, use the Kumaraswamy distribution (LRT=
+16.2046521, p= 3.0283391^{-4}). Perhpas the slight right skewness of the
+model is not well represented by the uniform distribution suggesting
+daily water intake is not evenly distributed nor random.</p>
+<p>It appears both the Kumaraswamy outperforms the uniform and power
+distribution models.</p>
+<p><font color = "red"><strong>Note</strong>: Please download the
+template and insert your work into it to complete the exam. </font></p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlNUQSA1MDYgRmluYWwgRXhhbWluYXRpb24gU3ByaW5nICINCmF1dGhvcjogIiBFemFuYSBSaXZlcnMiDQpkYXRlOiAiIER1ZTogTWF5IDUgIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogeWVzDQogICAgdG9jX2RlcHRoOiA0DQogICAgdG9jX2Zsb2F0OiB5ZXMNCiAgICBudW1iZXJfc2VjdGlvbnM6IG5vDQogICAgdG9jX2NvbGxhcHNlZDogeWVzDQogICAgY29kZV9mb2xkaW5nOiBoaWRlDQogICAgY29kZV9kb3dubG9hZDogeWVzDQogICAgc21vb3RoX3Njcm9sbDogeWVzDQogICAgaGlnaGxpZ2h0OiBtb25vY2hyb21lDQogICAgdGhlbWU6IHNwYWNlbGFiDQogICAgc2VsZl9jb250YWluZWQ6IGZhbHNlDQogICAgbGliX2RpcjogbGlicw0KLS0tDQoNCmBgYHtjc3MsIGVjaG8gPSBGQUxTRX0NCiNUT0M6OmJlZm9yZSB7DQogIGNvbnRlbnQ6ICJUYWJsZSBvZiBDb250ZW50cyI7DQogIGZvbnQtd2VpZ2h0OiBib2xkOw0KICBmb250LXNpemU6IDEuMmVtOw0KICBkaXNwbGF5OiBibG9jazsNCiAgY29sb3I6IG5hdnk7DQogIG1hcmdpbi1ib3R0b206IDEwcHg7DQp9DQoNCg0KZGl2I1RPQyBsaSB7ICAgICAvKiB0YWJsZSBvZiBjb250ZW50ICAqLw0KICAgIGxpc3Qtc3R5bGU6dXBwZXItcm9tYW47DQogICAgYmFja2dyb3VuZC1pbWFnZTpub25lOw0KICAgIGJhY2tncm91bmQtcmVwZWF0Om5vbmU7DQogICAgYmFja2dyb3VuZC1wb3NpdGlvbjowOw0KfQ0KDQpoMS50aXRsZSB7ICAgIC8qIGxldmVsIDEgaGVhZGVyIG9mIHRpdGxlICAqLw0KICBmb250LXNpemU6IDIycHg7DQogIGZvbnQtd2VpZ2h0OiBib2xkOw0KICBjb2xvcjogRGFya1JlZDsNCiAgdGV4dC1hbGlnbjogY2VudGVyOw0KICBmb250LWZhbWlseTogIkdpbGwgU2FucyIsIHNhbnMtc2VyaWY7DQp9DQoNCmg0LmF1dGhvciB7IC8qIEhlYWRlciA0IC0gYW5kIHRoZSBhdXRob3IgYW5kIGRhdGEgaGVhZGVycyB1c2UgdGhpcyB0b28gICovDQogIGZvbnQtc2l6ZTogMTVweDsNCiAgZm9udC13ZWlnaHQ6IGJvbGQ7DQogIGZvbnQtZmFtaWx5OiBzeXN0ZW0tdWk7DQogIGNvbG9yOiBuYXZ5Ow0KICB0ZXh0LWFsaWduOiBjZW50ZXI7DQp9DQoNCmg0LmRhdGUgeyAvKiBIZWFkZXIgNCAtIGFuZCB0aGUgYXV0aG9yIGFuZCBkYXRhIGhlYWRlcnMgdXNlIHRoaXMgdG9vICAqLw0KICBmb250LXNpemU6IDE4cHg7DQogIGZvbnQtd2VpZ2h0OiBib2xkOw0KICBmb250LWZhbWlseTogIkdpbGwgU2FucyIsIHNhbnMtc2VyaWY7DQogIGNvbG9yOiBEYXJrQmx1ZTsNCiAgdGV4dC1hbGlnbjogY2VudGVyOw0KfQ0KDQpoMSB7IC8qIEhlYWRlciAxIC0gYW5kIHRoZSBhdXRob3IgYW5kIGRhdGEgaGVhZGVycyB1c2UgdGhpcyB0b28gICovDQogICAgZm9udC1zaXplOiAyMHB4Ow0KICAgIGZvbnQtd2VpZ2h0OiBib2xkOw0KICAgIGZvbnQtZmFtaWx5OiAiVGltZXMgTmV3IFJvbWFuIiwgVGltZXMsIHNlcmlmOw0KICAgIGNvbG9yOiBkYXJrcmVkOw0KICAgIHRleHQtYWxpZ246IGNlbnRlcjsNCn0NCg0KaDIgeyAvKiBIZWFkZXIgMiAtIGFuZCB0aGUgYXV0aG9yIGFuZCBkYXRhIGhlYWRlcnMgdXNlIHRoaXMgdG9vICAqLw0KICAgIGZvbnQtc2l6ZTogMThweDsNCiAgICBmb250LXdlaWdodDogYm9sZDsNCiAgICBmb250LWZhbWlseTogIlRpbWVzIE5ldyBSb21hbiIsIFRpbWVzLCBzZXJpZjsNCiAgICBjb2xvcjogbmF2eTsNCiAgICB0ZXh0LWFsaWduOiBsZWZ0Ow0KfQ0KDQpoMyB7IC8qIEhlYWRlciAzIC0gYW5kIHRoZSBhdXRob3IgYW5kIGRhdGEgaGVhZGVycyB1c2UgdGhpcyB0b28gICovDQogICAgZm9udC1zaXplOiAxNnB4Ow0KICAgIGZvbnQtd2VpZ2h0OiBib2xkOw0KICAgIGZvbnQtZmFtaWx5OiAiVGltZXMgTmV3IFJvbWFuIiwgVGltZXMsIHNlcmlmOw0KICAgIGNvbG9yOiBuYXZ5Ow0KICAgIHRleHQtYWxpZ246IGxlZnQ7DQp9DQoNCmg0IHsgLyogSGVhZGVyIDQgLSBhbmQgdGhlIGF1dGhvciBhbmQgZGF0YSBoZWFkZXJzIHVzZSB0aGlzIHRvbyAgKi8NCiAgICBmb250LXNpemU6IDE0cHg7DQogIGZvbnQtd2VpZ2h0OiBib2xkOw0KICAgIGZvbnQtZmFtaWx5OiAiVGltZXMgTmV3IFJvbWFuIiwgVGltZXMsIHNlcmlmOw0KICAgIGNvbG9yOiBkYXJrcmVkOw0KICAgIHRleHQtYWxpZ246IGxlZnQ7DQp9DQoNCi8qIEFkZCBkb3RzIGFmdGVyIG51bWJlcmVkIGhlYWRlcnMgKi8NCi5oZWFkZXItc2VjdGlvbi1udW1iZXI6OmFmdGVyIHsNCiAgY29udGVudDogIi4iOw0KDQpib2R5IHsgYmFja2dyb3VuZC1jb2xvcjp3aGl0ZTsgfQ0KDQouaGlnaGxpZ2h0bWUgeyBiYWNrZ3JvdW5kLWNvbG9yOnllbGxvdzsgfQ0KDQpwIHsgYmFja2dyb3VuZC1jb2xvcjp3aGl0ZTsgfQ0KDQp9DQpgYGANCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQojIGNvZGUgY2h1bmsgc3BlY2lmaWVzIHdoZXRoZXIgdGhlIFIgY29kZSwgd2FybmluZ3MsIGFuZCBvdXRwdXQgDQojIHdpbGwgYmUgaW5jbHVkZWQgaW4gdGhlIG91dHB1dCBmaWxlcy4NCg0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGZpZy5yZXRpbmEgPSAxLCBkcGkgPSA3MCkNCg0KaWYgKCFyZXF1aXJlKCJrbml0ciIpKSB7DQogICBpbnN0YWxsLnBhY2thZ2VzKCJrbml0ciIpDQogICBsaWJyYXJ5KGtuaXRyKQ0KfQ0KaWYgKCFyZXF1aXJlKCJwYW5kZXIiKSkgew0KICAgaW5zdGFsbC5wYWNrYWdlcygicGFuZGVyIikNCiAgIGxpYnJhcnkocGFuZGVyKQ0KfQ0KaWYgKCFyZXF1aXJlKCJnZ3Bsb3QyIikpIHsNCiAgaW5zdGFsbC5wYWNrYWdlcygiZ2dwbG90MiIpDQogIGxpYnJhcnkoZ2dwbG90MikNCn0NCmlmICghcmVxdWlyZSgidGlkeXZlcnNlIikpIHsNCiAgaW5zdGFsbC5wYWNrYWdlcygidGlkeXZlcnNlIikNCiAgbGlicmFyeSh0aWR5dmVyc2UpDQp9DQoNCmlmICghcmVxdWlyZSgicGxvdGx5IikpIHsNCiAgaW5zdGFsbC5wYWNrYWdlcygicGxvdGx5IikNCiAgbGlicmFyeShwbG90bHkpDQp9DQojIyMjDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsICAgICAgICMgaW5jbHVkZSBjb2RlIGNodW5rIGluIHRoZSBvdXRwdXQgZmlsZQ0KICAgICAgICAgICAgICAgICAgICAgIHdhcm5pbmcgPSBGQUxTRSwgICAjIHNvbWV0aW1lcywgeW91IGNvZGUgbWF5IHByb2R1Y2Ugd2FybmluZyBtZXNzYWdlcywNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyB5b3UgY2FuIGNob29zZSB0byBpbmNsdWRlIHRoZSB3YXJuaW5nIG1lc3NhZ2VzIGluDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgdGhlIG91dHB1dCBmaWxlLiANCiAgICAgICAgICAgICAgICAgICAgICByZXN1bHRzID0gVFJVRSwgICAgIyB5b3UgY2FuIGFsc28gZGVjaWRlIHdoZXRoZXIgdG8gaW5jbHVkZSB0aGUgb3V0cHV0DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgaW4gdGhlIG91dHB1dCBmaWxlLg0KICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2UgPSBGQUxTRSwNCiAgICAgICAgICAgICAgICAgICAgICBjb21tZW50ID0gTkENCiAgICAgICAgICAgICAgICAgICAgICApICANCmBgYA0KIA0KIFwNCiANCiMjICoqRmluYWwgRXhhbSBHdWlkZWxpbmVzKiogDQoNCiogKipDb3ZlcmFnZSoqOiBUaGUgbWFqb3IgY29uY2VwdHMgYW5kIGluZmVyZW5jZSBwcm9jZWR1cmVz4oCUc3VjaCBhcyBzYW1wbGluZyBkaXN0cmlidXRpb25zLCBjb25maWRlbmNlIGludGVydmFscywgYW5kIGh5cG90aGVzaXMgdGVzdGluZ+KAlGFyZSBjb3ZlcmVkIGFuZCBpbXBsZW1lbnRlZCB1c2luZyBib3RoIGNsYXNzaWNhbCBwYXJhbWV0cmljIGxpa2VsaWhvb2QtYmFzZWQgbWV0aG9kcyBhbmQgbW9kZXJuIG5vbi1wYXJhbWV0cmljIGFwcHJvYWNoZXMsIGluY2x1ZGluZyB0aGUgYm9vdHN0cmFwIGFuZCBrZXJuZWwgZGVuc2l0eSBlc3RpbWF0aW9uLg0KDQoqICoqUGFydCBBKiogcmVxdWlyZXMgZGVyaXZhdGlvbiBvZiBzZWxlY3RlZCBsaWtlbGlob29kLWJhc2VkIGZ1bmN0aW9ucyBmb3IgcGVyZm9ybWluZyB2YXJpb3VzIHR5cGVzIG9mIGluZmVyZW5jZSwgd2l0aCBzdWZmaWNpZW50IGRldGFpbCB0byBlbmFibGUgdHJhbnNsYXRpb24gb2YgdGhlc2UgZGVyaXZhdGlvbnMgaW50byBjb2RlIGZvciBudW1lcmljYWwgYW5hbHlzaXMuDQoNCiogWW91ciBjb2RlIGZvciB0aGUgcHJvYmxlbXMgaW4gKipQYXJ0IEIqKiBtdXN0IGFsaWduIHdpdGggeW91ciBkZXJpdmF0aW9ucyBpbiAqKlBhcnQgQSoqIGFuZCBiZSB3ZWxsIGNvbW1lbnRlZCB3aGVyZSBuZWNlc3NhcnkuDQoNCiogSW4gKipQYXJ0IEIqKiwgYWxsIG51bWVyaWNhbCByZXN1bHRzIG11c3QgYmUgaW50ZXJwcmV0ZWQgZnJvbSBhIHByYWN0aWNhbCBwZXJzcGVjdGl2ZS4NCg0KDQpcDQoNCiMjICoqUG9saWNpZXMgb2YgVXNpbmcgQUkgVG9vbHMqKg0KDQoqICoqUG9saWN5IG9uIEFJIFRvb2wgVXNlKio6IFN0dWRlbnRzIG11c3QgYWRoZXJlIHRvIHRoZSBBSSB0b29sIHBvbGljeSBzcGVjaWZpZWQgaW4gdGhlIGNvdXJzZSBzeWxsYWJ1cy4gVGhlIGRpcmVjdCBjb3B5aW5nIG9mIEFJLWdlbmVyYXRlZCBjb250ZW50IGlzIHN0cmljdGx5IHByb2hpYml0ZWQuIEFsbCBzdWJtaXR0ZWQgd29yayBtdXN0IHJlZmxlY3QgeW91ciBvd24gdW5kZXJzdGFuZGluZzsgd2hlcmUgZXh0ZXJuYWwgdG9vbHMgYXJlIGNvbnN1bHRlZCwgY29udGVudCBtdXN0IGJlIHRob3JvdWdobHkgcmVwaHJhc2VkIGFuZCBzeW50aGVzaXplZCBpbiB5b3VyIG93biB3b3Jkcy4NCg0KKiAqKkNvZGUgSW5jbHVzaW9uIFJlcXVpcmVtZW50Kio6IEFueSBjb2RlIGluY2x1ZGVkIGluIHlvdXIgZXNzYXkgbXVzdCBiZSBwcm9wZXJseSBjb21tZW50ZWQgdG8gZXhwbGFpbiB0aGUgcHVycG9zZSBhbmQvb3IgZXhwZWN0ZWQgb3V0cHV0IG9mIGtleSBjb2RlIGxpbmVzLiBTdWJtaXR0aW5nIEFJLWdlbmVyYXRlZCBjb2RlIHdpdGhvdXQgbWVhbmluZ2Z1bCwgc3R1ZGVudC1hZGRlZCBjb21tZW50cyB3aWxsIG5vdCBiZSBhY2NlcHRlZC4NCg0KXA0KDQojIyAqKldvcmtpbmcgTW9kZWwgZm9yIHRoZSBGaW5hbCBFeGFtKioNCg0KPGZvbnQgY29sb3IgPSAib3JhbmdlIj4qKkNhdXRpb24qKjogKlBsZWFzZSBmb2xsb3cgdGhlIHN1Z2dlc3RlZCBleHByZXNzaW9ucyBhbmQgZ3VpZGVkIHN0ZXBzIHRvIGNvbXBsZXRlIHRoZSBleGFtLiBPdGhlciBhcHByb2FjaGVzIHN1Y2ggYXMgdHJhbnNmb3JtYXRpb24gZm9yIHRyaXZpYWxpemUgdGhlIHByb2JsZW1zIHRoYXQgd2lsbCBub3QgbWVldCB0aGUgZXhhbSBvYmplY3RpdmVzLio8L2ZvbnQ+DQoNCg0KVGhlICoqS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uKiogaXMgYSB0d28tcGFyYW1ldGVyIGNvbnRpbnVvdXMgcHJvYmFiaWxpdHkgZGlzdHJpYnV0aW9uIGRlZmluZWQgb24gdGhlIGludGVydmFsICgwLCAxKS4gSXQgaXMgb2Z0ZW4gdXNlZCBhcyBhbiBhbHRlcm5hdGl2ZSB0byB0aGUgQmV0YSBkaXN0cmlidXRpb24gZHVlIHRvIGl0cyBzaW1wbGUgY2xvc2VkLWZvcm0gZXhwcmVzc2lvbnMgZm9yIHRoZSBjdW11bGF0aXZlIGRpc3RyaWJ1dGlvbiBmdW5jdGlvbiAoQ0RGKSBhbmQgcXVhbnRpbGUgZnVuY3Rpb24uIEl0IGlzIGNvbW1vbmx5IHVzZWQgaW4gDQoNCiogKipIeWRyb2xvZ3kqKjogTW9kZWxpbmcgcmFpbmZhbGwsIHN0cmVhbWZsb3csIG9yIG90aGVyIGJvdW5kZWQgbmF0dXJhbCBwaGVub21lbmENCg0KKiAqKkVjb25vbWljcyoqOiBJbmNvbWUgc2hhcmVzLCBwcm9wb3J0aW9ucywgb3IgYm91bmRlZCBpbmRpY2VzDQoNCiogKipNb250ZSBDYXJsbyBzaW11bGF0aW9uKio6IEVmZmljaWVudCByYW5kb20gdmFyaWF0ZSBnZW5lcmF0aW9uICh2aWEgaW52ZXJzZSB0cmFuc2Zvcm0pDQoNCiogKipNYWNoaW5lIGxlYXJuaW5nKio6IE91dHB1dCBsYXllciBmb3IgYm91bmRlZCB0YXJnZXRzLCBwcmlvciBkaXN0cmlidXRpb25zIGluIEJheWVzaWFuIG1vZGVscw0KDQoqICoqUmVsaWFiaWxpdHkgZW5naW5lZXJpbmcqKjogTW9kZWxpbmcgZmFpbHVyZSByYXRlcyBvZiBzeXN0ZW1zIHdpdGggYm91bmRlZCBsaWZldGltZXMNCg0KXA0KDQpMZXQgJFgkIGJlIHRoZSBLdW1hcmFzd2FteSByYW5kb20gdmFyaWFibGUgd2l0aCBDdW11bGF0aXZlIERpc3RyaWJ1dGlvbiBGdW5jdGlvbiAoQ0RGKSAgDQoNCiQkDQpGKHg7IGEsIGIpID0gMSAtICgxIC0geF5hKV5iDQokJA0KDQp3aGVyZSAkYSA+IDAkIGFuZCAkYiA+IDAkIHVua25vd24gcGFyYW1ldGVycyBhbmQgJDAgPCB4IDwgMSQuIA0KDQpUaGUgZm9sbG93aW5nIGFyZSB0d28gc3BlY2lhbCBjYXNlIG9mIHRoZSBLdW1hcmFzd2FteSBkaXN0cmlidXRpb246DQoNCjEuICoqVW5pZm9ybSBEaXN0cmlidXRpb24qKjogV2hlbiAkYSA9IDEkIGFuZCAkYiA9IDEkLCB0aGUgS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uIGJlY29tZXMgYSB1bmlmb3JtIGRpc3RyaWJ1dGlvbiBvdmVyICRbMCwgMV0kIHdpdGggQ0RGICRGKHgpID0geCQuDQoNCg0KMi4gKipQb3dlciBEaXN0cmlidXRpb24qKjogd2hlbiAkYiA9IDEkIGFuZCAkYSA+IDAkLCB0aGUgS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uIGJlY29tZXMgYSBwb3dlciBkaXN0cmlidXRpb24gb3ZlciAkWzAsIDFdJCB3aXRoIENERiAkRih4KSA9IHheYSQuIA0KDQpUaGlzIGZpbmFsIGV4YW0gZm9jdXNlcyBvbiBpbmZlcmVuY2VzIG9mIEt1bWFyYXN3YW15IGRpc3RyaWJ1dGlvbiBhbmQgcmVsYXRlZCBkYXRhIGFuYWx5c2lzLg0KDQoNCiMjIFBhcnQgQTogTWV0aG9kb2xvZ2ljYWwgRGVyaXZhdGlvbnMNCg0KXA0KDQojIyMgKipQcm9ibGVtIEExKio6IA0KU2hvdyB0aGF0IHRoZSBkZW5zaXR5IGZ1bmN0aW9uIG9mIHRoZSBLdW1hcmFzd2FteSBkaXN0cmlidXRpb24gaXMNCg0KJCQNCmYoeDsgYSwgYikgPSBhYiBcLCB4XnthLTF9ICgxIC0geF5hKV57Yi0xfS4NCiQkDQoNCmBgYHtyLCBlY2hvPUZBTFNFLCBvdXQud2lkdGg9IjUwJSIsIGZpZy5hbGlnbj0iY2VudGVyIiwgZmlnLmNhcD0iIFByb2JsZW0gQTEifQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoImh0dHBzOi8vaS5wb3N0aW1nLmNjLzR4cjl5OWJjL1Byb2JsZW0tQTEuanBnIikNCg0KYGBgDQoNCg0KXA0KDQojIyMgKipQcm9ibGVtIEEyKio6IA0KTGV0ICRce3hfMSwgeF8yLCBcY2RvdHMsIHhfbiBcfSQgYmUgYW4gaS5pLmQuIHJhbmRvbSBzYW1wbGUgdGFrZW4gZnJvbSBhIHBvcHVsYXRpb24gdGhhdCBmb2xsb3dzIHRoZSBhYm92ZSAyLXBhcmFtZXRlciBLdW1hcmFzd2FteSBkaXN0cmlidXRpb24uIFdyaXRlIG91dCB0aGUgbG9nbGlrZWxpaG9vZCBmdW5jdGlvbiBvZiAkYSQgYW5kICRiJCwgZGVub3RlZCBieSAkXGVsbChhLGIpJCwgYmFzZWQgb24gdGhlIGFib3ZlIHJhbmRvbSBzYW1wbGUgYW5kICoqZGVyaXZlKiogdGhlIGdyYWRpZW50IHZlY3RvciAkW1xlbGxfYV5ccHJpbWUoYSxiKSwgXGVsbF9iXlxwcmltZShhLGIpXSQsIHRoZSBmaXJzdCBvcmRlciBwYXJ0aWFsIGRlcml2YXRpdmUgb2YgdGhlIGxvZy1saWtlbGlob29kIHdpdGggcmVzcGVjdCB0byBwYXJhbWV0ZXJzICRhJCBhbmQgJGIkLg0KDQoNCmBgYHtyLCBlY2hvPUZBTFNFLCBvdXQud2lkdGg9IjUwJSIsIGZpZy5hbGlnbj0iY2VudGVyIiwgZmlnLmNhcD0iIFByb2JsZW0gQTIifQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoIkM6L1VzZXJzLzc1RVI5NjkyODcvT25lRHJpdmUgLSBXZXN0IENoZXN0ZXIgVW5pdmVyc2l0eSBvZiBQQS9TVEEgNTA2IC0gTWF0aGVtYXRpY2FsIFN0YXRpc3RpY3MgSUkvV2Vla2x5IE1vZHVsZXMvV2VlayAxNSAtIEV4YW0vUXVlc3Rpb24gQS9Qcm9ibGVtIEEyIHB0MS5qcGciKQ0KDQpgYGANCg0KYGBge3IsIGVjaG89RkFMU0UsIG91dC53aWR0aD0iNTAlIiwgZmlnLmFsaWduPSJjZW50ZXIiLCBmaWcuY2FwPSIgUHJvYmxlbSBBMiJ9DQprbml0cjo6aW5jbHVkZV9ncmFwaGljcygiQzovVXNlcnMvNzVFUjk2OTI4Ny9PbmVEcml2ZSAtIFdlc3QgQ2hlc3RlciBVbml2ZXJzaXR5IG9mIFBBL1NUQSA1MDYgLSBNYXRoZW1hdGljYWwgU3RhdGlzdGljcyBJSS9XZWVrbHkgTW9kdWxlcy9XZWVrIDE1IC0gRXhhbS9RdWVzdGlvbiBBL1Byb2JsZW0gQTIgcHQyLmpwZyIpDQoNCmBgYA0KDQoNClwNCg0KIyMjICoqUHJvYmxlbSBBMyoqOiANCkJhc2VkIG9uIHRoZSBncmFkaWVudHMgZnVuY3Rpb25zIG9idGFpbmVkIGluIHRoZSBhYm92ZSBwcm9ibGVtIEEyLCAqKmRlcml2ZSoqIHRoZSBvYnNlcnZlZCBGaXNoZXIgSW5mb3JtYXRpb24gbWF0cml4IChpLmUsIHRoZSBuZWdhdGl2ZSBIZXNzaWFuIE1hdHJpeCkuDQoNCmBgYHtyLCBlY2hvPUZBTFNFLCBvdXQud2lkdGg9IjUwJSIsIGZpZy5hbGlnbj0iY2VudGVyIiwgZmlnLmNhcD0iIFByb2JsZW0gQTMifQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoIkM6L1VzZXJzLzc1RVI5NjkyODcvT25lRHJpdmUgLSBXZXN0IENoZXN0ZXIgVW5pdmVyc2l0eSBvZiBQQS9TVEEgNTA2IC0gTWF0aGVtYXRpY2FsIFN0YXRpc3RpY3MgSUkvV2Vla2x5IE1vZHVsZXMvV2VlayAxNSAtIEV4YW0vUXVlc3Rpb24gQS9Qcm9ibGVtIEEzIHB0MS5qcGciKQ0KDQpgYGANCg0KDQpgYGB7ciwgZWNobz1GQUxTRSwgb3V0LndpZHRoPSI1MCUiLCBmaWcuYWxpZ249ImNlbnRlciIsIGZpZy5jYXA9IiBQcm9ibGVtIEEzIn0NCmtuaXRyOjppbmNsdWRlX2dyYXBoaWNzKCJDOi9Vc2Vycy83NUVSOTY5Mjg3L09uZURyaXZlIC0gV2VzdCBDaGVzdGVyIFVuaXZlcnNpdHkgb2YgUEEvU1RBIDUwNiAtIE1hdGhlbWF0aWNhbCBTdGF0aXN0aWNzIElJL1dlZWtseSBNb2R1bGVzL1dlZWsgMTUgLSBFeGFtL1F1ZXN0aW9uIEEvUHJvYmxlbSBBMyBwdDIuanBnIikNCg0KYGBgDQoNClwNCg0KIyMjICoqUHJvYmxlbSBBNCoqOiANCg0KQ29uc2lkZXIgcG93ZXIgZGlzdHJpYnV0aW9uICRGKHgpID0geF5hLCAoYSA+MCBccXVhZCBcdGV4dHsgYW5kIH1ccXVhZCB4IFxpbiAoMCwxKSkkLCBhIHNwZWNpYWwgY2FzZSBvZiB0aGUgS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uIHdpdGggJGIgPSAxJCwgYW5kIGEgcmFuZG9tIHNhbXBsZSBmcm9tIHRoaXMgZGlzdHJpYnV0aW9uICRceyB4XzEsIHhfMiwgXGNkb3RzLCB4X25cfSQuICoqRGVyaXZlKiogdGhlIE1MRSBhbmQgTU1FIG9mICRhJCByZXNwZWN0aXZlbHkuIFsqSGludDogVG8gZmluZCB0aGUgTU1FLCB5b3UgbmVlZCB0byBjb21wdXRlIHRoZSBtb21lbnQgb2YgdGhlIHBvd2VyIGRpc3RyaWJ1dGlvbjsgdGhhdCBpcywgJEVbWF5rXSA9IFxpbnRfMF4xIHheayBGJyh4KSBkeCQuIE5vdGUgdGhhdCBib3RoIHRoZSBNTEUgYW5kIHRoZSBNTUUgaGF2ZSBjbG9zZWQtZm9ybSBleHByZXNzaW9ucy4qXQ0KDQoNCmBgYHtyLCBlY2hvPUZBTFNFLCBvdXQud2lkdGg9IjUwJSIsIGZpZy5hbGlnbj0iY2VudGVyIiwgZmlnLmNhcD0iIFByb2JsZW0gQTQifQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoIkM6L1VzZXJzLzc1RVI5NjkyODcvT25lRHJpdmUgLSBXZXN0IENoZXN0ZXIgVW5pdmVyc2l0eSBvZiBQQS9TVEEgNTA2IC0gTWF0aGVtYXRpY2FsIFN0YXRpc3RpY3MgSUkvV2Vla2x5IE1vZHVsZXMvV2VlayAxNSAtIEV4YW0vUXVlc3Rpb24gQS9Qcm9ibGVtIEE0IHB0MS5qcGciKQ0KDQpgYGANCg0KYGBge3IsIGVjaG89RkFMU0UsIG91dC53aWR0aD0iNTAlIiwgZmlnLmFsaWduPSJjZW50ZXIiLCBmaWcuY2FwPSIgUHJvYmxlbSBBNCJ9DQprbml0cjo6aW5jbHVkZV9ncmFwaGljcygiQzovVXNlcnMvNzVFUjk2OTI4Ny9PbmVEcml2ZSAtIFdlc3QgQ2hlc3RlciBVbml2ZXJzaXR5IG9mIFBBL1NUQSA1MDYgLSBNYXRoZW1hdGljYWwgU3RhdGlzdGljcyBJSS9XZWVrbHkgTW9kdWxlcy9XZWVrIDE1IC0gRXhhbS9RdWVzdGlvbiBBL1Byb2JsZW0gQTQgcHQyLmpwZyIpDQoNCmBgYA0KYGBge3IsIGVjaG89RkFMU0UsIG91dC53aWR0aD0iNTAlIiwgZmlnLmFsaWduPSJjZW50ZXIiLCBmaWcuY2FwPSIgUHJvYmxlbSBBNCJ9DQprbml0cjo6aW5jbHVkZV9ncmFwaGljcygiQzovVXNlcnMvNzVFUjk2OTI4Ny9PbmVEcml2ZSAtIFdlc3QgQ2hlc3RlciBVbml2ZXJzaXR5IG9mIFBBL1NUQSA1MDYgLSBNYXRoZW1hdGljYWwgU3RhdGlzdGljcyBJSS9XZWVrbHkgTW9kdWxlcy9XZWVrIDE1IC0gRXhhbS9RdWVzdGlvbiBBL1Byb2JsZW0gQTQgcHQzLmpwZyIpDQoNCmBgYA0KDQoNClwNCg0KIyMjICoqUHJvYmxlbSBBNSoqOg0KDQpVc2luZyB0aGUgc2FtZSBzZXR0aW5nIGFzIGluICoqUHJvYmxlbSBBNCoqLCBmaW5kIHRoZSBhc3ltcHRvdGljIChXYWxkKSBjb25maWRlbmNlIGludGVydmFsIGZvciAkYSQuIFsqSGludDogQ29tcHV0ZSB0aGUgRmlzaGVyIGluZm9ybWF0aW9uIGZvciAkYSQsIHRoZW4gdGFrZSBpdHMgcmVjaXByb2NhbCB0byBvYnRhaW4gdGhlIHZhcmlhbmNlKi5dDQoNCmBgYHtyLCBlY2hvPUZBTFNFLCBvdXQud2lkdGg9IjUwJSIsIGZpZy5hbGlnbj0iY2VudGVyIiwgZmlnLmNhcD0iIFByb2JsZW0gQTUifQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoIkM6L1VzZXJzLzc1RVI5NjkyODcvT25lRHJpdmUgLSBXZXN0IENoZXN0ZXIgVW5pdmVyc2l0eSBvZiBQQS9TVEEgNTA2IC0gTWF0aGVtYXRpY2FsIFN0YXRpc3RpY3MgSUkvV2Vla2x5IE1vZHVsZXMvV2VlayAxNSAtIEV4YW0vUXVlc3Rpb24gQS9Qcm9ibGVtIEE1LmpwZyIpDQoNCmBgYA0KDQpcDQoNCiMjIyAqKlByb2JsZW0gQTYqKjoNCg0KVXNpbmcgdGhlIHNhbWUgc2V0dGluZyBhcyBpbiAqKlByb2JsZW0gQTQqKiwgcGVyZm9ybSBhIGxpa2VsaWhvb2QgcmF0aW8gdGVzdCBmb3IgdGhlIGh5cG90aGVzaXMgJEhfMCA6YT0xJCAoaS5lLiwgdGhlIHBvd2VyIGRpc3RyaWJ1dGlvbiByZWR1Y2VzIHRvIGEgdW5pZm9ybSBkaXN0cmlidXRpb24pLiBbKkhpbnQ6IEV2YWx1YXRlIHRoZSBsb2ctbGlrZWxpaG9vZCBmdW5jdGlvbiBhdCB0aGUgbWF4aW11bSBsaWtlbGlob29kIGVzdGltYXRlICRcaGF0e2F9JCBhbmQgYXQgJGE9MSQsIHRoZW4gdXNlIHRoZXNlIHZhbHVlcyB0byBjb25zdHJ1Y3QgdGhlIExSVCB0ZXN0IHN0YXRpc3RpYy4qXQ0KDQpgYGB7ciwgZWNobz1GQUxTRSwgb3V0LndpZHRoPSI1MCUiLCBmaWcuYWxpZ249ImNlbnRlciIsIGZpZy5jYXA9IiBQcm9ibGVtIEE2In0NCmtuaXRyOjppbmNsdWRlX2dyYXBoaWNzKCJDOi9Vc2Vycy83NUVSOTY5Mjg3L09uZURyaXZlIC0gV2VzdCBDaGVzdGVyIFVuaXZlcnNpdHkgb2YgUEEvU1RBIDUwNiAtIE1hdGhlbWF0aWNhbCBTdGF0aXN0aWNzIElJL1dlZWtseSBNb2R1bGVzL1dlZWsgMTUgLSBFeGFtL1F1ZXN0aW9uIEEvUHJvYmxlbSBBNi5qcGciKQ0KDQpgYGANCg0KDQoNClwNCg0KIyMgUGFydCBCOiBOdW1lcmljYWwgQW5hbHlzaXMNCg0KKipBbGwgY29kZSBtdXN0IGJlIHdlbGwgY29tbWVudGVkIGFuZCBhZGhlcmUgdG8gYmVzdCBjb2RpbmcgcHJhY3RpY2VzKioNCg0KKipXb3JraW5nIERhdGFzZXQqKjogQSBzbWFsbCByZXNlcnZvaXIgc3VwcGxpZXMgd2F0ZXIgdG8gYSB0b3duLiBEdXJpbmcgdGhlIGRyeSBzZWFzb24gKDUwIGRheXMpLCBlbmdpbmVlcnMgcmVjb3JkIHRoZSBmcmFjdGlvbiBvZiB1c2FibGUgc3RvcmFnZSBmaWxsZWQgZWFjaCBtb3JuaW5nLiBWYWx1ZXMgbmVhciAwIG1lYW4gdGhlIHJlc2Vydm9pciBpcyBuZWFybHkgZW1wdHk7IHZhbHVlcyBuZWFyIDEgbWVhbiBpdCdzIGZ1bGwuIFRoZSBkaXN0cmlidXRpb24gdGVuZHMgdG8gYmUgcmlnaHTigJFza2V3ZWQgKG1vc3RseSBsb3cgbGV2ZWxzIGR1ZSB0byBkcm91Z2h0KSBidXQgd2l0aCBvY2Nhc2lvbmFsIHJlcGxlbmlzaG1lbnQuDQoNClRoZSBmb2xsb3dpbmcgNTAgZGF0YSBwb2ludHMgKG9yZGVyZWQgZm9yIGNsYXJpdHkpIHJlcHJlc2VudCB0aGUgZGFpbHkgcHJvcG9ydGlvbiBvZiB1c2FibGUgc3RvcmFnZToNCg0KYGBgDQowLjEyLCAwLjE0LCAwLjE1LCAwLjE2LCAwLjE3LCAwLjE4LCAwLjE5LCAwLjIwLCAwLjIxLCAwLjIyLA0KMC4yMywgMC4yNCwgMC4yNSwgMC4yNiwgMC4yNywgMC4yOCwgMC4yOSwgMC4zMCwgMC4zMSwgMC4zMiwNCjAuMzMsIDAuMzQsIDAuMzUsIDAuMzYsIDAuMzcsIDAuMzgsIDAuMzksIDAuNDAsIDAuNDEsIDAuNDIsDQowLjQzLCAwLjQ0LCAwLjQ1LCAwLjQ2LCAwLjQ3LCAwLjQ4LCAwLjQ5LCAwLjUwLCAwLjUxLCAwLjUyLA0KMC41MywgMC41NCwgMC41NSwgMC41NiwgMC41NywgMC41OCwgMC41OSwgMC42MCwgMC42MSwgMC43OA0KYGBgDQoNClwNCg0KIyMjICoqUHJvYmxlbSBCMSoqOg0KDQpGaXQgdGhlIEt1bWFyYXN3YW15IGRpc3RyaWJ1dGlvbiB0byB0aGUgYWJvdmUgZGF0YS4gVXNlIHRoZSBkZXJpdmF0aW9ucyBpbiAqKlByb2JsZW0gQTIqKiB0byBmaW5kIHRoZSBNTEUgb2YgJGEkIGFuZCAkYiQuICoqUGxlYXNlIGNvcHkgdGhlIGtleSBmb3JtdWxhcyBiZWZvcmUgY29kaW5nLioqDQoNCkZvcm11bGFzOg0KDQpHcmFkaWVudCBWZWN0b3IgZm9yIEt1bWFyYXN3YW15IGRpc3RyaWJ1dGlvbiBsb2cgbGlrZWxpaG9vZHMuDQoNCkdyYWRpZW50IFZlY3RvciAkXGVsbCdfYihhLGIpJA0KDQokJA0KXGVsbCdfYnthLGIpID0gXGZyYWN7bn17Yn0gKyBcc3VtXm5fe2k9MX0gbG4oMS1YXmFfaSkNCiQkDQokJA0KXGVsbCdfYShhLGIpID0gXGZyYWN7bn17YX0gK1xzdW1ebl97aT0xfSBsbihYX2kpICsoYi0xKVxzdW1ebl97aT0xfVxmcmFje1heYV9pIGxuWF9pfXsxLVheYV9pfQ0KDQokJA0KDQpgYGB7cn0NCg0Kc3RvcmFnZT0gc29ydChjKDAuMTIsIDAuMTQsIDAuMTUsIDAuMTYsIDAuMTcsIDAuMTgsIDAuMTksIDAuMjAsIDAuMjEsIDAuMjIsDQowLjIzLCAwLjI0LCAwLjI1LCAwLjI2LCAwLjI3LCAwLjI4LCAwLjI5LCAwLjMwLCAwLjMxLCAwLjMyLA0KMC4zMywgMC4zNCwgMC4zNSwgMC4zNiwgMC4zNywgMC4zOCwgMC4zOSwgMC40MCwgMC40MSwgMC40MiwNCjAuNDMsIDAuNDQsIDAuNDUsIDAuNDYsIDAuNDcsIDAuNDgsIDAuNDksIDAuNTAsIDAuNTEsIDAuNTIsDQowLjUzLCAwLjU0LCAwLjU1LCAwLjU2LCAwLjU3LCAwLjU4LCAwLjU5LCAwLjYwLCAwLjYxLCAwLjc4KSkNCg0KaGlzdChzdG9yYWdlKSAjaGlzdG9ncmFtIG9mIGRhdGFzZXQNCg0KI0ZpbmQgTUxFIG9mIGEgYW5kIGINCg0KI0dyYWRpZW50IGZvciBsb2dfYihhLGIpDQoNCg0KI249IGxlbmd0aChzdG9yYWdlKQ0KDQojZnVuY3Rpb24gdG8gZmluZCB2YWx1ZXMgb2YgYSBhbmQgYiBiYXNlZCBvbiB0aGUgZGF0YXNldCBhbG9uZQ0KDQoNCiNmaW5kaW5nIHRoZSBncmFkaWVudCBvZiBiDQpncmFkX2JmdW5jID1mdW5jdGlvbihwYXJhbXMsIGRhdGEpIHsNCiAgYSA8LSBwYXJhbXNbMV0NCiAgYiA8LSBwYXJhbXNbMl0NCiAgDQogIG4gPC0gbGVuZ3RoKGRhdGEpDQogIA0KI24vYiArIHN1bShsb2coMS14XmEpKQ0KICBzdW1fdGVybT0gIHN1bShsb2coMS0gZGF0YV5hKSkgI24vYiArIHN1bShkYXRhKQ0KICBncmFkaWVudF9iID0gLSgobi9iKSArIHN1bV90ZXJtKQ0KICANCiAgcmV0dXJuKGdyYWRpZW50X2IpDQp9DQoNCg0KZ3JhZF9hZnVuYyA9IGZ1bmN0aW9uKHBhcmFtcywgZGF0YSkgI2J1aWxkaW5nIGxvZyBsaWtlbGlob29kIGZvciBncmFkaWVudCB2ZWN0b3INCnsNCiAgDQogIGEgPC0gcGFyYW1zWzFdDQogIGIgPC0gcGFyYW1zWzJdDQogIG4gPSBsZW5ndGgoZGF0YSkNCiAgDQogIGZpcnN0ID0obi9hKSAjZmlyc3QgdGVybSBvZiBncmFkaWVudCBlcXVhdGlvbiBmb3IgYQ0KICBsb2dkYXRhPSBzdW0obG9nKGRhdGEpKSAjbG9naW5nIGFsbCBzdW1tZWQgZGF0YSBpbiB0aGUgZGF0YXNldA0KICBiMT0gKGItMSkNCiAgICAgIG51bV9hID0gKChkYXRhXmEpKiBsb2coZGF0YSkpICNudW1lcmF0b3Igb2YgbGFzdCB0ZXJtDQogICAgICBkb21fYSA9ICgxLSAoZGF0YV5hKSkgI2Rlbm9taW5hdG9yIG9mIGxhc3QgdGVybQ0KICBsYXN0X3Rlcm1fZ2E9IHN1bShudW1fYS9kb21fYSkgI2ZpbmFsaXplZCBmcmFjdHRpb24gZm9yIGxhc3QgdGVybSB0byBiZSBwdXQgaW50byBncmFkaWVudCBlcXVhdGlvbg0KICANCiAgZ3JhZF9hID0gLShmaXJzdCArIGxvZ2RhdGEgKyBiMSAqIGxhc3RfdGVybV9nYSkgI2dyYWRpZW50IHRlcm0gZm9yIGEgdXNpbmcgYWxsIGRhdGEgKG5vIGJvb3RzdHJhcHMsIGV0Yy4ganVzdCBsb29wKQ0KIA0KcmV0dXJuKGdyYWRfYSkNCiAgIA0KfQ0KDQojcGxhY2luZyBhIGFuZCBiIGZyYWRpZW50cyBpbiB0aGUgc2FtZSBmdW5jdGlvbiB0byBsYXRlciBjb21wYXJlIGluIG9wdGltKCkgYW5kIHBvc3NpYmxlIG1hdHJpeCBidWlsZGluZw0KY29tYmluZWRfa3VtX2dyYWRpZW50PSBmdW5jdGlvbihwYXJhbXMsIGRhdGEpew0KICBhIDwtIHBhcmFtc1sxXQ0KICBiIDwtIHBhcmFtc1syXQ0KICBuID0gbGVuZ3RoKGRhdGEpDQojIyMjIyMjIyMjIyMjIyMjIyNpZiB5b3UgY2hvb3NlIHRvIGJsb2NrIG9yIGNoYW5nZSBldmVyeXRoaW5nIGluIGJldHdlZW4gIA0KICMgZ3JhZF9hDQojICBncmFkaWVudF9iDQogIA0KIyAgcmV0dXJuKGMoZ3JhZF9hLCBncmFkaWVudF9iKSkNCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgICAgDQogIA0KICBnYSA8LSBncmFkX2FmdW5jKHBhcmFtcywgZGF0YSkNCiAgZ2IgPC0gZ3JhZF9iZnVuYyhwYXJhbXMsIGRhdGEpDQoNCiAgIyBSZXR1cm4gdGhlbSB0b2dldGhlciBhcyBhIHZlY3RvciBmb3IgdGhlIG9wdGltaXplcg0KICByZXR1cm4oYyhnYSwgZ2IpKQ0KICANCn0NCg0KDQojIE5lZ2F0aXZlIExvZy1MaWtlbGlob29kIChUYXJnZXQgZm9yIE9wdGltaXphdGlvbikNCmt1bWFyX2xvZ2xpayA9IGZ1bmN0aW9uKHBhcmFtcywgZGF0YSkgew0KICBhIDwtIHBhcmFtc1sxXQ0KICBiIDwtIHBhcmFtc1syXQ0KICBuIDwtIGxlbmd0aChkYXRhKQ0KICANCiAgIyBCYXNlZCBvbiB5b3VyIGRlcml2YXRpb24gaW4gQTINCiAgbG9nbCA9IG4qbG9nKGEpICsgbipsb2coYikgKyAoYS0xKSpzdW0obG9nKGRhdGEpKSArICAgKGItMSkqc3VtKGxvZygxIC0gZGF0YV5hKSkNCiAgDQogIHJldHVybigtbG9nbCkgIyBXZSByZXR1cm4gbmVnYXRpdmUgYmVjYXVzZSBvcHRpbSgpIG1pbmltaXplcyBieSBkZWZhdWx0DQp9DQoNCnRlc3RfcGFyYW1zPSBjKDEsMSkNCg0KDQptbGUucmVzdWx0PSBvcHRpbSgNCiAgcGFyID0gdGVzdF9wYXJhbXMsICAgICNpbnRpYWwgZ3Vlc3MgKHN0YXJ0aW5nIHZhbHVlIGZvciB2ZWN0b3IgaW50aWFsIGd1ZXNzKSAuIFRoaXMgbXVzdCBiZSBhIHZlY3RvciBpbnRpYWwgZ3Vlc3NlcyBmb3IgYSBhbmQgYg0KICBmbiA9IGt1bWFyX2xvZ2xpaywgIyBjaGVja3MgaGVpZ2h0IG9mIGxpa2VsaWhvb2Qgc3VyZmFjZQ0KICBnciA9IGNvbWJpbmVkX2t1bV9ncmFkaWVudCwgIyBncmFkaWVudCB1cGhpbGwgc2hvdWxkIGJlIHRoZSBjb21iaW5lZCBncmFkaWVudA0KICBkYXRhID0gc3RvcmFnZSwNCiAgbWV0aG9kID0gIkwtQkZHUy1CIiwgI2NvbnN0cmFpbnRzIHRoZSBib3gNCiAgaGVzc2lhbiA9IFRSVUUsDQogIGxvd2VyID0gYygxZS01LCAxZS01KSwgIyBrZWVwcyB0aGUgcGFyYW1ldGVycyBwb3NpdGl2ZSAjd291bGQgcmVtb3ZlIGNvbnRyb2wgaWYgdGhpcyB3YXMgaW4gdGhlIGNvZGUNCiAgY29udHJvbCA9IGxpc3QodHJhY2UgPSBGQUxTRSwNCiAgICAgICAgICAgICAgICAgZm5zY2FsZSA9IDEsICNtaW5pbWl6ZWQgdGhlIG5lZ2F0aXZlIGxvZyBsaWtlbGlob29kIGZ1bmN0aW9uIC0tPiBmbnNjYWxlID0gLTEgbWF4aW1pemVzIHRoZSBmdW5jdGlvbg0KICAgICAgICAgICAgICAgICBtYXhpdCA9IDUwMCwNCiAgICAgICAgICAgICAgICAgYWJzdG9sID0gMWUtOCkNCikNCiAgDQoNCiMgRXh0cmFjdCBNTEVzIGEgYW5kIGINCm1sZV9hIDwtIG1sZS5yZXN1bHQkcGFyWzFdDQptbGVfYiA8LSBtbGUucmVzdWx0JHBhclsyXQ0KY2F0KCJNTEUgZm9yIGE6IiwgbWxlX2EsICJcbk1MRSBmb3IgYjoiLCBtbGVfYikNCg0KDQojIFRlc3RpbmcgeW91ciBjb21iaW5lZCBmdW5jdGlvbiB3aXRoIGEgZ3Vlc3Mgb2YgYT0xLCBiPTENCg0KY29tYmluZWRfa3VtX2dyYWRpZW50KHBhcmFtcyA9IHRlc3RfcGFyYW1zLCBkYXRhID0gc3RvcmFnZSkNCmBgYA0KVGhlIE1MRSBwcmVkaWN0ZWQgJFxoYXR7YX0kIGlzIDAuOTU5IGByIG1sZV9hYCBhbmQgdGhlIE1MRSBwcmVkaWN0ZWQgJFxoYXR7Yn0kIGlzIDEuOTkgYHIgbWxlX2JgLg0KVGhlIGhpc3RvZ3JhbSBvZiBzdG9yYWdlIGFwcGVhcnMgdG8gaGF2ZSBzb21lIHJpZ2h0IHRhaWwgYW5kIHVuaW1vZGFsIGRpc3RyaWJ1dGlvbiBjaGFyYWN0ZXJpc3RpY3MuDQoNClwNCg0KIyMjICoqUHJvYmxlbSBCMioqOg0KDQpGaXQgdGhlICoqcG93ZXIgZGlzdHJpYnV0aW9uKiogdG8gdGhlIGFib3ZlIGRhdGEgdXNpbmcgdGhlIGRlcml2ZWQgIG9mICRhJCBvYnRhaW5lZCBpbiAqKlByb2JsZW0gQTQqKiB0byB0ZXN0IHRoZSBmb2xsb3dpbmcgaHlwb3RoZXNpcyB1c2luZyBsaWtlbGlob29kIHJhdGlvIHByb2NlZHVyZSBhdCBzaWduaWZpY2FuY2UgbGV2ZWwgJFxhbHBoYSA9IDAuMDUkOg0KDQokJA0KSF8wOiBiID0gMSBccXVhZCBcdGV4dHsgdmVyc3VzIH0gXHF1YWQgSF9hOiBiIFxuZSAxLg0KJCQNCiQkDQoNClxoYXR7YV97TUxFfX0gPSAtXGZyYWN7bn17XHN1bV5uX3tpPTF9bG54X2l9DQoNCiQkDQpXaGVuIHdlIHVzZSBsb2cgbGlrZWxpaG9vZCByYXRpbyB0ZXN0cyB3ZSBjb21wYXJlZCBpZiB0aGUgY29tcGxleCBuZXN0ZWQgZXF1YXRpb24gaXMgYmV0dGVyIGF0IGV4cGxhaW5pbmcgdGhlIG1vZGVsIHRoYW4gdGhlIHNpbXBsZSBuZXN0ZWQgZXF1YXRpb24uIEhlcmUgd2UgY29tcGFyZSB0aGUgcG93ZXIgZGlzdHJpYnV0aW9uIChiPTEpIE1MRSB0byB0aGUgZnVsbCBLdW1hcmFzd2FteSBtb2RlbC4NCg0KYGBge3J9DQojTGlrZWxpaG9vZCByYXRpbyBwcm9jZWR1cmUgb24gdGhlIGRhdGEgYXQgYWxwaGEgPTAuMDUNCiN1c2luZyBwb3dlciBkaXN0cmlidXRpb24gb2YgTUxFIHdoZXJlIGIgPTEgDQoNCnN0b3JhZ2UNCg0Kbj1sZW5ndGgoc3RvcmFnZSkNCg0KIyAtIG4vIChzdW0oZGF0YSkqbG9nKGRhdGEpKQ0KDQptbGVfYV9wb3dlcj0gLW4vIChzdW0obG9nKHN0b3JhZ2UpKSkgI01MRSBmb3IgYSBjYWxjdWxhdGlvbg0KDQpjYXQoIk1MRSBmb3IgYSBpbiB0aGUgc3BlY2lhbCBjYXNlIHBvd2VyIGRpc3RydWJ1dGlvbjoiLCBtbGVfYV9wb3dlcikNCg0KI1doZW4gd2UgdXNlIGxvZ2xpa2VsaWhvb2QgcmF0aW8gdGVzdHMgd2UgY29tcGFyZWQgaWYgdGhlIGNvbXBsZXggbmVzdGVkIGVxdWF0aW9uIGlzIGJldHRlciBhdCBleHBsYWluaW5nIHRoZSBtb2RlbCB0aGFuIHRoZSBzaW1wbGUgbmVzdGVkIGVxdWF0aW9uLiBIZXJlIHdlIGNvbXBhcmUgdGhlIHBvd2VyIGRpc3RyaWJ1dGlvbiAoYj0xKSBNTEUgdG8gdGhlIGZ1bGwga3VtYXJhc3dhbXkgbW9kZWwNCg0KIyBUaGUgbG9nbGlrZWxpaG9vZCBtb2RlbCBmb3Iga3VtYXJhc3dhbXkgYQ0KDQpsb2dsaWtlX2t1bWFyID0gLWt1bWFyX2xvZ2xpayhjKG1sZV9hLCBtbGVfYiksIHN0b3JhZ2UpICMgZnVsbCB1bnJlc3RyaWNlZCBtb2RlbCANCg0KbG9nbGlrZV9wb3dlciA9IC1rdW1hcl9sb2dsaWsoYyhtbGVfYV9wb3dlciwgMSksIHN0b3JhZ2UpICNyZXN0cmljdGVkIG1vZGVsIGxvZyBsaWtlbGlob29kIHBvd2VyIGRpc3RyaWJ1dGlvbg0KDQoNCkxSVF9zdGF0aXN0aWMgPSAyKiAobG9nbGlrZV9rdW1hciAtIGxvZ2xpa2VfcG93ZXIpICNsaWtlbGlob29kIHJhdGlvIHN0YXRpc3RpYyBmb3IgdGhlIGxvZyBrdW1hcmFzd2FteSBhbmQgbGlrZWxpaG9vZCBmb3IgcG93ZXIgZGlzdHJ1YnV0aW9uDQoNCg0KcF92YWwgPSAxLSBwY2hpc3EoTFJUX3N0YXRpc3RpYywgZGY9MSkNCg0KY2F0KCJUaGUgbGlrZWxpaG9vZCByYXRpbyB0ZXN0IHN0YXRpc3RpYyBpcyIsIExSVF9zdGF0aXN0aWMsICJwPSIsIHBfdmFsLCAiLiIpDQoNCmBgYA0KDQpTdGF0ZSB0aGUgc3RhdGlzdGljYWwgZGVjaXNpb24gY2xlYXJseS4gV2hhdCBpcyB0aGUgcHJhY3RpY2FsIGltcGxpY2F0aW9uIG9mIHRoZSB0ZXN0aW5nIHJlc3VsdD8NCg0KQXMgdGhlIHAgdmFsdWUgaXMgbGVzcyB0aGFuICRcYWxwaGE9MC4wMDUkLCBgciBwX3ZhbGAsIHdlIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzICgkSF9vOiBiPTEgJCkgdGhhdCB0aGUgbGVzcyBjb21wbGV4IHBvd2VyIGRpc3RyaWJ1dGlvbiBsb2cgbGlrZWxpaG9vZCBtb2RlbCBiZXR0ZXIgc3VpdHMgdGhlIGRpc3RyaWJ1dGlvbi4gVGhlIEt1bWFyYXN3YW15IGRpc3RyaWJ1dGlvbiBzaG91bGQgYmUgdXNlZCB0byBtb2RlbCB0aGUgZGFpbHkgc3RvcmFnZSB3YXRlciBkYXRhLg0KDQoNCg0KDQoNClwNCg0KIyMjICoqUHJvYmxlbSBCMyoqOg0KDQpVc2UgdGhlIHByb2NlZHVyZSBhbmQgY29kZSBmcm9tICoqUHJvYmxlbSBCMSoqIHRvIGVzdGltYXRlIHRoZSBNTEVzIG9mICRhJCBhbmQgJGIkLCBhbmQgdGhlbiBjb21wbGV0ZSB0aGUgZm9sbG93aW5nIGFuYWx5c2VzOg0KDQooMSkuIE9idGFpbiB0aGUgYm9vdHN0cmFwIHNhbXBsaW5nIGRpc3RyaWJ1dGlvbnMgb2YgJFxoYXR7YX0kIGFuZCAkXGhhdHtifSQgYW5kIHBsb3QgZWFjaCBkaXN0cmlidXRpb24gdXNpbmcgKipHYXVzc2lhbiBrZXJuZWwgZGVuc2l0eSBjdXJ2ZXMqKi4NCg0KYGBge3J9DQoNCiNCb290c3RyYXAgTUxFIGZvciBhIGFuZCBiDQoNCkI9OTk5OQ0KYm9vdF9hID0gbnVtZXJpYyhCKSAjYWxsb3dzIG51bWJlciBvZiBib290c3RyYXBzIGZvciBhDQpib290X2IgPSBudW1lcmljKEIpICNhbGxvd3MgbnVtYmVyIG9mIGJvb3RzdHJhcHMgZm9yIGINCm49bGVuZ3RoKHN0b3JhZ2UpDQoNCnNldC5zZWVkKDEyMykNCg0KZm9yKGkgaW4gMTpCKSAjYmVnaW4gYm9vdHN0cmFwIHRvIGZpbmQgbWxlIGEgYW5kIGINCnsNCiAgDQpib290X3NhbXBsZT0gc2FtcGxlKHN0b3JhZ2UsIHNpemU9biwgcmVwbGFjZT0gVFJVRSApICAjcmVzYW1wbGUgd2l0aCByZXBsYWNlbWVudA0KICANCiNFc3RpbWF0ZSBNTEVzIGZvciBib290c3RyYXAgc2FtcGxlIA0KICAjdXNpbmcgb3B0aW0gDQoNCmJvb3RfbWxlPSBvcHRpbSgNCiAgICBwYXIgPSBjKG1sZV9hICogcnVuaWYoMSwgMC45LCAxLjEpLCBtbGVfYiAqIHJ1bmlmKDEsIDAuOSwgMS4xKSksICMgSml0dGVyIHN0YXJ0aW5nIHZhbHVlcyAjcGFyID0gYyhtbGVfYSwgbWxlX2IpLCAjIFN0YXJ0IGF0IHRoZSBvcmlnaW5hbCBNTEVzIGZvciBzcGVlZA0KICAgIGZuID0ga3VtYXJfbG9nbGlrLCAgIyBjaGVja3MgaGVpZ2h0IG9mIGxpa2VsaWhvb2Qgc3VyZmFjZQ0KICAgIGdyID0gY29tYmluZWRfa3VtX2dyYWRpZW50LCAgIyBncmFkaWVudCB1cGhpbGwgc2hvdWxkIGJlIHRoZSBjb21iaW5lZCBncmFkaWVudA0KICAgIGRhdGEgPSBib290X3NhbXBsZSwNCiAgICBtZXRob2QgPSAiTC1CRkdTLUIiLCAjY29udHJhaW50cyBib3gNCiAgICBsb3dlciA9IGMoMWUtNSwgMWUtNSkgIyBrZWVwcyB0aGUgcGFyYW1ldGVycyBwb3NpdGl2ZSAjd291bGQgcmVtb3ZlIGNvbnRyb2wgaWYgdGhpcyB3YXMgaW4gdGhlIGNvZGUNCiAgDQopDQpib290X2FbaV0gPC0gYm9vdF9tbGUkcGFyWzFdICNvdXRwdXQgYSBNTEUgcGFyYW1ldGVyDQpib290X2JbaV0gPC0gYm9vdF9tbGUkcGFyWzJdICNvdXRwdXQgYiBNTEUgcGFyYW1ldGVyDQoNCn0NCg0KDQojZ2F1c3NpYW4ga2VybmVsIGJ1aWxkaW5nIGZvciBhIGhhdA0KZGJvb3RfYXBsb3Q9IHBsb3QoZGVuc2l0eShib290X2EsIGtlcm5lbD0gImdhdXNzaWFuIiksIG1haW4gPSAiQm9vdHN0cmFwIERpc3RydWJ1dGlvbiBvZiBhIGhhdCIsDQogICAgIHhsYWI9ImEgaGF0IiwgY29sPSAic2t5Ymx1ZSIsIGx3ZD0yKQ0KYWJsaW5lKHY9IG1sZV9hLCBjb2w9ICJyZWQiLCBsdHk9MikjcmVmZXJlbmNlIGZvciBvcmlnaW5hbCBNTEUNCg0KI2dhdXNzaWFuIGtlcm5lbCBkZW5zaXR5IGZvciBiIGhhdA0KDQpkYm9vdF9icGxvdD0gcGxvdChkZW5zaXR5KGJvb3RfYiwga2VybmVsID0gImdhdXNzaWFuIiksIG1haW49IkJvb3RzdHJhcCBEaXN0cnVidXRpb24gb2YgYiBoYXQiLA0KICAgICB4bGFiPSAiYiBoYXQiLCBjb2w9ICJkYXJrZ3JlZW4iLCBsd2Q9MikNCmFibGluZSh2ID0gbWxlX2IsIGNvbCA9ICJyZWQiLCBsdHkgPSAyKQ0KDQpnZ3Bsb3RseShkYm9vdF9icGxvdCkNCmdncGxvdGx5KGRib290X2FwbG90KQ0KDQpgYGANCg0KVGhlIGJvb3RzdHJhcHBlZCBzYW1wbGluZyBkaXN0cmlidXRpb24gb2YgYSBpcyBgciBib290X2FbaV1gLiBUaGUgYm9vdHN0cmFwcGVkIHNhbXBsaW5nIGRpc3RyaWJ1dGlvbiBvZiBiIGlzIGByIGJvb3RfYltpXWAuDQoNCg0KKDIpLiAgQ29uc3RydWN0IGJvdGggdGhlICQ5NVwlJCAqKmJvb3RzdHJhcCBjb25maWRlbmNlIGludGVydmFsKiogYW5kIHRoZSAqKldhbGQgY29uZmlkZW5jZSBpbnRlcnZhbCoqIGZvciAkYiQuIERvIHRoZXNlIGludGVydmFscyBhZ3JlZSB3aXRoIHRoZSByZXN1bHRzIG9idGFpbmVkIGluICoqUHJvYmxlbSBCMioqPyBbKkNvbXB1dGUgdGhlIHN0YW5kYXJkIGVycm9yIG9mICRcaGF0e2J9JCB1c2luZyB0aGUgb2JzZXJ2ZWQgRmlzaGVyIGluZm9ybWF0aW9uIG1hdHJpeCwgaS5lLiwgdGhlIGludmVyc2Ugb2YgdGhlIG5lZ2F0aXZlIEhlc3NpYW4gb2J0YWluZWQgZnJvbSBvcHRpbSgpKl0NCg0KV2FsZCBFcXVhdGlvbg0KJCQNClxoYXR7Yn0gKyB6X3tcYWxwaGEvMn0gKiBcc3FydChbSV9uKFxoYXR7Yn1dX3syLDJ9KSkNCiQkDQoNCg0KYGBge3J9DQoNCiMjIEJvb3RzdHJhcHBlZCBDb25maWRlbmNlIEludGVydmFscw0KDQojYm9vdF9jaV9hPSBxdWFudGlsZShib290X2EsIHByb2JzPSBjKDAuMDI1LCAwLjk3NSkpDQojYm9vdF9jaV9iID0gcXVhbnRpbGUoYm9vdF9iLCBwcm9icz0gYygwLjAyNSwgMC45NzUpKQ0KDQojY2F0KCJUaGUgYm9vdHN0cmFwcGVkIGNvbmZpZGVuY2UgaW50ZXJ2YWwiKQ0KDQojQm9vdHN0cmFwcGVkIE5vcm1hbCBDb25maWRlbmNlIEludGVydmFsDQoNCmFscGhhIDwtIDAuMDUNCnpfY3JpdGljYWwgPC0gcW5vcm0oMSAtIGFscGhhLzIpDQpkaXNfY3JpdF9jYWw9Ym9vdF9hICsgel9jcml0aWNhbCAqIChib290X2Evc3FydChuKSkNCg0KIyBDYWxjdWxhdGUgQm9vdHN0cmFwIFN0YW5kYXJkIEVycm9yIChzZV9ib290KQ0Kc2VfYm9vdF9hID0gc2QoYm9vdF9hKQ0Kc2VfYm9vdF9iID0gc2QoYm9vdF9iKQ0KDQojIFogY3JpdGljYWwgdmFsdWUgZm9yIDk1JQ0KDQp6PSBxbm9ybSgwLjk3NSkNCg0KI0NvbmZpZGVuY2UgbGV2ZWwgZm9yIHBhcmFtZXRlciBhDQpjaV9ib290X2EgPSBjKExDST0gbWxlX2EgLSB6KnNlX2Jvb3RfYSwgICNsb3dlciBjb25maWRlbmNlIGxldmVsDQogICAgICAgICAgICAgICNlc3RpbWF0ZT0gbWxlX2EsICN0aGUgdmFsdWUgdGhlIENJIGlzIGNlbnRlcmVkIGFyb3VuZA0KICAgICAgICAgICAgICBVQ0w9IG1sZV9hICsgeipzZV9ib290X2EgI3VwcGVyIGNvbmZpZGVuY2UgbGV2ZWwNCiAgICAgICAgICAgICAgKQ0KY2F0KCJUaGUgYm9vdHN0cmFwZWQgbm9ybWFsIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yIHBhcmFtZXRlciBhPSIsIG1sZV9hLCAiaXMsIFsiLCBjaV9ib290X2EsICJdLiIpDQoNCmNpX2Jvb3RfYiA9IGMoTENJPSBtbGVfYiAtIHoqc2VfYm9vdF9iLCAgI2xvd2VyIGNvbmZpZGVuY2UgbGV2ZWwNCiAgICAgICAgICAgICAgI2VzdGltYXRlPSBtbGVfYiwgI3RoZSB2YWx1ZSB0aGUgQ0kgaXMgY2VudGVyZWQgYXJvdW5kDQogICAgICAgICAgICAgIFVDTD0gbWxlX2IgKyB6KnNlX2Jvb3RfYiAjdXBwZXIgY29uZmlkZW5jZSBsZXZlbA0KICAgICAgICAgICAgICApDQpjYXQoIlxuIFRoZSBib290c3RyYXBlZCBub3JtYWwgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgcGFyYW1ldGVyIGI9IiwgbWxlX2IsICJpcywgWyIsIGNpX2Jvb3RfYiwgIl0uIikNCg0KDQojUGVyY2VudGlsZSBDSSBCb29vdHN0cmFwcw0KYm9vdF9wZXJjZW50aWxlX2EgPSBhcy5udW1lcmljKHF1YW50aWxlKGJvb3RfYSwgcHJvYnM9IGMoMC4wMjUsIDAuOTc1KSkpDQpib290X3BlcmNlbnRpbGVfYiA9IGFzLm51bWVyaWMocXVhbnRpbGUoYm9vdF9iLCBwcm9icz0gYygwLjAyNSwgMC45NzUpKSkNCg0KY2F0KCJcbiBUaGUgYm9vdHN0cmFwcGVkIHBlcmNlbnRpbGUgOTUlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yIHBhcmFtZXRlciBhPSBpcywgWyIsIGJvb3RfcGVyY2VudGlsZV9hLCAiXS4iKQ0KDQpjYXQoIlxuIFRoZSBib290c3RyYXBlZCBwZXJjZW50aWxlIDk1JSBjb25maWRlbmNlIGludGVydmFsIGZvciBwYXJhbWV0ZXIgYiBpcywgWyIsIGJvb3RfcGVyY2VudGlsZV9iLCAiXS4iKQ0KDQoNCiMjIyMjIyMjIyMjV2FsZCBDSSANCiNDb21wdXRlIHRoZSBXYWxkIENJIHVzaW5nIG9ic2VydmVkIEZpc2hlciBpbmZvcm1hdGlvbg0KDQoNCg0KZmlzaGVyX2luZm89IHNvbHZlKG1sZS5yZXN1bHQkaGVzc2lhbikgI3Rha2UgdGhlIGludmVyc2Ugb2YgdGhlIG1sZS5yZXN1bHQgbWF0cml4DQojaGF2ZSB2YWx1ZXMgYmVmb3JlIHRoaXMgbWF0cml4IGluIHRoZSBlcXVhdGlubiBhcyB3ZWxsIGFzIHdlIGRlc2NyaWJlIHNvbWUgb2YgdGhlIGZvcm11bGEgYmVsb3cNCiAgI3ZhcmlhbmNlKFRoZXRhMSkgICAgI2NvdmFyaWFuY2UoVGhldGExLCBUaGV0YTIpDQogICNjb3YoVGhldGExLCBUaGV0YTIpICMgdmFyaWFuY2UodGhldGEyKQ0KI2luc2lkZSB0aGUgaGVzc2lhbiBtYXRyaXggZm9yIHdhbGQgd2hpY2ggaXMgdGhlIGludmVyc2Ugb2YgdGhlIGZpc2hlciBtYXRyaXggICogdGhlIG1hdHJpeCBvZiBoYXRcdGhldGExIC0gaW52ZXJzZSB0aGV0YTEwIChvbiB0b3Agb2YpIGhhdFx0aGV0YTIgLSB0aGV0YTIwDQoNCiN0aGUgaW52ZXJzZSBvZg0KICAjdmFyaWFuY2UoaGF0XGEpICAgICNjb3ZhcmlhbmNlKFxoYXRcYSwgXGhhdFxiKSANCiAgI2NvdihcaGF0XGEsIFxoYXRcYikgIyB2YXJpYW5jZShcaGF0XGEpDQoNCiN3ZSBhcmUgb25seSB0aGUgYiBwYXJhbWV0ZXINCg0KI2NhbGN1bGF0ZSB0aGUgc3RhbmRhcmQgZXJyb3Igc3BlY2lmaWMgdG8gd2FsZCBiDQpzZV93YWxkX2IgPSBzcXJ0KGZpc2hlcl9pbmZvWzIsMl0pICNzdGFuZGFyZCBlcnJvciB3YWxkDQoNCno9IHFub3JtKDAuOTc1KQ0Kd2FsZF9jaV9iID0gYyhMQ0k9IG1sZV9iLSB6KnNlX3dhbGRfYiwgVUNMPSBtbGVfYiArIHoqc2Vfd2FsZF9iKQ0KDQpjYXQoIlxuIFRoZSBXYWxkIENvbmZpZGVuY2UgSW50ZXJ2YWwgZm9yIGIgaXMgWyIsIHdhbGRfY2lfYiwgIl0uIikNCmBgYA0KV2UgYXJlIGNvbXBhcmluZyB0aGUgV2FsZCBDb25maWRlbmNlIGludGVydmFsIHRvIGEgYm9vdHN0cmFwIHNhbXBsaW5nIGNvbmZpZGVuY2UgaW50ZXJ2YWwuIFRvIGJldHRlciBjYXB0dXJlIHRoZSBza2V3bmVzcyBvZiB0aGlzIEt1bWFyYXN3YW15IGRpc3RyaWJ1dGlvbiB3ZSBjb21wYXJlIHRoZSBib290c3RyYXBwZWQgUGVyY2VudGlsZSBDb25maWRlbmNlIEludGVydmFsIHRvIHRoZSBXYWxkIENvbmZpZGVuY2UgSW50ZXJ2YWwuIFRoZSBQZXJjZW50aWxlIDk1JUNJIGZvciBwYXJhbWV0ZXIgYiBpcyBgciBib290X3BlcmNlbnRpbGVfYmAgKHdpZHRoID0gIDAuMzc4MTgxKSAuIFRoZSBXYWxkIENvbmZpZGVuY2UgaW50ZXJ2YWwgaXMgYHIgd2FsZF9jaV9iYCAod2lkdGg9IDEuMTA4MjY0KS4gVGhlIGJvb3RzdHJhcHBlZCBwZXJjZW50aWxlIENJIGhhcyBhIGZhciBzbWFsbGVyIGludGVydmFsIHRoYW4gdGhlIFdhbGQgQ29uZmlkZW5jZSBpbnRlcnZhbCBzdWdnZXN0aW5nIHRoZSBXYWxkIHRlc3QgaXMgbm90IHRoZSBiZXN0IHRlc3QgdG8gdXNlIG9uIHRoZSBkaXN0cmlidXRpb24gYXMgaXQgYXNzdW1lcyBhIG5vcm1hbCBzYW1wbGluZyBkaXN0cmlidXRpb24sIHdoaWNoIGlzIGJlc3Qgc3VpdGVkIGhlcmUuIFRoZSBXYWxkIDk1JUNJIGlzIHVuZGVycGVyZm9ybWluZyB0aGUgYm9vdHN0cmFwcGVkIE5vcm1hbCA5NSVDSSBhcyB3ZWxsIGByIGNpX2Jvb3RfYmAuIE91ciBkZXNpcmUgaXMgdG8gaGF2ZSBhIHNtYWxsIGNvbmZpZGVuY2UgaW50ZXJ2YWwgYXMgbG9uZyBhcyB0aGUgZGlzdHJpYnV0aW9uIGlzIHdlbGwgcmVwcmVzZW50ZWQgYnkgdGhlIGludGVydmFsIHVzZWQuDQoNCg0KSW4gUHJvYmxlbSBCMiB3ZSByZWplY3RlZCB0aGUgbnVsbCBoeXBvdGhlc2lzIHRoYXQgdGhlIHNpbXBsZXIgbW9kZWwgc3VpdHMgdGhlIGRpc3RyaWJ1dGlvbiwgY29uY2x1ZGluZyB0aGUgS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uIGJldHRlciBtb2RlbHMgdGhlIGRhaWx5IHN0b3JhZ2Ugd2F0ZXIgZGF0YS4gQ29uc2lkZXJpbmcgdGhpcyBtb3JlIGNvbXBsZXggbW9kZWwsIG1vc3QgbGlrZWx5IGhhcyBtb3JlIGNvbXBsZXggZGlzdHJpYnV0aW9uIHNoYXBlIHRoYXQgaXMgbm90IHdlbGwgcmVwcmVzZW50ZWQgYnkgYSBub3JtYWwgZGlzdHJpYnV0aW9uIGV2ZW4gd2hlbiBvdmVyY29taW5nIGZvciBzb21lIHJvYnVzdG5lc3MsIHRoZSBiZXR0ZXIgc3VpdGVkIGJvb3RzdHJhcHBlZCBwZXJjZW50aWxlIGNpIGFncmVlcyB3aXRoIHRoZSBjb21wbGV4aXR5IG9mIHRoZSBkYXRhc2V0LiANCg0KIA0KDQoNCigzKS4gQmFzZWQgb24gdGhlIGJvb3RzdHJhcCBzYW1wbGluZyBkaXN0cmlidXRpb25zIGZyb20gcGFydCAoMSkgb2YgdGhpcyBwcm9ibGVtLCBhc3Nlc3Mgd2hldGhlciB0aGUgdmFsaWRpdHkgb2YgdGhlIFdhbGQgY29uZmlkZW5jZSBpbnRlcnZhbCBpcyBzdXBwb3J0ZWQuDQoNCg0KV2hpbGUgdGhlIGJvb3RzdHJhcHBlZCBjb25maWRlbmNlIGludGVydmFscyBkbyBub3QgaW5jbHVkZSAwLCB3ZSBjYW4gYXNzdW1lIG91ciBwYXJhbWV0ZXJzIGEgYW5kIGIgaGFzIHNpZ25pZmljYW5jZS4gVGhlIGJvb3RzdHJhcCBrZXJuZWwgZmlndXJlIGZvciAkXGhhdHthfSQgcmFuZ2UgYWJvdXQgZnJvbSAwLjgzLTEuMTAgd2l0aCBhIE1MRSB2YWx1ZSBvZiBgIHIgYm9vdF9hW2ldYC4gVGhlIGJvb3RzdHJhcCBrZXJuZWwgZmlndXJlIGZvciAkXGhhdHtifSQgcmFuZ2VzIGZyb20gYWJvdXQgMS44IHRvIDIuMiB3aXRoIGFuIE1MRSB2YWx1ZSBvZiBgciBib290X2JbaV1gLiBBcyB0aGUgV2FsZCBjb25maWRlbmNlIGludGVydmFsIGByIHdhbGRfY2lfYmAgIGlzIGJldHdlZW4ga2VybmVsJ3MgcmFuZ2VzIGZvciB0aGUgZW50aXJlIGVuY29tcGFzc2luZyBkYXRhc2V0IHRoZXJlZm9yZSBjYXB0dXJpbmcgYW4gaW50ZXJ2YWwgd2l0aGluIGEgcGxhdXNpYmxlIHJhbmdlIGFsdGhvdWdoIGl0IGlzIHdheSBsZXNzIHZhbGlkIHRoYW4gaXRzIGJvb3RzdHJhcHBlZCBwZXJjZW50aWxlIENvbmZpZGVuY2UgSW50ZXJ2YWwuQSBwZXJjZW50aWxlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgaXMgcHJlZmVycmVkIGZvciB0aGUgc3RvcmFnZSBkaXN0cmlidXRpb24uIA0KVGhlIFdhbGQgQ0kgYXNzdW1wdGlvbiBmb3Igbm9ybWFsaXR5IGFuZCBzeW1tZXRyeSBjYW5ub3Qgd2VsbCBjYXB0dXJlIHRoZSB0cnVlIHNoYXBlIG9mIHRoZSBkaXN0cmlidXRpb24uIEFzIHRoZSBkaXN0cmlidXRpb24gYXBwZWFycyB0byBoYXZlIHNvbWUgdW5pbW9kYWwgc2hhcGUgYW5kIHNsaWdodCB0YWlsLCByYXRoZXIgdGhhbiBhIHN0cm9uZyBzeW1tZXRyaWNhbCBzaGFwZSBjZW50ZXJlZCBhcm91bmQgaXRzIE1MRS4gVGhlIHdpZGVyIFdhbGQgY29uZmlkZW5jZSBpbnRlcnZhbCBoaWdobGlnaHRzIGl0cyB1bmNlcnRpYW55IHRvIG1lYXN1cmUgZGV2aWF0aW9ucyBmcm9tIG5vcm1hbCBzaGFwZSB3ZWxsLg0KDQpcDQoNCiMjIyAqKlByb2JsZW0gQjQqKjoNCg0KSW4gdGhlIGludHJvZHVjdGlvbiB0byB0aGUgd29ya2luZyBtb2RlbCBmb3IgdGhpcyBleGFtLCB0aGUgS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uIHJlZHVjZXMgdG8gdGhlIHVuaWZvcm0gZGlzdHJpYnV0aW9uIG9uICgwLDEpLiBJbiB0aGlzIHByb2JsZW0sIHdlIHBlcmZvcm0gYSAqKmxpa2VsaWhvb2QgcmF0aW8gdGVzdCoqIGZvciB0aGUgZm9sbG93aW5nIGh5cG90aGVzaXMgdG8gYXNzZXNzIHdoZXRoZXIgdGhlIGRhdGEgY29tZSBmcm9tIHRoZSB1bmlmb3JtIGRpc3RyaWJ1dGlvbiBvbiAoMCwxKToNCg0KJCQNCkhfMDogYSA9IDFccXVhZCBcJiBccXVhZCBiID0gMVxxdWFkIFx0ZXh0eyB2ZXJzdXMgfSBccXVhZCBIX2E6IGEgXG5lIDEgXHF1YWQgXHRleHR7b3J9IFxxdWFkIGIgXG5lIDEgXHF1YWQgXHRleHR7b3J9XHF1YWQgKGEgXG5lIDEgXHF1YWQgXCYgXHF1YWQgYiBcbmUgMSkuDQokJA0KDQpQcm92aWRlIGEgcHJhY3RpY2FsIGludGVycHJldGF0aW9uIG9mIHRoZSBhYm92ZSB0ZXN0IHJlc3VsdC4gWypIaW50OiAkSF9hJCBiYXNpY2FsbHkgc2F5cyB0aGF0IHRoZXJlIGlzIG5vIGNvbnN0cmFpbnRzIGZvciAkYSQgYW5kICRiJC4gUGxlYXNlIHJldmlldyB0aGUgbGVjdHVyZSBub3RlIGZvciBtb2R1bGUgMTEgIG9uIHRoZSBsaWtlbGlob29kIHJhdGlvIHRlc3QgYmVmb3JlIGNvZGluZy4qXQ0KDQpcDQoNCkhlcmUgd2UgY29tcGFyZSB0aGUgS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uIHRvIGFub3RoZXIgc3BlY2lhbCBjYXNlIHVuaWZvcm0gZGlzdHJpYnV0aW9uIG1vZGVsIHdoZXJlIHRoZSBkaXN0cmlidXRpb24gcmFuZ2VzIGJldHdlZW4gMCBhbmQgMS4gIA0KDQokJA0KTFJUX3t1bmkoMSwxKX09IDJbXGVsbChcaGF0e2F9LCBcaGF0e2J9KS1cZWxsKDEsMSldDQokJA0KDQpgYGB7cn0NCm49IGxlbmd0aChzdG9yYWdlKQ0KDQojdW5yZXN0cmljdGVkIG9yaWdpbmFsIGxvZyBsaWtlbGlob29kIGZyb20ga3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uDQoNCmxvZ0xfdW5yZXN0cmljdGVkID0gLWt1bWFyX2xvZ2xpayhjKG1sZV9hLCBtbGVfYiksIHN0b3JhZ2UpICNwcmVzZW50cyBqb2ludCBwcm9iYWJpbGl0eSBvZiBlbnRpcmUgZGF0YXNldCBnaXZlIGEgYW5kIGIgcGFyYW1ldGVycw0KDQojbG9nIGxpa2VsaWhvb2QgZm9yIFVuaWZvcm0gKGE9MSwgYj0xKQ0KbG9nTF9yZXN0cmljdGVkPSAta3VtYXJfbG9nbGlrKGMoMSwxKSwgc3RvcmFnZSkgI3RoZSBwYXJhbWV0ZXJzIGZvciAxIGFuZCAxIGZvciBib3RoICBhIGFuZCBiDQoNCiNsb2cgcmF0aW8gdGVzdCBzdGF0aXN0aWMNCg0KTFJUX3N0YXRfdW5pY29tcGFyaXNvbiA9IDIgKiAobG9nTF91bnJlc3RyaWN0ZWQgLSBsb2dMX3Jlc3RyaWN0ZWQpIA0KDQpwdmFsX3VuaWNvbXBMUlQ9IDEtIHBjaGlzcShMUlRfc3RhdF91bmljb21wYXJpc29uLCBkZj0yKQ0KDQpjYXQoIlRoZSBsb2dsaWtsaWhvb2QgcmF0aW8gY29uc2lkZXJpbmcgdGhlIHNwZWNpYWwgY2FzZSBrdW1hc3dhbXkgdW5pZm9ybSBkaXN0cnVidXRpbyAoYT0xLCBiPTEpIGlzIiwgTFJUX3N0YXRfdW5pY29tcGFyaXNvbiwgIihwPSIsIHB2YWxfdW5pY29tcExSVCwgIikuIikNCg0KYGBgDQpXaGVuIGFzc2Vzc2luZyB0aGUgc3Ryb25nZXIgbW9kZWwgdXNpbmcgdGhlIExpa2VsaWhvb2QgUmF0aW8gVGVzdCwgdGhlIG1vcmUgY29tcGxleCBLdW1hcmFzd2FteSBkaXN0cmlidXRpb24gZG9lcyBhIGJldHRlciBqb2IgYXQgbW9kZWxsaW5nIHRoZSB3YXRlciBzdG9yYWdlIGRpc3RyaWJ1dGlvbiB0aGFuIHRoZSB1bmlmb3JtIG1vZGVsLiBJZiBjb21wYXJpbmcgd2hldGhlciB0byB1c2UgdGhlIHJlc3RyaWN0ZWQgdW5pZm9ybSBkaXN0cmlidXRpb24gb3IgdGhlIHVucmVzdHJpY3RlZCBLdW1hcmFzd2FteSBkaXN0cmlidXRpb24sIHVzZSB0aGUgS3VtYXJhc3dhbXkgZGlzdHJpYnV0aW9uIChMUlQ9IGByIExSVF9zdGF0X3VuaWNvbXBhcmlzb25gLCBwPSBgciBwdmFsX3VuaWNvbXBMUlRgKS4gUGVyaHBhcyB0aGUgc2xpZ2h0IHJpZ2h0IHNrZXduZXNzIG9mIHRoZSBtb2RlbCBpcyBub3Qgd2VsbCByZXByZXNlbnRlZCBieSB0aGUgdW5pZm9ybSBkaXN0cmlidXRpb24gc3VnZ2VzdGluZyBkYWlseSB3YXRlciBpbnRha2UgaXMgbm90IGV2ZW5seSBkaXN0cmlidXRlZCBub3IgcmFuZG9tLg0KDQoNCkl0IGFwcGVhcnMgYm90aCB0aGUgS3VtYXJhc3dhbXkgb3V0cGVyZm9ybXMgdGhlIHVuaWZvcm0gYW5kIHBvd2VyIGRpc3RyaWJ1dGlvbiBtb2RlbHMuIA0KDQo8Zm9udCBjb2xvciA9ICJyZWQiPioqTm90ZSoqOiBQbGVhc2UgZG93bmxvYWQgdGhlIHRlbXBsYXRlIGFuZCBpbnNlcnQgeW91ciB3b3JrIGludG8gaXQgdG8gY29tcGxldGUgdGhlIGV4YW0uIDwvZm9udD4NCg0KDQoNCg0K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("14-FinalExam.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
